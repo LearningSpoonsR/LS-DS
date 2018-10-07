@@ -1,0 +1,234 @@
+Rank	Country or area	UN continental	UN statistical	July 2016	July 2017
+1	China	Asia	Eastern Asia	1,403,500,365	1,409,517,397
+2	India	Asia	Southern Asia	1,324,171,354	1,339,180,127
+3	United States	Americas	Northern America	322,179,605	324,459,463
+4	Indonesia	Asia	South-eastern Asia	261,115,456	263,991,379
+5	Brazil	Americas	South America	207,652,865	209,288,278
+6	Pakistan	Asia	Southern Asia	193,203,476	197,015,955
+7	Nigeria	Africa	Western Africa	185,989,640	190,886,311
+8	Bangladesh	Asia	Southern Asia	162,951,560	164,669,751
+9	Russia	Europe	Eastern Europe	143,964,513	143,989,754
+10	Mexico	Americas	Central America	127,540,423	129,163,276
+11	Japan	Asia	Eastern Asia	127,748,513	127,484,450
+12	Ethiopia	Africa	Eastern Africa	102,403,196	104,957,438
+13	Philippines	Asia	South-eastern Asia	103,320,222	104,918,090
+14	Egypt	Africa	Northern Africa	95,688,681	97,553,151
+15	Vietnam	Asia	South-eastern Asia	94,569,072	95,540,800
+16	Germany	Europe	Western Europe	81,914,672	82,114,224
+17	Democratic Republic of the Congo	Africa	Middle Africa	78,736,153	81,339,988
+18	Iran	Asia	Southern Asia	80,277,428	81,162,788
+19	Turkey	Asia	Western Asia	79,512,426	80,745,020
+20	Thailand	Asia	South-eastern Asia	68,863,514	69,037,513
+21	United Kingdom	Europe	Northern Europe	65,788,574	66,181,585
+22	France	Europe	Western Europe	64,720,690	64,979,548
+23	Italy	Europe	Southern Europe	59,429,938	59,359,900
+24	Tanzania	Africa	Eastern Africa	55,572,201	57,310,019
+25	South Africa	Africa	Southern Africa	56,015,473	56,717,156
+26	Myanmar	Asia	South-eastern Asia	52,885,223	53,370,609
+27	South Korea	Asia	Eastern Asia	50,791,919	50,982,212
+28	Colombia	Americas	South America	48,653,419	49,065,615
+29	Kenya	Africa	Eastern Africa	48,461,567	49,699,862
+30	Spain	Europe	Southern Europe	46,347,576	46,354,321
+31	Argentina	Americas	South America	43,847,430	44,271,041
+32	Ukraine	Europe	Eastern Europe	44,438,625	44,222,947
+33	Uganda	Africa	Eastern Africa	41,487,965	42,862,958
+34	Algeria	Africa	Northern Africa	40,606,052	41,318,142
+35	Sudan	Africa	Northern Africa	39,578,828	40,533,330
+36	Iraq	Asia	Western Asia	37,202,572	38,274,618
+37	Poland	Europe	Eastern Europe	38,224,410	38,170,712
+38	Canada	Americas	Northern America	36,289,822	36,624,199
+39	Morocco	Africa	Northern Africa	35,276,786	35,739,580
+40	Afghanistan	Asia	Southern Asia	34,656,032	35,530,081
+41	Saudi Arabia	Asia	Western Asia	32,275,687	32,938,213
+42	Peru	Americas	South America	31,773,839	32,165,485
+43	Venezuela	Americas	South America	31,568,179	31,977,065
+44	Uzbekistan	Asia	Central Asia	31,446,795	31,910,641
+45	Malaysia	Asia	South-eastern Asia	31,187,265	31,624,264
+46	Angola	Africa	Middle Africa	28,813,463	29,784,193
+47	Mozambique	Africa	Eastern Africa	28,829,476	29,668,834
+48	Nepal	Asia	Southern Asia	28,982,771	29,304,998
+49	Ghana	Africa	Western Africa	28,206,728	28,833,629
+50	Yemen	Asia	Western Asia	27,584,213	28,250,420
+51	Madagascar	Africa	Eastern Africa	24,894,551	25,570,895
+52	North Korea	Asia	Eastern Asia	25,368,620	25,490,965
+53	Australia	Oceania	Australia and New Zealand	24,125,848	24,450,561
+54	Ivory Coast	Africa	Western Africa	23,695,919	24,294,750
+55	Cameroon	Africa	Middle Africa	23,439,189	24,053,727
+56	Taiwan	Asia	Eastern Asia	23,556,706	23,626,456
+57	Niger	Africa	Western Africa	20,672,987	21,477,348
+58	Sri Lanka	Asia	Southern Asia	20,798,492	20,876,917
+59	Romania	Europe	Eastern Europe	19,778,083	19,679,306
+60	Burkina Faso	Africa	Western Africa	18,646,433	19,193,382
+61	Malawi	Africa	Eastern Africa	18,091,575	18,622,104
+62	Mali	Africa	Western Africa	17,994,837	18,541,980
+63	Syria	Asia	Western Asia	18,430,453	18,269,868
+64	Kazakhstan	Asia	Central Asia	17,987,736	18,204,499
+65	Chile	Americas	South America	17,909,754	18,054,726
+66	Zambia	Africa	Eastern Africa	16,591,390	17,094,130
+67	Netherlands	Europe	Western Europe	16,987,330	17,035,938
+68	Guatemala	Americas	Central America	16,582,469	16,913,503
+69	Ecuador	Americas	South America	16,385,068	16,624,858
+70	Zimbabwe	Africa	Eastern Africa	16,150,362	16,529,904
+71	Cambodia	Asia	South-eastern Asia	15,762,370	16,005,373
+72	Senegal	Africa	Western Africa	15,411,614	15,850,567
+73	Chad	Africa	Middle Africa	14,452,543	14,899,994
+74	Somalia	Africa	Eastern Africa	14,317,996	14,742,523
+75	Guinea	Africa	Western Africa	12,395,924	12,717,176
+76	South Sudan	Africa	Eastern Africa	12,230,730	12,575,714
+77	Rwanda	Africa	Eastern Africa	11,917,508	12,208,407
+78	Tunisia	Africa	Northern Africa	11,403,248	11,532,127
+79	Cuba	Americas	Caribbean	11,475,982	11,484,636
+80	Belgium	Europe	Western Europe	11,358,379	11,429,336
+81	Benin	Africa	Western Africa	10,872,298	11,175,692
+82	Greece	Europe	Southern Europe	11,183,716	11,159,773
+83	Bolivia	Americas	South America	10,887,882	11,051,600
+84	Haiti	Americas	Caribbean	10,847,334	10,981,229
+85	Burundi	Africa	Eastern Africa	10,524,117	10,864,245
+86	Dominican Republic	Americas	Caribbean	10,648,791	10,766,998
+87	Czech Republic	Europe	Eastern Europe	10,610,947	10,618,303
+88	Portugal	Europe	Southern Europe	10,371,627	10,329,506
+89	Sweden	Europe	Northern Europe	9,837,533	9,910,701
+90	Azerbaijan	Asia	Western Asia	9,725,376	9,827,589
+91	Hungary	Europe	Eastern Europe	9,753,281	9,721,559
+92	Jordan	Asia	Western Asia	9,455,802	9,702,353
+93	Belarus	Europe	Eastern Europe	9,480,042	9,468,338
+94	United Arab Emirates	Asia	Western Asia	9,269,612	9,400,145
+95	Honduras	Americas	Central America	9,112,867	9,265,067
+96	Tajikistan	Asia	Central Asia	8,734,951	8,921,343
+97	Serbia	Europe	Southern Europe	8,820,083	8,790,574
+98	Austria	Europe	Western Europe	8,712,137	8,735,453
+99	Switzerland	Europe	Western Europe	8,401,739	8,476,005
+100	Israel	Asia	Western Asia	8,191,828	8,321,570
+101	Papua New Guinea	Oceania	Melanesia	8,084,991	8,251,162
+102	Togo	Africa	Western Africa	7,606,374	7,797,694
+103	Sierra Leone	Africa	Western Africa	7,396,190	7,557,212
+104	Hong Kong	Asia	Eastern Asia	7,302,843	7,364,883
+105	Bulgaria	Europe	Eastern Europe	7,131,494	7,084,571
+106	Laos	Asia	South-eastern Asia	6,758,353	6,858,160
+107	Paraguay	Americas	South America	6,725,308	6,811,297
+108	El Salvador	Americas	Central America	6,344,722	6,377,853
+109	Libya	Africa	Northern Africa	6,293,253	6,374,616
+110	Nicaragua	Americas	Central America	6,149,928	6,217,581
+111	Lebanon	Asia	Western Asia	6,006,668	6,082,357
+112	Kyrgyzstan	Asia	Central Asia	5,955,734	6,045,117
+113	Turkmenistan	Asia	Central Asia	5,662,544	5,758,075
+114	Denmark	Europe	Northern Europe	5,711,870	5,733,551
+115	Singapore	Asia	South-eastern Asia	5,622,455	5,708,844
+116	Finland	Europe	Northern Europe	5,503,132	5,523,231
+117	Slovakia	Europe	Eastern Europe	5,444,218	5,447,662
+118	Norway	Europe	Northern Europe	5,254,694	5,305,383
+119	Congo	Africa	Middle Africa	5,125,821	5,260,750
+120	Eritrea	Africa	Eastern Africa	4,954,645	5,068,831
+121	Palestine	Asia	Western Asia	4,790,705	4,920,724
+122	Costa Rica	Americas	Central America	4,857,274	4,905,769
+123	Ireland	Europe	Northern Europe	4,726,078	4,761,657
+124	Liberia	Africa	Western Africa	4,613,823	4,731,906
+125	New Zealand	Oceania	Australia and New Zealand	4,660,833	4,705,818
+126	Central African Republic	Africa	Middle Africa	4,594,621	4,659,080
+127	Oman	Asia	Western Asia	4,424,762	4,636,262
+128	Mauritania	Africa	Western Africa	4,301,018	4,420,184
+129	Croatia	Europe	Southern Europe	4,213,265	4,189,353
+130	Kuwait	Asia	Western Asia	4,052,584	4,136,528
+131	Panama	Americas	Central America	4,034,119	4,098,587
+132	Moldova	Europe	Eastern Europe	4,059,608	4,051,212
+133	Georgia	Asia	Western Asia	3,925,405	3,912,061
+134	Puerto Rico	Americas	Caribbean	3,667,903	3,663,131
+135	Bosnia and Herzegovina	Europe	Southern Europe	3,516,816	3,507,017
+136	Uruguay	Americas	South America	3,444,006	3,456,750
+137	Mongolia	Asia	Eastern Asia	3,027,398	3,075,647
+138	Armenia	Asia	Western Asia	2,924,816	2,930,450
+139	Albania	Europe	Southern Europe	2,926,348	2,930,187
+140	Jamaica	Americas	Caribbean	2,881,355	2,890,299
+141	Lithuania	Europe	Northern Europe	2,908,249	2,890,297
+142	Qatar	Asia	Western Asia	2,569,804	2,639,211
+143	Namibia	Africa	Southern Africa	2,479,713	2,533,794
+144	Botswana	Africa	Southern Africa	2,250,260	2,291,661
+145	Lesotho	Africa	Southern Africa	2,203,821	2,233,339
+146	The Gambia	Africa	Western Africa	2,038,501	2,100,568
+147	Republic of Macedonia	Europe	Southern Europe	2,081,206	2,083,160
+148	Slovenia	Europe	Southern Europe	2,077,862	2,079,976
+149	Gabon	Africa	Middle Africa	1,979,786	2,025,137
+150	Latvia	Europe	Northern Europe	1,970,530	1,949,670
+151	Guinea-Bissau	Africa	Western Africa	1,815,698	1,861,283
+152	Bahrain	Asia	Western Asia	1,425,171	1,492,584
+153	Trinidad and Tobago	Americas	Caribbean	1,364,962	1,369,125
+154	Swaziland	Africa	Southern Africa	1,343,098	1,367,254
+155	Estonia	Europe	Northern Europe	1,312,442	1,309,632
+156	East Timor	Asia	South-eastern Asia	1,268,671	1,296,311
+157	Equatorial Guinea	Africa	Middle Africa	1,221,490	1,267,689
+158	Mauritius	Africa	Eastern Africa	1,262,132	1,265,138
+159	Cyprus	Asia	Western Asia	1,170,125	1,179,551
+160	Djibouti	Africa	Eastern Africa	942,333	956,985
+161	Fiji	Oceania	Melanesia	898,760	905,502
+162	Reunion	Africa	Eastern Africa	869,925	876,562
+163	Comoros	Africa	Eastern Africa	795,601	813,912
+164	Bhutan	Asia	Southern Asia	797,765	807,610
+165	Guyana	Americas	South America	773,303	777,859
+166	Montenegro	Europe	Southern Europe	628,615	628,960
+167	Macau	Asia	Eastern Asia	612,167	622,567
+168	Solomon Islands	Oceania	Melanesia	599,419	611,343
+169	Luxembourg	Europe	Western Europe	575,747	583,455
+170	Suriname	Americas	South America	558,368	563,402
+171	Western Sahara	Africa	Northern Africa	538,755	552,628
+172	Cape Verde	Africa	Western Africa	539,560	546,388
+173	Guadeloupe	Americas	Caribbean	449,975	449,568
+174	Maldives	Asia	Southern Asia	427,756	436,330
+175	Malta	Europe	Southern Europe	429,362	430,835
+176	Brunei	Asia	South-eastern Asia	423,196	428,697
+177	Bahamas	Americas	Caribbean	391,232	395,361
+178	Martinique	Americas	Caribbean	385,103	384,896
+179	Belize	Americas	Central America	366,954	374,681
+180	Iceland	Europe	Northern Europe	332,474	335,025
+181	Barbados	Americas	Caribbean	284,996	285,719
+182	French Polynesia	Oceania	Polynesia	280,208	283,007
+183	French Guiana	Americas	South America	275,713	282,731
+184	New Caledonia	Oceania	Melanesia	272,677	276,255
+185	Vanuatu	Oceania	Melanesia	270,402	276,244
+186	Mayotte	Africa	Eastern Africa	246,489	253,045
+187	Sao Tome and Principe	Africa	Middle Africa	199,910	204,327
+188	Samoa	Oceania	Polynesia	195,125	196,440
+189	Saint Lucia	Americas	Caribbean	178,015	178,844
+190	Guernsey and  Jersey	Europe	Northern Europe	164,541	165,314
+191	Guam	Oceania	Micronesia	162,896	164,229
+192	Curacao	Americas	Caribbean	159,371	160,539
+193	Kiribati	Oceania	Micronesia	114,395	116,398
+194	Saint Vincent and the Grenadines	Americas	Caribbean	109,643	109,897
+195	Tonga	Oceania	Polynesia	107,122	108,020
+196	Grenada	Americas	Caribbean	107,317	107,825
+197	Federated States of Micronesia	Oceania	Micronesia	104,937	105,544
+198	Aruba	Americas	Caribbean	104,822	105,264
+199	United States Virgin Islands	Americas	Caribbean	104,913	104,901
+200	Antigua and Barbuda	Americas	Caribbean	100,963	102,012
+201	Seychelles	Africa	Eastern Africa	94,228	94,737
+202	Isle of Man	Europe	Northern Europe	83,737	84,287
+203	Andorra	Europe	Southern Europe	77,281	76,965
+204	Dominica	Americas	Caribbean	73,543	73,925
+205	Cayman Islands	Americas	Caribbean	60,765	61,559
+206	Bermuda	Americas	Northern America	61,666	61,349
+207	Greenland	Americas	Northern America	56,412	56,480
+208	American Samoa	Oceania	Polynesia	55,599	55,641
+209	Saint Kitts and Nevis	Americas	Caribbean	54,821	55,345
+210	Northern Mariana Islands	Oceania	Micronesia	55,023	55,144
+211	Marshall Islands	Oceania	Micronesia	53,066	53,127
+212	Faroe Islands	Europe	Northern Europe	49,117	49,290
+213	Sint Maarten	Americas	Caribbean	39,537	40,120
+214	Monaco	Europe	Western Europe	38,499	38,695
+215	Liechtenstein	Europe	Western Europe	37,666	37,922
+216	Turks and Caicos Islands	Americas	Caribbean	34,900	35,446
+217	Gibraltar	Europe	Southern Europe	34,408	34,571
+218	San Marino	Europe	Southern Europe	33,203	33,400
+219	British Virgin Islands	Americas	Caribbean	30,661	31,196
+220	Caribbean Netherlands	Americas	Caribbean	25,019	25,398
+221	Palau	Oceania	Micronesia	21,503	21,729
+222	Cook Islands	Oceania	Polynesia	17,379	17,380
+223	Anguilla	Americas	Caribbean	14,764	14,909
+224	Wallis and Futuna	Oceania	Polynesia	11,899	11,773
+225	Nauru	Oceania	Micronesia	11,347	11,359
+226	Tuvalu	Oceania	Polynesia	11,097	11,192
+227	Saint Pierre and Miquelon	Americas	Northern America	6,305	6,320
+228	Montserrat	Americas	Caribbean	5,152	5,177
+229	Saint Helena, Ascension and Tristan da Cunha	Africa	Western Africa	4,035	4,049
+230	Falkland Islands	Americas	South America	2,910	2,910
+231	Niue	Oceania	Polynesia	1,624	1,618
+232	Tokelau	Oceania	Polynesia	1,282	1,300
+233	Vatican City	Europe	Southern Europe	801	792
