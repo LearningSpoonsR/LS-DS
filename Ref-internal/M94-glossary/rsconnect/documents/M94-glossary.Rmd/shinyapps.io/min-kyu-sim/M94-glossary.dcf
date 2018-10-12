@@ -1,0 +1,12 @@
+name: M94-glossary
+title: M94-glossary
+username:
+account: min-kyu-sim
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 348257
+bundleId: 1390756
+url: https://acemk.shinyapps.io/M94-glossary/
+when: 1527156944.2512
+asMultiple: FALSE
+asStatic: FALSE
