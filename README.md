@@ -5,7 +5,7 @@
 + 매주 일요일 10:30 ~ 13:30 | 일 3시간  
 + `learningSpoonsR@gmail.com`
 
-Next Class: M22(html vs pdf), Project Setup, M23(ggplot), M32(fd)
+Next Class: M22(html vs pdf), M23(ggplot), M45, Project Setup, M32(fd), 
 
 ## Chapter 1  
 + M11-intro: 강의 계획서에 해당합니다.  Data Science와 R 프로그램에 대해 소개합니다.  
@@ -24,6 +24,9 @@ Next Class: M22(html vs pdf), Project Setup, M23(ggplot), M32(fd)
 ## Chapter 4  
 + M41:   
 + M42:  
++ M43:  
++ M44:  
++ M45-retail: 리테일 데이터 셋을 분석합니다. 
 
 ## Chapter 5    
 + M51:     
