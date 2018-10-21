@@ -5,6 +5,8 @@
 + 매주 일요일 10:30 ~ 13:30 | 일 3시간  
 + `learningSpoonsR@gmail.com`
 
+Next Class: M22(html vs pdf), Project Setup, M23(ggplot), M32(fd)
+
 ## Chapter 1  
 + M11-intro: 강의 계획서에 해당합니다.  Data Science와 R 프로그램에 대해 소개합니다.  
 + M12-base: Data Type과 Data Structure에 대해서 논의합니다.    
@@ -12,12 +14,12 @@
 
 ## Chapter 2  
 + M21-dplyr_ggplot_rmd: ISLR의 Carseats 데이터셋을 분석하면서 자료 처리, 플랏, 문서화를 차례로 다룹니다.  
-+ M22-CarseatsReport: Carseats dataset을 이용해서 rmd report를 만듭니다. html과 pdf로 만들어봅니다.  
++ M22-CarseatsReport: Carseats dataset을 이용해서 rmd report를 만듭니다. html(`class3_rmd_report.Rmd`)과 pdf(`class3_rmd_pdf.Rmd`)로 만들어봅니다.  
 + M23-ggplot_part2: GGplot에서 더 많은 종류의 차트를 알아봅니다.   
 
 ## Chapter 3  
-+ M31:   
-+ M32:  
++ M31: WordCloud (참고용)   
++ M32: flexdashboard  
 
 ## Chapter 4  
 + M41:   
