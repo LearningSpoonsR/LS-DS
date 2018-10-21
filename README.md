@@ -5,7 +5,14 @@
 + 매주 일요일 10:30 ~ 13:30 | 일 3시간  
 + `learningSpoonsR@gmail.com`
 
-Next Class: M22(html vs pdf), M23(ggplot), M45, Project Setup, M32(fd), 
++ Week 4: M22(html vs pdf), M23(ggplot), M45(retail), Project Setup, M51(tidyr)
++ Week 5: M32(fd), M52(time-series), M55(python), M56(wrap-up)
+
+## 수업 순서  
+M11 -> M12 -> M13 ->   
+M21 -> M22 -> 
+M23 -> M45 -> M51 -> 
+M32 -> M52, M55, M56
 
 ## Chapter 1  
 + M11-intro: 강의 계획서에 해당합니다.  Data Science와 R 프로그램에 대해 소개합니다.  
