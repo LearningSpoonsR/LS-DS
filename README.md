@@ -12,7 +12,8 @@
 
 ## Chapter 2  
 + M21-dplyr_ggplot_rmd: ISLR의 Carseats 데이터셋을 분석하면서 자료 처리, 플랏, 문서화를 차례로 다룹니다.  
-+ M22:  
++ M22-CarseatsReport: Carseats dataset을 이용해서 rmd report를 만듭니다. html과 pdf로 만들어봅니다.  
++ M23-ggplot_part2: GGplot에서 더 많은 종류의 차트를 알아봅니다.   
 
 ## Chapter 3  
 + M31:   
