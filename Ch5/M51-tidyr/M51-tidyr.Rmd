@@ -1,0 +1,254 @@
+---
+title: "tidyr "
+author: "LearningSpoonsR "
+date: "`r Sys.Date()`"
+fontsize: 9pt
+output:
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "rose"
+    latex_engine: xelatex
+    # keep_tex: true
+    # template: myTemplate.tex
+    includes:
+      in_header: myRmdBeamerStyle/latex-topmatter.tex
+classoption: t
+mainfont: NanumGothic
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(background = '718CBA')
+```
+
+## beamer@RMarkdown
+
+- RMarkdown  
+- pdf 조판을 위한 texlive 엔진  
+- slide형태의 pdf를 만드는 beamer 패키지 (R 패키지가 아니라 tex 패키지)  
+- 한글 및 twocolumn layout을 위한 `latex-topmatter.tex` (베포해드리는 `rmd-beamer.Rmd` 템플릿의 하위 폴더에 있습니다.)
+
+## 0. Let's start!
+
+\begcols
+\begcol{.48\textwidth}
+
+```{r, message=FALSE}
+source("infile-tidyr.R")
+library(tidyverse) # Wickham's
+library(sqldf)
+```
+
+- Part I. Join  
+- Part II. Tidy data  
+
+\endcol
+\begcol{.48\textwidth}
+
+
+\endcol
+\endcols
+
+
+## Part I. Join  
+
+\begcols
+\begcol{.48\textwidth}
+
+```{r}
+df1
+df2
+```
+
+\endcol
+\begcol{.48\textwidth}
+
+- 4 types of join
+
+\endcol
+\endcols
+
+## I-1. Inner Join  
+
+```{r, eval=FALSE}
+inner_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId")
+sqldf("SELECT CustomerId, Product, State 
+       FROM df1 JOIN df2 USING(CustomerID)")   
+```
+
+```{r, echo=FALSE}
+inner_join(df1, df2)
+```
+
+## I-2. Left Join 
+
+```{r, eval=FALSE}
+left_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId", all.x = TRUE)
+sqldf("SELECT CustomerId, Product, State 
+       FROM df1 LEFT JOIN df2 USING(CustomerID)")  
+```
+
+```{r, echo=FALSE}
+left_join(df1, df2)
+```
+
+## I-3. Outer Join (full) 
+
+```{r, eval=FALSE}
+full_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId", all = TRUE)
+```
+
+```{r, echo=FALSE}
+full_join(df1, df2)
+```
+
+## I-4. Right Join
+
+```{r, eval=FALSE}
+right_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId", all.y = TRUE)
+```
+
+```{r, echo=FALSE}
+right_join(df1, df2)
+```
+
+## Summary
+
+- Summary  
+
+```{r, eval=FALSE}
+inner_join(df1, df2)
+left_join(df1, df2)
+full_join(df1, df2)
+right_join(df1, df2)
+```
+
+- Variations  
+
+```{r, eval=FALSE}
+inner_join(df1, df2)
+inner_join(x=df1, y=df2)
+inner_join(x=df1, y=df2, by = "CustomerId")
+inner_join(x=df1, y=df2, by = c("CustomerId"))
+inner_join(x=df1, y=df2, by = c("CustomerId"="CustomerId"))
+```
+
+## blank  
+
+
+
+## Part II. Tidy data   
+
+\begcols
+\begcol{.48\textwidth}
+
+```{r}
+table1
+```
+
+\endcol
+\begcol{.48\textwidth}
+
+\endcol
+\endcols
+
+
+## II-0. Short Review (mutate)
+
+```{r}
+table1
+```  
+  
+```{r}
+table1 %>% mutate(rate = cases / popul * 100)
+```  
+
+## II-0. Short Review (group_by & summarise)
+
+```{r}
+table1
+```  
+  
+```{r, eval=FALSE}
+table1 %>% group_by(year) %>% summarise(n = sum(cases))
+table1 %>% count(year, wt = cases) # equivalent to above 
+```  
+```{r, echo=FALSE}
+table1 %>% group_by(year) %>% summarise(n = sum(cases))
+```
+
+## blank  
+
+## II-1. `gather` from `table4a` & `table4b`
+
+\begcols
+\begcol{.48\textwidth}
+
+```{r}
+table4a
+tidy4a <- table4a %>% 
+  gather(colnames(table4a)[-1], 
+         key = "year", 
+         value = "cases")
+tidy4a
+```
+
+\endcol
+\begcol{.48\textwidth}
+
+```{r}
+table4b
+tidy4b <- table4b %>% 
+  gather(colnames(table4b)[-1], 
+         key = "year", 
+         value = "popul")
+tidy4b
+```
+
+\endcol
+\endcols
+
+## II-1. `gather` from `table4a` & `table4b`
+
+```{r, eval=FALSE}
+left_join(tidy4a, tidy4b)
+left_join(tidy4a, tidy4b, by = c("ISO3", "year"))
+left_join(tidy4a, tidy4b, by = c("ISO3"="ISO3", "year"="year"))
+```
+
+```{r, echo=FALSE}
+left_join(tidy4a, tidy4b)
+```
+
+## II-2. `spread` from `table2`
+
+```{r}
+table2
+table2 %>% spread(key = "type", value = "count")
+```
+
+## II-3. `separate` from `table3`
+
+```{r}
+table3
+table3 %>% separate(rate, into = c("cases", "popul"), sep = "/")
+```
+
+\vspace{20pt}
+**Classic method**    
+```{r}
+table3$cases <- 
+  sapply(strsplit(table3$rate, split = "/"), 
+         function(x) x[1])
+table3$popul <- 
+  sapply(strsplit(table3$rate, split = "/"), 
+         function(x) x[2])
+```
+
+## blank
+
+## blank
