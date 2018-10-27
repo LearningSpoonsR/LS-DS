@@ -11,8 +11,8 @@
 ## 수업 순서  
 M11 -> M12 -> M13 ->   
 M21 -> M22 ->  
-M23 -> M45 -> M51 ->   
-M32 -> M52, M55, M56
+M23 -> M45-retail -> M48 -> M49 -> M51-tidyr ->   
+M32-fd -> M52-timeSeris, M55-python, M56-outtro
 
 ## Chapter 1  
 + M11-intro: 강의 계획서에 해당합니다.  Data Science와 R 프로그램에 대해 소개합니다.  
@@ -32,12 +32,16 @@ M32 -> M52, M55, M56
 + M41:   
 + M42:  
 + M43:  
-+ M44:  
-+ M45-retail: 리테일 데이터 셋을 분석합니다. 
++ M44-subway  
++ M45-retail: 리테일 데이터 셋을 분석합니다.  
++ M46
++ M47-SNS: 
++ M48-salesWeather: inClass Project   
++ M49-shipment: inClass Project  
 
 ## Chapter 5    
-+ M51:     
-+ M52:  
++ M51-tidyr     
++ M52-timeSeris  
 + M53:  
 + M54-longevity: 첫 수업 시간에 소개드리는 presentation형식의 R분석 입니다.  OECD자료를 바탕으로 GDP가 높은 국가가 평균 수명이 높은지에 대해서 검증합니다.  선형 회귀와 변수 변환에 대해서도 소개합니다.   
 
