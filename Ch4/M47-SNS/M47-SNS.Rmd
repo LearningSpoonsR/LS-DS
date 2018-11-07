@@ -1,0 +1,186 @@
+---
+title: "M47 - SNS marketing"
+author: "learningSpoons"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message = FALSE}
+library(dplyr)
+library(ggplot2)
+library(readxl)
+library(stringr)
+library(lubridate)
+library(plotly)
+```
+
+```{r}
+dataset <- read.csv("dataset.csv", stringsAsFactors = FALSE)
+str(dataset)
+```
+
+```{r}
+unique(dataset$acct)
+dataset$acct[dataset$acct %in% c("naver.con", "nvaer.com")] <- "naver.com"
+dataset$acct[dataset$acct %in% c("hanmail.net", "hanmauk.net")] <- "daum.net"
+```
+
+```{r}
+dataset$date <- as.Date(dataset$date)
+dataset$acct <- as.factor(dataset$acct)
+```
+
+## 1. Preprocessing - Path      
+
+```{r}
+dataset$fb     <- str_detect(dataset$path, "페이스북")
+dataset$blog   <- str_detect(dataset$path, "블로그")
+dataset$web    <- str_detect(dataset$path, "홈페이지")
+dataset$jiin   <- str_detect(dataset$path, "지인")
+dataset$search <- str_detect(dataset$path, "검색")
+dataset$cafe   <- str_detect(dataset$path, "카페")
+dataset$insta  <- str_detect(dataset$path, "인스타")
+```
+
+## 3. Group by month     
+
+```{r}
+dataset_month <- dataset %>%
+  group_by(Y = year(date), M = month(date)) %>%
+  summarise(
+    fb = sum(fb), blog = sum(blog), web = sum(web), 
+    jiin = sum(jiin), search = sum(search),
+    cafe = sum(cafe), insta = sum(insta)) %>%
+  mutate(Date = as.Date(paste(Y, M, 1, sep = "-")))
+```
+
+## 4. Time-seires chart   
+
+```{r}
+# multiple geom_line
+fig1 <- ggplot(dataset_month, aes(x = Date)) + 
+  geom_line(aes(y = fb, colour = "fb")) + 
+  geom_line(aes(y = blog, colour = "blog")) + 
+  geom_line(aes(y = web, colour = "web")) + 
+  geom_line(aes(y = jiin, colour = "jiin")) + 
+  geom_line(aes(y = cafe, colour = "cafe")) + 
+  geom_line(aes(y = insta, colour = "insta")) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  scale_x_date(breaks = dataset_month$Date) +
+  labs(x = "Month", y = NULL)
+# print(fig1)
+ggplotly(fig1)
+```
+
+## 5. Pie-charts - All time  
+
+```{r}
+# All Time
+df <- data.frame(
+  channel = colnames(dataset_month)[3:9],
+  freq = colSums(dataset_month[, c(3:9)]),
+  stringsAsFactors = FALSE)
+# M91.page 39 - pie-chart
+fig2 <- ggplot(df, aes(x = "", y = freq, fill = factor(channel))) +
+  geom_bar(width = 1, stat = "identity") +
+  theme(axis.line = element_blank(),
+        plot.title = element_text(hjust=0.5)) +
+  labs(fill="channel", x=NULL, y=NULL) + 
+  coord_polar(theta = "y", start=0)
+print(fig2)
+```
+
+```{r}
+# facet by month
+# googled "r facet piechart"
+# https://stackoverflow.com/questions/25372055/how-can-i-use-facet-wrap-using-pie-charts
+library(reshape2) 
+dataset_month_long <- 
+  data.frame(Date = dataset_month$Date, dataset_month[,3:9]) %>% 
+  melt(id = "Date") # Change it to "long" type - not tidy!
+fig4 <- 
+  ggplot(dataset_month_long,
+         aes(x = 1, y = value, fill = variable)) + 
+  geom_bar(stat = "identity", 
+           color = "black",
+           position = position_fill()) +
+  coord_polar(theta = "y") + 
+  theme(axis.ticks = element_blank(),
+        axis.text.x = element_text(colour='black'),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        plot.title = element_text(hjust=0.5)) + 
+  scale_y_continuous(
+    breaks = cumsum(dataset_month_long$value) - dataset_month_long$value/2,
+    labels = dataset_month_long$variable) +
+  facet_wrap( ~ Date)
+print(fig4)
+```
+
+
+## 2. Preprocessing - Account    
+
+```{r}
+# count by acct  
+dataset %>%
+  group_by(acct) %>%
+  summarise(count = length(acct)) %>%
+  arrange(desc(count))
+# mutate acctType
+dataset <- dataset %>%
+  mutate(acctType = 
+           ifelse(acct=="naver.com", "naver",
+                  ifelse(acct=="gmail.com", "gmail",
+                         ifelse(acct=="hanmail.net", "daum",
+                                ifelse(acct=="daum.net", "daum", "other")))))
+dataset$acctType <- as.factor(dataset$acctType)
+dataset_acctType <- dataset %>%
+  group_by(acctType) %>%
+  summarise(
+    fb = sum(fb), blog = sum(blog), web = sum(web), 
+    jiin = sum(jiin), search = sum(search),
+    cafe = sum(cafe), insta = sum(insta))
+dataset_acctType <- dataset_acctType[1:4,]
+```
+
+```{r}
+dataset_acctType_proportion <-
+  data.frame(
+    acctType = dataset_acctType$acctType,
+    round(dataset_acctType[,2:8]/rowSums(dataset_acctType[,2:8]), 2),
+    subtotal = rowSums(dataset_acctType[,2:8])) 
+dataset_acctType_proportion <- dataset_acctType_proportion %>% arrange(desc(subtotal))
+dataset_acctType_proportion
+table(dataset$acct)
+```
+
+```{r}
+dataset_acctType_long <- 
+  data.frame(acctType = dataset_acctType$acctType, dataset_acctType[,2:8]) %>% 
+  melt(id = "acctType") # Change it to "long" type - not tidy!
+fig5 <- 
+  ggplot(dataset_acctType_long,
+         aes(x = 1, y = value, fill = variable)) + 
+  geom_bar(stat = "identity", 
+           color = "black",
+           position = position_fill()) +
+  coord_polar(theta = "y") + 
+  theme(axis.ticks = element_blank(),
+        axis.text.x = element_text(colour='black'),
+        axis.text.y = element_blank(),
+        axis.title = element_blank(),
+        plot.title = element_text(hjust=0.5)) + 
+  scale_y_continuous(
+    breaks = cumsum(dataset_acctType_long$value) - dataset_acctType_long$value/2,
+    labels = dataset_acctType_long$variable) +
+  facet_wrap( ~ acctType)
+fig5
+```
+
+
