@@ -16,26 +16,41 @@
   
 |     | 제목    | 관련 packages | Description |      
 | ----|:-------:|:------:|:-----------:|    
-| M11 | intro   |        | 강의 계획서. Data Science와 R 프로그램에 대해 소개합니다. |  
-| M12 | base    | `base` | Data Type과 Data Structure에 대해서 논의합니다. |  
-| M13 | Quiz 1  |        | |  
+| M11 | intro   |             | 강의 계획서. Data Science와 R 프로그램에 대해 소개합니다. |  
+| M12 | base    | `base`      | Data Type과 Data Structure에 대해서 논의합니다. |  
+| M13 | Quiz 1  | `rmarkdown` | M12 review (`.docx`) |  
   
+## M2X: The First Project - Carseat Sales    
+
++ 사용하기 편한 간단한 패키지들을 학습합니다. 
++ Carseats Sales 데이터를 이용해서 `rmarkdown`으로 작성된 report를 만듭니다.
+
+|     | 제목    | 관련 packages | Description |      
+| ----|:-------:|:------:|:-----------:|    
+| M21 | flow    | `dplyr`, `ggplot2`, `rmarkdown`, `ISLR` | `ISLR`의 `Carseats` 매출데이터로 자료 처리, 시각화, 문서화의 전 과정을 다룹니다. |  
+| M22 | CarseatsReport | `rmarkdown` (`.html`, `.docx`, `.pdf`) | 실제로 분석 결과를 보고서로 작성합니다. |  
+| M23 | More on `ggplot2` | `ggplot2` | 시각화 기법에 대해서 좀 더 깊이있게 다룹니다. |  
+| M24 | `ggplot2` Gallery | `ggplot2` | 사용성이 높은 `ggplot2`를 이용한 아름다운 시각화 예제를 살펴봅니다. |
+
+* **M3X** 부터는 dependency가 없습니다. 즉, M1X와 M2X까지를 익숙하게 다룰 수 있다면 M3X이후에는 모듈 각각에 대해서 독립적으로 이해하고 사용할 수 있습니다. *
+
+## M3X: A Little Advanced - Textmining & Wordcloud  
 
 
-M1X - Intro & Basics - intro & base
-M2X - First proj - dplyr, ggplot, rmd
++ 여러개의 한글/영어로 된 문학/비문학 
+
+
+
+## Chapter 3  
++ M31: WordCloud (참고용)   
++ M32: flexdashboard  
+
 
 M3X - More to take - ggplot, rmd, fd
 M4X - Case Study on Data Analysis - biz intelligence
 
 M5X - Advanced - xts, dygraph, tidyr, python, outtro
 M6X - Applications - wordcloud, API, crawling, autoemail, shiny, translation
-
-
-+ M11-intro: 강의 계획서에 해당합니다.    
-+ M12-base: Data Type과 Data Structure에 대해서 논의합니다.    
-+ M13: M12에 대한 퀴즈 파일입니다. Rmarkdown의 사용 용법에 대한 좋은 예제가 됩니다.  
-
 
 
 
@@ -56,19 +71,8 @@ M21 -> M22 ->
 M23 -> M45-retail -> M48 -> M49 -> M51-tidyr ->   
 M32-fd -> M52-timeSeris, M55-python, M56-outtro
 
-## Chapter 1  
-+ M11-intro: 강의 계획서에 해당합니다.  Data Science와 R 프로그램에 대해 소개합니다.  
-+ M12-base: Data Type과 Data Structure에 대해서 논의합니다.    
-+ M13: M12에 대한 퀴즈 파일입니다. Rmarkdown의 사용 용법에 대한 좋은 예제가 됩니다.  
 
-## Chapter 2  
-+ M21-dplyr_ggplot_rmd: ISLR의 Carseats 데이터셋을 분석하면서 자료 처리, 플랏, 문서화를 차례로 다룹니다.  
-+ M22-CarseatsReport: Carseats dataset을 이용해서 rmd report를 만듭니다. html(`class3_rmd_report.Rmd`)과 pdf(`class3_rmd_pdf.Rmd`)로 만들어봅니다.  
-+ M23-ggplot_part2: GGplot에서 더 많은 종류의 차트를 알아봅니다.   
 
-## Chapter 3  
-+ M31: WordCloud (참고용)   
-+ M32: flexdashboard  
 
 ## Chapter 4  
 + M41:   
