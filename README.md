@@ -1,3 +1,45 @@
+## R로 시작하는 데이터 분석 및 시각화    
+
++ 부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수    
++ 상세페이지: http://learningspoons.com/offline-class/offline-ds/datasciencecareer/    
++ 일정    
+  + 2018.12.23 ~ 2019.01.27 (5회)     
+  + **2018.12.30 휴강**     
+  + 매주 일요일 10:30 ~ 13:30  
+  + 2018.12.23, 2019.1.6, 2019.1.13, 2019.1.20, 2019.1.27   
++ 코스매니저: 김형종 (출결등 기타)  
++ 강사이메일: `learningSpoonsR@gmail.com`  
++ Facebook group
++ Github: https://github.com/LearningSpoonsR/LS-DS  
+
+## M1X: Introduction & Basics    
+  
+|     | 제목    | 관련 packages | Description |      
+| ----|:-------:|:------:|:-----------:|    
+| M11 | intro   |        | 강의 계획서. Data Science와 R 프로그램에 대해 소개합니다. |  
+| M12 | base    | `base` | Data Type과 Data Structure에 대해서 논의합니다. |  
+| M13 | Quiz 1  |        | |  
+  
+
+
+M1X - Intro & Basics - intro & base
+M2X - First proj - dplyr, ggplot, rmd
+
+M3X - More to take - ggplot, rmd, fd
+M4X - Case Study on Data Analysis - biz intelligence
+
+M5X - Advanced - xts, dygraph, tidyr, python, outtro
+M6X - Applications - wordcloud, API, crawling, autoemail, shiny, translation
+
+
++ M11-intro: 강의 계획서에 해당합니다.    
++ M12-base: Data Type과 Data Structure에 대해서 논의합니다.    
++ M13: M12에 대한 퀴즈 파일입니다. Rmarkdown의 사용 용법에 대한 좋은 예제가 됩니다.  
+
+
+
+
+
 ## 데이터 사이언스 커리어 입문
 
 + 수업 자료 및 참고 자료 모음 repository입니다.  
