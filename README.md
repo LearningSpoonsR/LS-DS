@@ -1,7 +1,7 @@
 # R로 시작하는 데이터 분석 및 시각화    
 
 + 부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수    
-+ 상세페이지: http://learningspoons.com/offline-class/offline-ds/datasciencecareer/    
++ Github: https://github.com/LearningSpoonsR/LS-DS  
 + 일정    
   + 2018.12.23 ~ 2019.01.27 (5회)     
   + **2018.12.30 휴강**     
@@ -10,7 +10,7 @@
 + 코스매니저: 김형종 (출결등 기타)  
 + 강사이메일: `learningSpoonsR@gmail.com`  
 + Facebook group
-+ Github: https://github.com/LearningSpoonsR/LS-DS  
+
 
 # 모듈 소개  
 
