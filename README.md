@@ -48,9 +48,8 @@ M51 -> M52 -> M53 -> M54 -> M55
 | M26 | `beamer` | `rmarkdown`, texlive | 한글로 된 프리젠테이션 문서(수업 강의노트)를 작성할 수 있는 템플릿입니다. `M22`에 pdf 조판을 위한 textlive 프로그램 설치 과정을 진행해야 합니다. |
 | M27 | `slidy` | `rmarkdown` | `rmarkdown`을 사용하면 손쉽게 `.html`로 된 프리젠테이션 문서를 만들 수 있습니다. 이에 해당하는 `slidy` 포맷의 템플릿입니다. |   
 
-## **M3X** 부터는 dependency가 없습니다.  
-
-+ 즉, M1X와 M2X까지를 익숙하게 다룰 수 있다면 M3X이후에는 모듈 각각에 대해서 독립적으로 이해하고 사용할 수 있습니다.  
+> **M3X** 부터는 dependency가 없습니다.  
+> 즉, M1X와 M2X까지를 익숙하게 다룰 수 있다면 M3X이후에는 모듈 각각에 대해서 독립적으로 이해하고 사용할 수 있습니다.  
 
 ## M3X: Textmining & Web Applications  
 
