@@ -72,7 +72,7 @@ M51 -> M52 -> M53 -> M54 -> M55
 | M42 | subway    |   |  |    
 | M43 | retail    |   |  |  
 | M44 | SNS       |   |  |  
-| M45 | 전표분석   |   |  |  
+| M45 | sales log |   |  |  
 
 ## M5X: Other Advanced Applications  
 
