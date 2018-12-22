@@ -1,4 +1,4 @@
-## R로 시작하는 데이터 분석 및 시각화    
+# R로 시작하는 데이터 분석 및 시각화    
 
 + 부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수    
 + 상세페이지: http://learningspoons.com/offline-class/offline-ds/datasciencecareer/    
@@ -11,6 +11,8 @@
 + 강사이메일: `learningSpoonsR@gmail.com`  
 + Facebook group
 + Github: https://github.com/LearningSpoonsR/LS-DS  
+
+# 모듈 소개  
 
 ## M1X: Introduction & Basics    
   
@@ -32,7 +34,7 @@
 | M23 | More on `ggplot2` | `ggplot2` | 시각화 기법에 대해서 좀 더 깊이있게 다룹니다. |  
 | M24 | `ggplot2` Gallery | `ggplot2` | 사용성이 높은 `ggplot2`를 이용한 아름다운 시각화 예제를 살펴봅니다. |
 
-* **M3X** 부터는 dependency가 없습니다. 즉, M1X와 M2X까지를 익숙하게 다룰 수 있다면 M3X이후에는 모듈 각각에 대해서 독립적으로 이해하고 사용할 수 있습니다. *
+## **M3X** 부터는 dependency가 없습니다. 즉, M1X와 M2X까지를 익숙하게 다룰 수 있다면 M3X이후에는 모듈 각각에 대해서 독립적으로 이해하고 사용할 수 있습니다. *
 
 ## M3X: A Little Advanced - Textmining & Wordcloud  
 
