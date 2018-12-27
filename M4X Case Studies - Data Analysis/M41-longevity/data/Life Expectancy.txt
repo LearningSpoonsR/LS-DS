@@ -1,0 +1,184 @@
+Country	Life Expectancy	Female	Male	Health Adjusted
+Japan	83.7	86.8	80.5	74.9
+Switzerland	83.4	85.3	81.3	73.1
+Singapore	83.1	86.1	80	73.9
+Australia	82.8	84.8	80.9	71.9
+Spain	82.8	85.5	80.1	72.4
+Iceland	82.7	84.1	81.2	72.7
+Italy	82.7	84.8	80.5	72.8
+Israel	82.5	84.3	80.6	72.8
+Sweden	82.4	84	80.7	72
+France	82.4	85.4	79.4	72.6
+South Korea	82.3	85.5	78.8	73.2
+Canada	82.2	84.1	80.2	72.3
+Luxembourg	82	84	79.8	71.8
+Netherlands	81.9	83.6	80	72.2
+Norway	81.8	83.7	79.8	72
+Malta	81.7	83.7	79.7	71.7
+New Zealand	81.6	83.3	80	71.6
+Austria	81.5	83.9	79	72
+Ireland	81.4	83.4	79.4	71.5
+United Kingdom	81.2	83	79.4	71.4
+Belgium	81.1	83.5	78.6	71.1
+Finland	81.1	83.8	78.3	71
+Portugal	81.1	83.9	78.2	71.4
+Germany	81	83.4	78.7	71.3
+Greece	81	83.6	78.3	71.9
+Slovenia	80.8	83.7	77.9	71.1
+Denmark	80.6	82.5	78.6	71.2
+Cyprus	80.5	82.7	78.3	71.3
+Chile	80.5	83.4	77.4	70.4
+Costa Rica	79.6	82.2	77.1	69.7
+United States	79.3	81.6	76.9	69.1
+Cuba	79.1	81.4	76.9	69.2
+Czech Republic	78.8	81.7	75.9	69.4
+Maldives	78.5	80.2	76.9	69.6
+Qatar	78.2	80	77.4	67.7
+Croatia	78	81.2	74.7	69.4
+Albania	77.8	80.7	75.1	68.8
+Panama	77.8	81.1	74.7	68.1
+Brunei	77.7	79.2	76.3	70.4
+Estonia	77.6	82	72.7	68.9
+Poland	77.5	81.3	73.6	68.7
+Bosnia and Herzegovina	77.4	79.7	75	68.6
+United Arab Emirates	77.1	78.6	76.4	67.9
+Uruguay	77	80.4	73.3	67.9
+Bahrain	76.9	77.9	76.2	67
+Mexico	76.7	79.5	73.9	67.4
+Slovakia	76.7	80.2	72.9	68.1
+Oman	76.6	79.2	75	66.7
+Antigua and Barbuda	76.4	78.6	74.1	67.5
+Argentina	76.3	79.9	72.7	67.6
+Jamaica	76.2	78.6	73.9	66.9
+Ecuador	76.2	79	73.5	67
+China	76.1	77.6	74.6	68.5
+Montenegro	76.1	78.1	74.1	67.9
+Bahamas	76.1	79.1	72.9	66.6
+Vietnam	76	80.7	71.3	66.6
+Hungary	75.9	79.1	72.3	67.4
+Turkey	75.8	78.9	72.6	66.2
+Macedonia	75.7	77.8	73.5	67.5
+Algeria	75.6	77.5	73.8	66
+Serbia	75.6	78.4	72.9	67.7
+Iran	75.5	76.6	74.5	66.6
+Peru	75.5	78	73.1	65.6
+Barbados	75.5	77.9	73.1	66.6
+Tunisia	75.3	77.8	73	66.7
+Saint Lucia	75.2	77.9	72.6	66.1
+Malaysia	75	77.3	72.7	66.5
+Romania	75	78.8	71.4	66.8
+Brazil	75	78.7	71.4	65.5
+Lebanon	74.9	76.5	73.5	65.7
+Thailand	74.9	78	71.9	66.8
+Sri Lanka	83.7	86.8	80.5	74.9
+Armenia	74.8	77.7	71.6	66.8
+Nicaragua	74.8	77.9	71.5	63.7
+Colombia	74.8	78.4	71.2	65.1
+Kuwait	74.7	76	73.7	65.8
+Honduras	74.6	77	72.3	64.9
+Mauritius	74.6	77.8	71.4	66.8
+Latvia	74.6	79.2	69.6	67.1
+Saudi Arabia	74.5	76	73.2	64.5
+Bulgaria	74.5	78	71.1	66.4
+Georgia	74.4	78.3	70.3	66.5
+Morocco	74.3	75.4	73.3	64.9
+Jordan	74.1	75.9	72.5	65
+Venezuela	74.1	78.5	70	65.2
+Paraguay	74	76	72.2	65.2
+Samoa	74	77.5	70.9	66.6
+Dominican Republic	73.9	77.1	70.9	65.1
+Grenada	73.6	76.1	71.2	65
+Lithuania	73.6	79.1	68.1	66
+Tonga	73.5	76.4	70.6	66
+El Salvador	73.5	77.9	68.8	64.1
+Cape Verde	73.3	75	71.3	64.4
+Saint Vincent and the Grenadines	73.2	75.2	71.3	64.6
+Seychelles	73.2	78	69.1	65.5
+Libya	72.7	75.6	70.1	63.8
+Azerbaijan	72.7	75.8	69.6	64.7
+Belarus	72.3	78	66.5	65.1
+Moldova	72.1	76.2	67.9	64.8
+Vanuatu	72	74	70.1	64.6
+Guatemala	71.9	75.2	68.5	62.1
+Bangladesh	71.8	73.1	70.6	62.3
+Suriname	71.6	74.7	68.6	63.1
+Ukraine	71.3	76.1	66.3	64.1
+Trinidad and Tobago	71.2	74.8	67.9	63.3
+Kyrgyzstan	71.1	75.1	67.2	63.8
+Egypt	70.9	73.2	68.8	62.2
+Bolivia	70.7	73.3	68.2	62.2
+North Korea	70.6	74	67	64
+Russia	70.5	76.3	64.7	63.3
+Kazakhstan	70.2	74.7	65.7	63.3
+Belize	70.1	73.1	67.5	62.3
+Fiji	69.9	73.1	67	62.9
+Bhutan	69.8	70.1	69.5	61.2
+Tajikistan	69.7	73.6	66.6	62.1
+Micronesia	69.4	70.6	68.1	62.5
+Uzbekistan	69.4	72.7	66.1	62.4
+Solomon Islands	69.2	70.8	67.9	62.1
+Nepal	69.2	70.8	67.7	61.1
+Indonesia	69.1	71.2	67.1	62.2
+Iraq	68.9	71.8	66.2	60
+Mongolia	68.8	73.2	64.7	62
+Cambodia	68.7	70.7	66.6	58.9
+Philippines	68.5	72	65.3	61.1
+India	68.3	69.9	66.9	59.5
+Timor-Leste	68.3	70.1	66.6	60.7
+Sao Tome and Principe	67.5	69.4	65.6	59.1
+Senegal	66.7	68.6	64.6	58.3
+Myanmar	66.6	68.5	64.6	59.2
+Pakistan	66.4	67.5	65.5	57.8
+Kiribati	66.3	68.8	63.7	59.1
+Turkmenistan	66.3	70.5	62.2	59.8
+Guyana	66.2	68.5	63.9	58.9
+Rwanda	66.1	71.1	60.9	56.6
+Gabon	66	67.2	64.7	57.2
+Namibia	65.8	68.3	63.1	57.5
+Yemen	65.7	67.2	64.3	57.7
+Laos	65.7	67.2	64.1	57.9
+Botswana	65.7	68.1	63.3	56.9
+Madagascar	65.5	67	63.9	56.9
+Ethiopia	64.8	66.8	62.8	56.1
+Congo	64.7	66.3	63.2	56.6
+Eritrea	64.7	67	62.4	55.9
+Syria	64.5	69.9	59.9	56.1
+Sudan	64.1	65.9	62.4	55.9
+Comoros	63.5	65.2	61.9	55.9
+Djibouti	63.5	65.3	61.8	55.8
+Haiti	63.5	65.5	61.5	55.4
+Kenya	63.4	65.8	61.1	55.6
+Mauritania	63.1	64.6	61.6	55.1
+Papua New Guinea	62.9	65.4	60.6	56.4
+South Africa	62.9	66.2	59.3	54.5
+Ghana	62.4	63.9	61	55.3
+Uganda	62.3	64.3	60.3	54
+Niger	61.8	62.8	60.9	54.2
+Tanzania	61.8	63.8	59.9	54.1
+Zambia	61.8	64.7	59	53.6
+Liberia	61.4	62.9	59.8	52.7
+Gambia	61.1	62.5	59.8	53.8
+Zimbabwe	60.7	62.3	59	52.3
+Afghanistan	60.5	61.9	59.3	52.2
+Benin	60	61.1	58.8	52.5
+Burkina Faso	59.9	60.5	59.1	52.6
+Togo	59.9	61.1	58.6	52.8
+DR Congo	59.8	61.5	58.3	51.7
+Burundi	59.6	61.6	57.7	52.2
+Guinea	59	59.8	58.2	51.7
+Guinea-Bissau	58.9	60.5	57.2	51.5
+Swaziland	58.9	61.1	56.6	50.9
+Malawi	58.3	59.9	56.7	51.2
+Mali	58.2	58.3	58.2	51.1
+Equatorial Guinea	58.2	60	56.6	51.2
+Mozambique	57.6	59.4	55.7	49.6
+South Sudan	57.3	58.6	56.1	49.9
+Cameroon	57.3	58.6	55.9	50.3
+Somalia	55	56.6	53.5	47.8
+Nigeria	54.5	55.6	53.4	47.7
+Lesotho	53.7	55.4	51.7	46.6
+Cote d'Ivoire	53.3	54.4	52.3	47
+Chad	53.1	54.5	51.7	46.1
+Central African Republic	52.5	54.1	50.9	45.9
+Angola	52.4	54	50.9	45.8
+Sierra Leone	50.1	50.8	49.3	44.4
