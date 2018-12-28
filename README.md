@@ -10,6 +10,7 @@
   + 2018.12.23, 2019.1.6, 2019.1.13, 2019.1.20, 2019.1.27   
 + 코스매니저: 김형종 (출결등 기타)  
 + 강사이메일: `learningSpoonsR@gmail.com`  
++ https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html
 
 ***   
 
