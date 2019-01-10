@@ -47,10 +47,10 @@ f <- ggplot(data = temp) + geom_col(mapping = aes(x= Continent,y= avgLIFE), fill
 
 정방행렬이 아닌 m에 대해 solve(m,n)에서 자꾸 square 가 되어야 한다는 경고가 뜹니다 
 
-m <- matrix(1:6, nrow = 3, ncol = 2)
-n <- matrix(7:9, nrow = 3)
-solve(m,n)
-qr.solve(m,n) 
+m <- matrix(1:6, nrow = 3, ncol = 2)  
+n <- matrix(7:9, nrow = 3)  
+solve(m,n)  
+qr.solve(m,n)   
  
 + 에러 메시지 Error in solve.default(m, n) : 'a' (3 x 2) must be square로 구글에 검색해서
 + https://stackoverflow.com/questions/30610678/how-to-solve-linear-equations-in-r-with-rectangular-matrix
