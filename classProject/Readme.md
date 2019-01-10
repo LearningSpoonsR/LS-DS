@@ -22,6 +22,7 @@ avgGDP 라는 object 를 찾을 수 없다는 경고가 자주 보였는데, sum
 이 과정없이 단순히 label 으로 바로 넘어가면 오류가 발생했습니다.
 
 temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = round(mean(GDP_per_Capita),1), avgLIFE = round(mean(Life.Expectancy),1))   
+
 e <- ggplot(data = temp) + geom_col(mapping = aes(x= Continent, y= avgGDP), fill='blue') + geom_text(aes(x= Continent, y=avgGDP, label = avgGDP),vjust=1.5, color ='white')    
 
 f <- ggplot(data = temp) + geom_col(mapping = aes(x= Continent,y= avgLIFE), fill= 'red') + geom_text(aes(x= Continent, y=avgLIFE,label = avgLIFE), vjust=1.5, color = 'white')    
