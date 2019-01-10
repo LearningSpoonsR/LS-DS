@@ -21,16 +21,17 @@ avgGDP 라는 object 를 찾을 수 없다는 경고가 자주 보였는데, sum
 
 이 과정없이 단순히 label 으로 바로 넘어가면 오류가 발생했습니다.
 
-temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = round(mean(GDP_per_Capita),1), avgLIFE = round(mean(Life.Expectancy),1)) 
-e <- ggplot(data = temp) + geom_col(mapping = aes(x= Continent, y= avgGDP), fill='blue') + geom_text(aes(x= Continent, y=avgGDP, label = avgGDP),vjust=1.5, color ='white')  
-f <- ggplot(data = temp) + geom_col(mapping = aes(x= Continent,y= avgLIFE), fill= 'red') + geom_text(aes(x= Continent, y=avgLIFE,label = avgLIFE), vjust=1.5, color = 'white')  
+temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = round(mean(GDP_per_Capita),1), avgLIFE = round(mean(Life.Expectancy),1))   
+e <- ggplot(data = temp) + geom_col(mapping = aes(x= Continent, y= avgGDP), fill='blue') + geom_text(aes(x= Continent, y=avgGDP, label = avgGDP),vjust=1.5, color ='white')    
 
-1: e <- ggplot(data = temp) + 
-2:  geom_col(mapping = aes(x= Continent, y= avgGDP), fill='blue') + 
-3:  geom_text(aes(x= Continent, y=avgGDP, label = avgGDP),vjust=1.5, color ='white')
-4: e2 <- ggplot(data = temp, mapping = aes(x= Continent, y= avgGDP)) + 
-5:   geom_col(fill='blue') + 
-6:   geom_text(aes(label = avgGDP),vjust=1.5, color ='white')
+f <- ggplot(data = temp) + geom_col(mapping = aes(x= Continent,y= avgLIFE), fill= 'red') + geom_text(aes(x= Continent, y=avgLIFE,label = avgLIFE), vjust=1.5, color = 'white')    
+
+1: e <- ggplot(data = temp) +   
+2:  geom_col(mapping = aes(x= Continent, y= avgGDP), fill='blue') +   
+3:  geom_text(aes(x= Continent, y=avgGDP, label = avgGDP),vjust=1.5, color ='white')  
+4: e2 <- ggplot(data = temp, mapping = aes(x= Continent, y= avgGDP)) +   
+5:   geom_col(fill='blue') +   
+6:   geom_text(aes(label = avgGDP),vjust=1.5, color ='white')  
 
 + 실력이 많이 느셔서 상속에 대해서도 시도해 보시려고 하시는군요. 아주 좋습니다. 
 + 1번 라인에서 ggplot은 data만 가지고 있습니다.
