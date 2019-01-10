@@ -1,6 +1,6 @@
 ## 1. avgGDP, avgLIFE 값에 대해 반올림을 하고 싶습니다만, round(data, digits=2) 사용시 data 범위를 설정하는 단계에서 시행착오를 겪고 있습니다
 
-temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = mean(GDP_per_Capita), avgLIFE = mean(Life.Expectancy)) 에서 바로 round를 적용시킬 순 없나요?
+`temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = mean(GDP_per_Capita), avgLIFE = mean(Life.Expectancy))` 에서 바로 `round`를 적용시킬 순 없나요?
 
 + avgLIFE 보다는 avgLife라고 쓰는것 추천드립니다. (낙타 혹 같이 생겼다고 해서 Camel 표기법이라고 해요)
 + avgGDP = round(mean(GDP_per_Capita),1) 이렇게 하면 됩니다.
