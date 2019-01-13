@@ -1,0 +1,296 @@
+---
+title: "M51-tidyr "
+author: "LearningSpoonsR "
+date: "`r Sys.Date()`"
+fontsize: 9pt
+output:
+  beamer_presentation:
+    colortheme: default
+    includes:
+      in_header: myRmdBeamerStyle/latex-topmatter.tex
+    latex_engine: xelatex
+    slide_level: 2  
+    theme: Montpellier
+    toc: yes
+classoption: t
+mainfont: NanumGothic
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(background = '718CBA')
+```
+
+# Part 0. Setup  
+
+##  
+
+```{r, message=FALSE}
+source("infile-tidyr.R")
+library(tidyverse) # Wickham's
+library(sqldf)
+```  
+
+1. `source("infile-tidyr.R")`  
+    + 해당 R 소스코드를 실행한 효과가 나옴  
+    + 긴 코드를 보이지 않게 숨기게 하는데에 유용함  
+    + 이 강의노트에서 사용할 데이터프레임들을 정의하는 코드   
+2. `tidyverse`
+    + Wickham이 만든 packages들을 다 모아놓은 패키지  
+3. `sqldf`  
+    + R에서 SQL 명령어를 사용할 수 있게 해주는 패키지   
+    + SQL은 대용량의 복잡한 데이터를 다루는 데에 적합한 언어  
+    + 이런 Cross-Language 패키지들은 새로운 환경에서의 연착률을 도와줌  
+
+# Part I. `join`: 두 개의 데이터 프레임을 합하는 법 (a.k.a. `merge`)  
+
+## 0. `df1`과 `df2`를 어떻게 합해야 할까요?  
+
+\lc  
+
+
+```{r}
+df1
+df2
+```
+
+\rc  
+
+- `join`에는 4가지 방법이 있습니다.  
+
+\ec 
+
+## 1. Inner Join  
+
+```{r, eval=FALSE}
+inner_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId")
+sqldf("SELECT CustomerId, Product, State 
+       FROM df1 JOIN df2 USING(CustomerID)")   
+```
+
+```{r, echo=FALSE}
+inner_join(df1, df2)
+```
+
+## 2. Left Join 
+
+```{r, eval=FALSE}
+left_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId", all.x = TRUE)
+sqldf("SELECT CustomerId, Product, State 
+       FROM df1 LEFT JOIN df2 USING(CustomerID)")  
+```
+
+```{r, echo=FALSE}
+left_join(df1, df2)
+```
+
+## 3. Outer Join (full) 
+
+```{r, eval=FALSE}
+full_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId", all = TRUE)
+```
+
+```{r, echo=FALSE}
+full_join(df1, df2)
+```
+
+## 4. Right Join
+
+```{r, eval=FALSE}
+right_join(df1, df2)
+merge(x = df1, y = df2, by = "CustomerId", all.y = TRUE)
+```
+
+```{r, echo=FALSE}
+right_join(df1, df2)
+```
+
+## Summary
+
++ Summary  
+
+```{r, eval=FALSE}
+inner_join(df1, df2)
+left_join(df1, df2)
+full_join(df1, df2)
+right_join(df1, df2)
+```
+
++ Variations (`join`할때 사용할 `key`변수를 구체화)  
+
+```{r, eval=FALSE}
+inner_join(df1, df2)
+inner_join(x=df1, y=df2)
+inner_join(x=df1, y=df2, by = "CustomerId")
+inner_join(x=df1, y=df2, by = c("CustomerId"))
+inner_join(x=df1, y=df2, by = c("CustomerId"="CustomerId"))
+```
+
++ `vlookup`이나 `index-match`함수를 이용해서 엑셀 파일 합해본 경험있으세요?  
++ R에서는 이게 정말 끝입니다.    
+
+## blank  
+
+# Part II. Workding with "tidy" data    
+
+## 0. 단정한 데이터?  
+
+\lc 
+
++ `M21` p.17  
++ tidy data.frame!  
+    1. 개체 타입은 `data.frame`  
+    2. 각각의 row는 관찰값을 의미  
+    3. 각각의 column은 변수를 의미  
+
+![from `dplyr` Cheatsheet](fig/fig_a.png)
+
+
+\rc  
+
+```{r}
+table1
+```
+
+\vspace{10pt}  
+  
++ `table1`과 같은 정보를 담고 있지만, tidy하게 되있지 않은 데이터 구조가 있습니다.  
++ 이들을 tidy하게 `table1` 모양으로 바꿉니다.  
++ `pivot_table` in Excel  
+
+\ec
+
+## 0. 목 적  
+
+\lc
+
++ Before  
+
+```{r}
+table4a 
+table2
+table3
+```
+
+\rc  
+
++ After  
+
+```{r}
+table1
+```  
+
+\ec  
+
+
+## 1. Review (`mutate`)  
+
+```{r}
+table1
+```  
+  
+```{r}
+table1 %>% mutate(rate = cases / popul * 100)  
+```  
+
+## 1. Review (`group_by` & `summarise`)  
+
+```{r}
+table1
+```  
+  
+```{r, eval=FALSE}
+table1 %>% group_by(year) %>% summarise(n = sum(cases))  
+table1 %>% count(year, wt = cases) # equivalent to above   
+``` 
+```{r, echo=FALSE}
+table1 %>% group_by(year) %>% summarise(n = sum(cases))
+```
+
+## 2. `gather` from `table4a` & `table4b`  
+
+\lc  
+
+```{r}
+table4a
+tidy4a <- table4a %>% 
+  gather(colnames(table4a)[-1], 
+         key = "year", 
+         value = "cases")
+tidy4a
+```
+
+\rc  
+
+```{r}
+table4b
+tidy4b <- table4b %>% 
+  gather(colnames(table4b)[-1], 
+         key = "year", 
+         value = "popul")
+tidy4b
+```
+
+\ec  
+
+##  
+
+```{r, eval=FALSE}
+left_join(tidy4a, tidy4b)
+left_join(tidy4a, tidy4b, by = c("ISO3", "year"))
+left_join(tidy4a, tidy4b, by = c("ISO3"="ISO3", "year"="year"))
+```
+
+```{r, echo=FALSE}
+left_join(tidy4a, tidy4b)
+```
+
+## 3. `spread` from `table2`
+
+```{r}
+table2
+table2 %>% spread(key = "type", value = "count")
+```
+
+## 4. `separate` from `table3`
+
+```{r}
+table3
+table3 %>% separate(rate, into = c("cases", "popul"), sep = "/")
+```
+
+\vspace{20pt}  
+
+**참고: Classical method**    
+
+```{r}
+table3$cases <- 
+  sapply(strsplit(table3$rate, split = "/"), function(x) x[1])
+table3$popul <- 
+  sapply(strsplit(table3$rate, split = "/"), function(x) x[2])
+```
+  
+## Summary  
+
+\lc
+
++ Before  
+
+```{r}
+table4a 
+table2
+table3
+```
+
+\rc  
+
++ After  
+
+```{r}
+table1
+```  
+
+\ec  

@@ -1,0 +1,223 @@
+---
+title: "Word Cloud"
+output: flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+```
+
+```{r}
+source("../../LSR.R")
+setLang("kr")
+activate("tm", "SnowballC", "wordcloud", "KoNLP", "pdftools")
+activate("ggplot2", "dplyr", "RColorBrewer", "wordcloud2")
+```
+
+
+Three Questions  
+=====================================   
+    
+Column {data-width=500}
+-------------------------------------
+
+```{r}
+text <- pdf_text("../script/three_questions.pdf")
+docs <- Corpus(VectorSource(text))
+lang <- "en"
+freqTable <- cleanDocsGenerateFreqTable(docs, lang)
+```  
+  
+### Boxplot  
+    
+```{r}
+ggplot(head(freqTable,20)) +
+  geom_bar(aes(x=reorder(word, freq), y=freq), stat="identity") +
+  coord_flip()  
+```
+   
+Column {data-width=500}  
+-------------------------------------  
+   
+### Word Cloud   
+
+```{r, warning = FALSE}
+# wordcloud2(freqTable, color = "random-light", backgroundColor = "grey")
+wordcloud(words = freqTable$word, freq = freqTable$freq,
+         min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,
+         colors=brewer.pal(8, "Dark2"))
+```      
+  
+RainFall      
+=====================================   
+    
+Column {data-width=500}
+-------------------------------------
+
+```{r}
+text <- pdf_text("../script/sonaki.pdf")
+docs <- sapply(text, extractNoun, USE.NAMES = F) %>% unlist()
+docs <- Filter(function(x) {nchar(x) >= 2}, docs)
+lang <- "kr"
+freqTable <- cleanDocsGenerateFreqTable(docs, lang)
+```
+
+### Boxplot
+    
+```{r}
+ggplot(head(freqTable,20)) +
+  geom_bar(aes(x=reorder(word, freq), y=freq), stat="identity") +
+  coord_flip()
+```
+   
+Column {data-width=500}
+-------------------------------------
+   
+### Word Cloud
+
+```{r, warning = FALSE}
+# wordcloud2(freqTable, color = "random-light", backgroundColor = "grey")
+wordcloud(words = freqTable$word, freq = freqTable$freq,
+         min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,
+         colors=brewer.pal(8, "Dark2"))
+```      
+
+Appeal  
+=====================================  
+    
+Column {data-width=500}
+-------------------------------------
+
+```{r}
+text <- readLines("../script/appeal.txt")
+docs <- sapply(text, extractNoun, USE.NAMES = F) %>% unlist()
+docs <- Filter(function(x) {nchar(x) >= 2}, docs)
+lang <- "kr"
+freqTable <- cleanDocsGenerateFreqTable(docs, lang)
+```
+
+### Boxplot
+    
+```{r}
+ggplot(head(freqTable,20)) +
+  geom_bar(aes(x=reorder(word, freq), y=freq), stat="identity") +
+  coord_flip()
+```
+   
+Column {data-width=500}
+-------------------------------------
+   
+### Word Cloud
+
+```{r, warning = FALSE}
+# wordcloud2(freqTable, color = "random-light", backgroundColor = "grey")
+wordcloud(words = freqTable$word, freq = freqTable$freq,
+         min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,
+         colors=brewer.pal(8, "Dark2"))
+```     
+
+The Art of Loving
+=====================================  
+    
+Column {data-width=500}
+-------------------------------------
+
+```{r}
+text <- pdf_text("../script/art_of_loving.pdf")
+docs <- Corpus(VectorSource(text))
+lang <- "en"
+freqTable <- cleanDocsGenerateFreqTable(docs, lang)
+```
+
+### Boxplot
+    
+```{r}
+ggplot(head(freqTable,20)) +
+  geom_bar(aes(x=reorder(word, freq), y=freq), stat="identity") +
+  coord_flip()
+```
+   
+Column {data-width=500}
+-------------------------------------
+   
+### Word Cloud
+
+```{r, warning = FALSE}
+# wordcloud2(freqTable, color = "random-light", backgroundColor = "grey")
+wordcloud(words = freqTable$word, freq = freqTable$freq,
+         min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,
+         colors=brewer.pal(8, "Dark2"))
+```     
+
+Choi
+=====================================  
+    
+Column {data-width=500}
+-------------------------------------
+
+```{r}
+text <- readLines("../script/choi.txt")
+# text <- Corpus(VectorSource(text))
+docs <- sapply(text, extractNoun, USE.NAMES = F) %>% unlist(docs)
+docs <- Filter(function(x) {nchar(x) >= 2}, docs) # Character length >= 2
+lang <- "kr"
+freqTable <- cleanDocsGenerateFreqTable(docs, lang)
+```
+
+### Boxplot
+    
+```{r}
+ggplot(head(freqTable,20)) +
+  geom_bar(aes(x=reorder(word, freq), y=freq), stat="identity") +
+  coord_flip()
+```
+   
+Column {data-width=500}
+-------------------------------------
+   
+### Word Cloud
+
+```{r, warning = FALSE}
+# wordcloud2(freqTable, color = "random-light", backgroundColor = "grey")
+wordcloud(words = freqTable$word, freq = freqTable$freq,
+         min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,
+         colors=brewer.pal(8, "Dark2"))
+```     
+
+I have a dream  
+=====================================   
+    
+Column {data-width=500}  
+-------------------------------------  
+
+```{r}
+text <- readLines("../script/dream.txt")
+docs <- Corpus(VectorSource(text))
+lang <- "en"
+freqTable <- cleanDocsGenerateFreqTable(docs, lang)
+```
+
+### Barplot  
+    
+```{r}  
+ggplot(head(freqTable,20)) +
+  geom_bar(aes(x=reorder(word, freq), y=freq), stat="identity") +
+  coord_flip()
+```
+   
+Column {data-width=500}  
+-------------------------------------  
+   
+### Word Cloud  
+
+```{r, warning = FALSE}  
+# wordcloud2(freqTable, color = "random-light", backgroundColor = "grey")
+wordcloud(words = freqTable$word, freq = freqTable$freq,
+         min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,
+         colors=brewer.pal(8, "Dark2"))
+```     
+
+
+
+

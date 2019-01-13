@@ -1,0 +1,33 @@
+% Changes made:
+% 2017-08-30
+% : Code chunk font to small from tiny
+% : Frame Number (page number)
+% 2018-05-04
+% : Two Column functionality
+
+% declare overall beamer theme to use as baseline
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+% make code-output smaller
+% CODE CHUNK FONT
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{fontsize=\small,commandchars=\\\{\}}
+
+\def\begcols{\begin{columns}}
+\def\endcols{\end{columns}}
+\def\begcol{\begin{column}}
+\def\endcol{\end{column}}
+
+% make console-output smaller:
+\makeatletter
+\def\verbatim{\small\@verbatim \frenchspacing\@vobeyspaces \@xverbatim}
+\makeatother
+
+
+\setlength{\parskip}{0pt}
+
+
+\setlength{\OuterFrameSep}{-4pt}
+\makeatletter
+\preto{\@verbatim}{\topsep=-5pt \partopsep=-5pt }
+\makeatother

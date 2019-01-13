@@ -1,4 +1,5 @@
-# 0. 강의노트 마지막 페이지에 실습과제를 내드렸는데, 아직 Rmarkdown을 다루지 않았으므로 R을 이용하는 버전으로 바꿔서 아래에 내 드리겠습니다.
+# 0. 강의노트 마지막 페이지에 실습과제를 내드렸는데, 아직 Rmarkdown을 다루지 않았으므로 
+#      R을 이용하는 버전으로 바꿔서 아래에 내 드리겠습니다.
 # 1. 이메일에 첨부된 `lifeCountry.csv`파일을 다운받으세요.
 # 2. C:/LS-DS/classProject라는 폴더를 만드세요.
 # 3. Rstudio를 열어서 File -> New File -> R Script를 하면 새로운 소스 파일이 생성됩니다.
@@ -26,18 +27,26 @@ a <- ggplot(dataset) +
 a
 # 12. facet을 이용해서 대륙별로 GDP와 기대수명에 대한 산점도를 그려보세요. 
 a + facet_wrap(~ Continent)
-# 13. 국가별로 성별에 따라 기대수명이 다릅니다. mutate함수를 사용해서 ageSexDiff라는 변수를 만들어 보세요.
-dataset <- dataset %>%
-  mutate(ageSexDiff = Female - Male)
+# 13. 국가별로 성별에 따라 기대수명이 다릅니다. 
+# mutate함수를 사용해서 ageSexDiff라는 변수를 만들어 보세요.
+dataset <- dataset %>% mutate(ageSexDiff = Female - Male)
 # 14. 어떤 대륙에서 ageSexDiff가 가장 크고 작은가요? 
-dataset %>% group_by(Continent) %>% summarise(contiSexDiff = mean(ageSexDiff)) %>% arrange(desc(contiSexDiff))
+dataset %>% 
+  group_by(Continent) %>% 
+  summarise(contiSexDiff = mean(ageSexDiff)) %>% 
+  arrange(desc(contiSexDiff))
 # 15. 자유롭게 분석을 시작해보세요.
 # Dumbell plot (p25 in M24-ggplot2_Gallery)
 library(ggalt)
 continentGender <- dataset %>% 
-  group_by(Continent) %>% summarise(avgMen = mean(Male), avgWomen = mean(Female)) %>% arrange(desc(avgWomen))
+  group_by(Continent) %>% 
+  summarise(avgMen = mean(Male), avgWomen = mean(Female)) %>% 
+  arrange(desc(avgWomen))
 b <- ggplot(continentGender, 
-            aes(x = avgMen, xend = avgWomen, y= reorder(Continent, -avgWomen), group = Continent)) +
+            aes(x = avgMen, 
+                xend = avgWomen, 
+                y= reorder(Continent, -avgWomen), 
+                group = Continent)) +
   geom_dumbbell()
 b
 c <- b + 
@@ -55,58 +64,3 @@ c
 # 17. 자유롭게 분석을 시작해보세요.
 # 18. `classProject1.R`을 저장해서 learningSpoonsR@gmail.com 로 보내주세요.
 
-
-setwd("C:/LS-DS/classProject")
-dataset <- read.csv("lifeCountry.csv", stringsAsFactors = FALSE) 
-library(dplyr)
-library(ggplot2)
-# dataset
-str(dataset) # nrow=161, ncol=11 (number of variables = 10)
-summary(dataset)
-TOP_GDP <- dataset %>% select(Country, GDP_per_Capita) %>% top_n(1) # head(1) is also possible
-TOP_GDP #Luxembourg; 107708
-BOTTOM_GDP <- dataset %>% select(Country, GDP_per_Capita) %>% top_n(-1) # tail(1) is also possible
-BOTTOM_GDP #South Sudan; 221
-TOP_LIFE <- dataset %>% select(Country, Life.Expectancy) %>% top_n(1)
-TOP_LIFE #Japan and Sri Lanka; 83.7
-BOTTOM_LIFE <- dataset %>% select(Country, Life.Expectancy) %>% top_n(-1)
-BOTTOM_LIFE #sierra Leone; 50.1
-
-temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = mean(GDP_per_Capita), avgLIFE = mean(Life.Expectancy))
-temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = round(mean(GDP_per_Capita),1), avgLIFE = round(mean(Life.Expectancy),1))
-
-temp
-a <- ggplot(data = dataset) + geom_point(mapping = aes(x = GDP_per_Capita, y = Life.Expectancy, color = Continent))
-a
-b <- a + facet_wrap(~ Continent, nrow = 2)
-b
-temp2 <- dataset %>% mutate(ageSexDiff = abs(Female - Male)) %>% select(Country, ageSexDiff)
-temp2
-TOP_Diff <- temp2 %>% top_n(1)
-TOP_Diff #Belarus; 11.5
-BOTTOM_Diff <- temp2 %>% top_n(-1)
-BOTTOM_Diff #Mali; 0.1
-temp3 <- dataset %>% mutate(ageSexDiff = abs(Female - Male)) %>% group_by(Continent) %>% summarise(avgDiff = mean(ageSexDiff))
-temp3
-TOP_Diff_Continent <- temp3 %>% top_n(1)
-TOP_Diff_Continent #Europe; 6.00
-BOTTOM_Diff_Continent <- temp3 %>% top_n(-1)
-BOTTOM_Diff_Continent #Africa; 3.72
-c <- ggplot(data = dataset) + geom_smooth(mapping = aes(x = GDP_per_Capita, y = Life.Expectancy, color = Continent))
-c
-d <- c + facet_wrap(~ Continent, nrow=2)
-d
-e <- ggplot(data = temp) + 
-  geom_col(mapping = aes(x= Continent, y= avgGDP), fill='blue') + 
-  geom_text(aes(x= Continent, y=avgGDP, label = avgGDP),vjust=1.5, color ='white')
-e
-e2 <- ggplot(data = temp, mapping = aes(x= Continent, y= avgGDP)) + 
-  geom_col(fill='blue') + 
-  geom_text(aes(label = avgGDP),vjust=1.5, color ='white')
-e2
-f <- ggplot(data = temp) + 
-  geom_col(mapping = aes(x= Continent,y= avgLIFE), fill= 'red') + 
-  geom_text(aes(x= Continent, y=avgLIFE,label = avgLIFE), vjust=1.5, color = 'white')
-f
-library(gridExtra)
-grid.arrange(e,f,ncol =2) #round(digits=2)???????ϰ???��??data??��?̾??Ƴ?
