@@ -1,3 +1,68 @@
+## 수업 시간(2019-01-13)에 나온 질문: `NA`를 다루는 법    
+
+임의로 `OECD_GDP`를 변형해봅니다.  
+
+
+```r
+dataset$OECD_GDP[3] <- "na"
+dataset$OECD_GDP[4] <- ""
+```
+
+위의 값들을 `NA`로 바꿔보겠습니다. 2가지 접근법이 있습니다. `dataset`의 `OECD_GDP`변수 값이 `"na"`인 경우에 `NA`로 변경하는 방법입니다.  
+
+
+```r
+# before 
+head(dataset$OECD_GDP)
+```
+
+```
+## [1] NA            NA            "na"          ""            NA           
+## [6] "18913.23927"
+```
+
+```r
+# dplyr method  
+# https://stackoverflow.com/questions/28013850/change-value-of-variable-with-dplyr
+dataset <- dataset %>% 
+  mutate(OECD_GDP = replace(OECD_GDP, OECD_GDP=="na", NA)) %>% 
+  mutate(OECD_GDP = replace(OECD_GDP, OECD_GDP=="", NA))  
+# classic method    
+dataset$OECD_GDP[dataset$OECD_GDP == "na"] <- NA
+dataset$OECD_GDP[dataset$OECD_GDP == ""] <- NA
+# after 
+head(dataset$OECD_GDP)
+```
+
+```
+## [1] NA            NA            NA            NA            NA           
+## [6] "18913.23927"
+```
+
+더 간단하게 처리하려면 `|` (or)를 사용해서 아래와 같이 할 수 있습니다.  
+
+
+```r
+# dplyr method  
+dataset <- dataset %>% 
+  mutate(OECD_GDP = replace(OECD_GDP, (OECD_GDP=="na" | OECD_GDP==""), NA)) 
+# classic method    
+dataset$OECD_GDP[(dataset$OECD_GDP=="na" | dataset$OECD_GDP=="")] <- NA
+```
+
+아래와 같은 방법도 가능합니다. 즉, `(OECD_GDP=="na" | OECD_GDP=="")`는 `OECD_GDP %in% c("na", "")`와 같습니다.   
+
+
+```r
+# dplyr method  
+dataset <- dataset %>% 
+  mutate(OECD_GDP = replace(OECD_GDP, OECD_GDP %in% c("na", ""), NA)) 
+# classic method  
+dataset$OECD_GDP[dataset$OECD_GDP %in% c("na", "")] <- NA
+```
+
+위에는 `"na"`와 `""`값을 `NA`로 바꾸기 위해서 총 6가지 방법을 보여드렸습니다. 이처럼 코딩에는 여러개의 정답이 있습니다. 저는 개인적으로 마지막 방법의 classic method를 사용할 것 같습니다.  
+
 ## 1. avgGDP, avgLIFE 값에 대해 반올림을 하고 싶습니다만, round(data, digits=2) 사용시 data 범위를 설정하는 단계에서 시행착오를 겪고 있습니다
 
 `temp <- dataset %>% group_by(Continent) %>% summarise(avgGDP = mean(GDP_per_Capita), avgLIFE = mean(Life.Expectancy))` 에서 바로 `round`를 적용시킬 순 없나요?
