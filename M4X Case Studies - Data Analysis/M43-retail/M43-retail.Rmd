@@ -21,7 +21,7 @@ classoption: t
 library(rmarkdown)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(background = '718CBA')
-# source("../../LSR.R")
+source("../../LSR.R")
 library(dplyr)
 library(tidyr)
 library(ggplot2)
