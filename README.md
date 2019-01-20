@@ -15,12 +15,13 @@
 ***   
 
 ## 수업 순서  
-M41->  
-M11 -> M12 -> M13 ->    
-M21 -> M22 -> M23 -> (M24, M25, M26, M27) ->    
-(M31) -> M32 -> M33 -> (M34, M35) ->   
-M42 -> M43 -> M44 -> M45 ->  
-M51 -> M52 -> M53 -> M54 -> M55    
+M41 (OECD) ->  
+M11 (Intro) -> M12 (base) -> M13 (Quiz) ->    
+M21 (Flow) -> M22 -> M23 (GGplot) -> M24 (GGplot Gallery) -> M25, M26, M27 (Templates) ->    
+M32 (Flexdashboard) -> M33 (Shiny)   
+M43 (retail) -> M51 (tidyr) -> M52 (time-series)
+
+M42 (subway) -> M44 (SNS) -> M45 (sales log) ->  M53 (python) -> M54 (KMA & Auto) -> M55 (outtro)
 
 ***  
 
