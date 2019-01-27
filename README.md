@@ -72,8 +72,8 @@ M33 (Shiny) -> M46 (retail2)
 
 |     | 제목    | 관련 packages | Description |          
 | ----|:-------:|:------:|:-----------:|        
-| M51 | tidyr       | `tidyr`, SQL     |  |        
-| M52 | Time Series | `xts`, `dygraph`, `lubridate` |  |      
+| `M51` | tidyr       | `tidyr`, SQL     |  |        
+| `M52` | Time Series | `xts`, `dygraph`, `lubridate` |  |      
 
 ## M6X: References  
 
