@@ -16,9 +16,9 @@
 
 M11 (Intro) -> M41 (OECD) ->  M12 (base) -> M13 (Quiz) ->    
 M21 (Flow) -> M22 -> M23 (GGplot) -> M24 (GGplot Gallery) -> M25, M26, M27 (Templates) ->    
-M32 (Flexdashboard) -> M43 (retail) -> 
-M51 (tidyr) -> M52 (time-series) -> 
-M33 (Shiny) -> M46 (retail2)
+M32 (Flexdashboard) -> M43 (retail) ->   
+M51 (tidyr) -> M52 (time-series) ->   
+M33 (Shiny) -> M46 (retail2)  
 
 ***  
 
