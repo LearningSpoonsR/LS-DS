@@ -1,0 +1,12 @@
+name: M46-retail2-correl
+title: M46-retail2-correl
+username:
+account: learningspoonsr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 660775
+bundleId: 1831331
+url: https://learningspoonsr.shinyapps.io/M46-retail2-correl/
+when: 1548238707.82548
+asMultiple: FALSE
+asStatic: FALSE

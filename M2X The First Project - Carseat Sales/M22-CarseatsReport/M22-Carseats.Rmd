@@ -1,0 +1,118 @@
+---
+title: "Carseats Report - Advertising vs Sales"
+author: "Learning Spoons R"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true  
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## I. Carseat
+
+```{r, message=FALSE}
+library(ISLR)
+library(dplyr)
+library(ggplot2)
+str(Carseats) 
+```
+
+이 보고서는 `Advertising`이 `Sales`에 미치는 영향을 분석합니다.  
+
+## II. Basic: Advertising vs Sales  
+
+```{r}
+xyPlot <- 
+  ggplot(data = Carseats, aes(x = Advertising, y = Sales)) + 
+  geom_point()
+xyPlot
+```  
+
+## III. Design    
+
++ 후보 추가 변수들은 다음과 같습니다. `setdiff(colnames(Carseats), c("Sales", "Adverting"))`: `r setdiff(colnames(Carseats), c("Sales", "Adverting"))`.  
++ 각각의 데이터는 각각의 지역 (Spatial Data)를 의미합니다.  그리고 `Advertising`와 `Sales`를 제외한 다른 변수들은 1) 해당 지역의 특성 혹은 2) 해당 지역에서의 business practice의 특성을 반영합니다. (factor 변수는 bold로 표기하였습니다.)   
+  1. 해당 지역의 특성: `Income`, `Population`, `Age`, `Education`, **`Urban`**, **`US`**   
+  2. 해당 지역의 biz의 특성: `CompPrice`, `Price`, **`ShelveLoc`**  
+
++ 해당 지역의 특성에 따라서 광고 효과를 살펴봅니다.  
+  1. Factor 변수에 따라서 광고 효과가 달라지는지 살펴봅니다.  
+  2. Factor 변수가 아닌 경우에는 4분위 값을 기준으로 Factor 변수로 변환하여 살펴봅니다.  
+ 
+## IV. Report  
+
+### 1. Factor 변수 분석   
+
+```{r}
+xyPlot + facet_wrap(~ Urban) + ggtitle("by Urban")
+xyPlot + facet_wrap(~ US) + ggtitle("by US")
+```
+
+### 2. Numeric 변수 분석  
+
+```{r}
+# Create factor type
+generateQuartile <- function(x) {
+  return(summary(x)[c(2,3,5)])
+}
+Carseats <- Carseats %>% 
+  mutate(IncomeF = 
+           ifelse(Income < generateQuartile(Income)[1], "Q1",
+                  ifelse(Income < generateQuartile(Income)[2], "Q2",
+                         ifelse(Income < generateQuartile(Income)[3], "Q3", "Q4")))) %>%
+  mutate(PopulationF = 
+           ifelse(Population < generateQuartile(Population)[1], "Q1",
+                  ifelse(Population < generateQuartile(Population)[2], "Q2",
+                         ifelse(Population < generateQuartile(Population)[3], "Q3", "Q4")))) %>%
+  mutate(AgeF = 
+           ifelse(Age < generateQuartile(Age)[1], "Q1",
+                  ifelse(Age < generateQuartile(Age)[2], "Q2",
+                         ifelse(Age < generateQuartile(Age)[3], "Q3", "Q4")))) %>%
+  mutate(EducationF = 
+           ifelse(Education < generateQuartile(Education)[1], "Q1",
+                  ifelse(Education < generateQuartile(Education)[2], "Q2",
+                         ifelse(Education < generateQuartile(Education)[3], "Q3", "Q4"))))
+```
+
+```{r, eval=FALSE}
+xyPlot <- 
+  ggplot(data = Carseats, aes(x = Advertising, y = Sales)) + 
+  geom_point() # Let xyPlot to update the dataset 
+xyPlot + facet_wrap(~ IncomeF) + 
+  labs(title = "by IncomeF", 
+       subtitle = generateQuartile(Carseats$Income) %>% as.numeric() %>% paste(collapse = ","))
+xyPlot + facet_wrap(~ PopulationF) +
+  labs(title = "by PopulationF", 
+       subtitle = generateQuartile(Carseats$Population) %>% as.numeric() %>% paste(collapse = ","))
+xyPlot + facet_wrap(~ AgeF) + 
+  labs(title = "by AgeF", 
+       subtitle = generateQuartile(Carseats$Age) %>% as.numeric() %>% paste(collapse = ","))
+xyPlot + facet_wrap(~ EducationF) + 
+  labs(title = "by EducationF", 
+       subtitle = generateQuartile(Carseats$Education) %>% as.numeric() %>% paste(collapse = ","))
+```
+
+```{r}
+xyPlot <- 
+  ggplot(data = Carseats, aes(x = Advertising, y = Sales)) + 
+  geom_point() # Let xyPlot to update the dataset 
+variables <- c("Income", "Population", "Age", "Education")
+for (var in variables) {
+  a <- xyPlot + 
+    facet_wrap(as.formula(paste0("~", var, "F"))) +
+    labs(title = 
+           paste0("by ", var, "F"),
+         subtitle = 
+           generateQuartile(eval(parse(text=paste0("Carseats$", var)))) %>%
+           as.numeric() %>% paste(collapse = ","))
+  print(a)
+}
+```
+
+
+
+

@@ -1,0 +1,12 @@
+name: M46-retail2-shiny
+title: M46-retail2-shiny
+username:
+account: learningspoonsr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 660768
+bundleId: 1831316
+url: https://learningspoonsr.shinyapps.io/M46-retail2-shiny/
+when: 1548238313.76377
+asMultiple: FALSE
+asStatic: FALSE

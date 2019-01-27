@@ -1,0 +1,126 @@
+---
+title: "LearningSpoonsR_lifeCountry"
+author: "Geon Seung Lee"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: yes
+  word_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **각 대륙별 GDP 및 기대수명에 대한 박스플롯을 만들어보세요.** 
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+dataset <- read.csv("lifeCountry.csv", stringsAsFactors = FALSE)
+```
+
+**박스플롯에서 아웃라이러를 제외한 최대/상위25/중간값/하위25/최소 데이터값만 표기하고 싶습니다.**     
+
+### Step 1. 기본 박스 플랏 그리기  
+
+```{r}
+a <- ggplot(dataset, aes(x=Continent, y=GDP_per_Capita)) + geom_boxplot() 
+a 
+```
+
+### Step 2. `geom_text`로 통계량 추가하기  
+
+##### Step 2-1. 먼저 통계량을 모아놓은 `GDP_stats`라는 데이터 프레임을 만듭니다. 
+
+```{r}
+summary(dataset$GDP_per_Capita)
+GDP_stats <- dataset %>% 
+  group_by(Continent) %>%
+  summarise(Min = summary(GDP_per_Capita)[1],
+            Q1 = summary(GDP_per_Capita)[2],
+            Median = summary(GDP_per_Capita)[3],
+            Q3 = summary(GDP_per_Capita)[5],
+            Max = summary(GDP_per_Capita)[6])
+GDP_stats[,-1] <- round(GDP_stats[,-1])
+GDP_stats
+```
+
+##### Step 2-2. `geom_text`를 이용해서 label을 추가합니다. 
+
+```{r}
+a + 
+  geom_text(data = GDP_stats, aes(x=Continent, y=Min, label=Min), size = 3) + 
+  geom_text(data = GDP_stats, aes(x=Continent, y=Q1, label=Q1), size = 3) + 
+  geom_text(data = GDP_stats, aes(x=Continent, y=Median, label=Median), size = 3) + 
+  geom_text(data = GDP_stats, aes(x=Continent, y=Q3, label=Q3), size = 3) +
+  geom_text(data = GDP_stats, aes(x=Continent, y=Max, label=Max), size = 3)  
+```
+
+##### Step 2-3. 텍스트가 선이랑 겹쳐서 잘 보이지 않네요? 
+
++ 박스플랏의 크기가 촘촘하여 텍스트를 넣을 자리가 별로 없습니다. 이런 경우에는 박스 플랏을 더 크게 만드는 것이 좋아보입니다.  
++ Chunk control 부분에 `{r, fig.height = 10}`를 추가하였습니다. (코드 확인해주세요)  
++ Rstudio내에서 보면 사이즈가 그대로입니다. 하지만 rendering된 html에는 크기가 커진 것을 확인할 있습니다.  
+
+```{r, fig.width = 6, fig.height = 10}
+a <- ggplot(dataset, aes(x=Continent, y=GDP_per_Capita)) + geom_boxplot() 
+a +
+  geom_text(data = GDP_stats, aes(x=Continent, y=Min, label=Min), size = 3) + 
+  geom_text(data = GDP_stats, aes(x=Continent, y=Q1, label=Q1), size = 3) + 
+  geom_text(data = GDP_stats, aes(x=Continent, y=Median, label=Median), size = 3) + 
+  geom_text(data = GDP_stats, aes(x=Continent, y=Q3, label=Q3), size = 3) +
+  geom_text(data = GDP_stats, aes(x=Continent, y=Max, label=Max), size = 3)  
+```
+
+##### Step 2-4. 조금 나아지긴 했지만 여전히 겹쳐네요. 텍스트 위치를 조금 옮겨 보겠습니다. 
+
+```{r, fig.width = 6, fig.height = 10}
+h_shift = -0.1 # horizontal shift
+v_shift = -0.5 # vertical shift 
+a +
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Min, label=Min, hjust=h_shift, vjust=v_shift), 
+            size = 3) + 
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Q1, label=Q1, hjust=h_shift, vjust=v_shift), 
+            size = 3) + 
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Median, label=Median, hjust=h_shift, vjust=v_shift), 
+            size = 3) + 
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Q3, label=Q3, hjust=h_shift, vjust=v_shift), 
+            size = 3) +
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Max, label=Max, hjust=h_shift, vjust=v_shift), 
+            size = 3)  
+```
+
++ Africa 같은 대륙은 Q1, Median, Q3가 촘촘하여 text를 넣을 공간이 없습니다.  
++ 위의 코드에서 Q1과 Q3에는 `hjust`값을 양수로 넣어준다면 Q1과 Q3는 왼쪽으로 배열할 수 있습니다.  
+
+```{r, fig.width = 6, fig.height = 10}
+h_shift = -0.1 
+h_shift2 = 1.1
+v_shift = -0.5 
+a +
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Min, label=Min, hjust=h_shift, vjust=v_shift), 
+            size = 3) + 
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Q1, label=Q1, hjust=h_shift2, vjust=v_shift), 
+            size = 3) + 
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Median, label=Median, hjust=h_shift, vjust=v_shift), 
+            size = 3) + 
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Q3, label=Q3, hjust=h_shift2, vjust=v_shift), 
+            size = 3) +
+  geom_text(data = GDP_stats, 
+            aes(x=Continent, y=Max, label=Max, hjust=h_shift, vjust=v_shift), 
+            size = 3)  
+```
+
+이런 식으로 text의 위치를 조금씩 조정한다면 원하는 모양에 가까워 질 것 같습니다. 
+

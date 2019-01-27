@@ -1,0 +1,345 @@
+---
+title: "M45-retail"
+author: "LS"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../../LSR.R")
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+## 0. 시작하기    
+
+Tableau라는 비쥬얼라이제이션 업체의 교육용 자료입니다.  
+
+데이터를 받았을 때에 가장 처음에 해야할 작업은 데이터가 어떻게 구성이 되어있는지를 확인하는 것입니다.  이렇게 파일로 받은 경우에는 엑셀이나 메모장으로 데이터 파일을 열어 확인합니다.  
+
+**Tidy data**란 각 column이 변수에 해당하고 각 row가 1개의 관찰을 의미하는 잘 정리된 데이터 구조를 이야기 합니다.  이는 R자료 구조에서는 `data.frame`에 해당하고 파이썬에서는 `pandas.DataFrame`에 해당합니다.  시계열 자료인 경우에는 각각 `xts`이거나 `pandas.Series`입니다.  
+
+Tidy data가 아닌 경우에는 주어진 데이터를 우선 tidy data를 만들어야 하며, 이를 전처리(Preprocessing)과정이라고 합니다.  실제 업무에서 접하게 되는 데이터는 `tidy`한 경우가 잘 없습니다.  그렇기 때문에 데이터를 `tidy`하게 바꾸는 preprocessing과정이 전체 데이터 분석의 시간의 상당수를 차지하는 경우가 많습니다.  
+
+Preprocessing을 하는 과정은 다양하고 복잡하고 지저분한 raw 데이터 만큼이나 다양하고 복잡하고 세밀한 관찰력과 때로는 창의력을 요하기도 합니다.  이 과정이 흔히 노동집약적이기도 하지만, 이 과정이 데이터를 보는 눈과 데이터 구조를 이해하는 데에 큰 도움을 주기도 합니다.  또한 preprocessing과정을 열심히 수행하면서 얻게되는 경험과 프로그래밍 실력은 데이터 분석가로서의 자신감을 높여줍니다.  
+
+`M51`에서는 Preprocessing과정에서 1) tidy하지 않은 데이터를 tidy하게 바꾸는 명령어와 2) 두 개 이상의 데이터 프레임을 합치는 법을 배웁니다.   1)에서는 `tidyr` 패키지의 몇 가지 명령을 사용해서 `tidy`하지 않은 데이터 셋 중에서 전형적인 경우에 대처하는 법을 배웁니다.  2) 실제 데이터 분석을 하는 경우에 상당수는 1가지 데이터가 아닌 2개 이상의 데이터를 합치는 경우가 많습니다.  예를 들어 날씨에 따른 매출의 변화를 관찰하고 싶다면 기상청에서 제공하는 날씨데이터를 구해서 매출 데이터랑 결합을 시켜야 할 것입니다.    
+
+![](fig/fig1.png)\  
+
+다행히도 현재 사용할 데이터는 `tidy`한 데이터입니다.  `tidy`하지 않은 데이터를 처리한 예제는 `M44[0]-Preprocessing.Rmd`에서 찾을 수 있습니다.  `M44[0]-Preprocessing.Rmd`에서는 흔한 raw 데이터를 불러와서 변수의 이름을 붙이고 `tidyr`패키지의 명령을 이용해서 `tidy`한 dataset으로 만들어내서 csv파일로 저장하는 프로세스를 보여줍니다.  **네모난** **tidy한** dataset이 되었기에 `M44[1]`이후에는 각종 데이터 분석을 할 수 있습니다.  
+
+아래 명령을 통해 데이터를 불러옵니다.  
+
+```{r}
+library(readxl)
+dataset <- read_excel("retail.xlsx")
+```
+
+데이터 구조를 파악합니다.  
+
+```{r}
+str(dataset)
+head(dataset)
+dim(dataset)
+```
+
+데이터 분석은 대체로 1) 데이터의 관찰 -> 2) 가설의 설정 -> 3) 가설 검증 -> 4) 결론 도출 -> 5) 공유의 과정으로 이루어집니다.  이 과정에서 때로는 다른 데이터를 더 확보해서 분석에 포함시키기도 하고, 데이터의 결함과 미비한 점을 파악함으로써 데이터 관리자와 공급자와 커뮤니케이션 합니다.  마지막으로 공유의 단계에서는 데이터와 관련된 다른 사람들과 의사소통 하며 더 나은 의사결정을 돕게합니다.   
+
+retail 데이터 셋을 관찰한 결과 아래처럼 9개의 가설을 세웠습니다.  이를 차례로 검증해 보겠습니다.  
+
+## 1. `Ship Date`를 기반으로 배송이 가장 오래걸리는 상품은 무엇인가?    
+
+#### Background & Strategy  
+
+상품은 주문(Order)-출고(Ship)-배송완료(Delivery)의 3개의 시점이 있음.  주문과 출고사이의 시간(lead time)은 판매자의 역량이며, 출고와 배송완료 시점 사이의 시간(delivery time)은 delivery mode에 따라 결정됨.  
+
+질문자의 의도는 주문과 배송완료 사이의 시간, 그러니까 소비자의 입장에서 생각하고 있는 것이지만 업체 입장에서는 lead time이 업체 운영의 효율성과 관계된 것임.  그러므로 각 sub-category별로 Ship Date와 Order Date의 차이를 계산하여 평균과 분산을 구해보아야 함.  
+
+Average보다는 lead time의 long tail이 중요한 수치임.  Long tail이란 소비자의 불만을 야기할 정도로 소비자가 기대하는 평균 lead time에 비해서 아주 큰 값을 의미함.  오퍼레이션의 관점에서 이는 근로자의 휴가나 파업등의 이슈, 혹은 장비의 결함과 break down등의 상황에 해당함.  Lead time이 아닌 delivery time의 경우에는 명절이나 연휴 시즌으로 인한 지연, 기상 조건에 따른 지연이 이에 해당함.  
+
+이상값에 해당하는 경우에는 따로 데이터를 추출해서 요인을 Case별로 분석해봐야 함.  
+
+#### Tasks Specification  
+
+1. `leadTime`이라는 변수를 생성하고 각각의 `Sub-Category`에 대해서 `leadTime`의 평균과 분산을 구한다.  
+2. 각각의 `Sub-Category`에 대해서 box-plot을 그린다.   
+3. `leadTime`이 가장 긴 20개의 관찰값을 출력한다.  
+
+#### Task 1  
+
+```{r}
+dataset$leadTime <- dataset$`Ship Date` - dataset$`Order Date`
+activate("lubridate")
+task1 <- dataset %>% 
+  group_by(`Sub-Category`) %>%
+  summarise(avgLT = mean(leadTime), sdLT = sd(leadTime)) %>%
+  arrange(desc(avgLT))
+```
+
+`avgLT`와 `sdLT`를 구했지만, 단위가 초(second)로 되어있습니다.  `class(task1$avgLT)`를 실행해보니 `r class(task1$avgLT)`라고 합니다.  그러므로 google에서 "convert difftime second to days"를 검색하여 아래와 같은 해결책을 얻고 task1을 완료합니다.  
+
+```{r}
+task1$avgLT <- task1$avgLT %>% as.numeric(units = "days") %>% round(2)
+task1$sdLT  <- task1$sdLT  %>% as.numeric(units = "days") %>% round(2)
+print(task1)
+```
+
+품목별로 평균적인 `leadTime`의 크기가 크지 않습니다.  표준편차의 차이도 매우 크지 않습니다.  평균과 표준편차외에 전체적인 분포를 task2에서 살펴보도록 합니다.  
+
+#### Task 2  
+
+```{r}
+ggplot(dataset) +
+  geom_boxplot(aes(x = `Sub-Category`, y = leadTime)) +
+  coord_flip()
+```
+
+`leadTime`의 수치가 뭔가 괴상하게 나옵니다.  원인을 살펴보니 `leadTime`변수 자체가 seconds단위로 되어 있습니다.  위에서 days로 바꾸어주는 방법을 이용해서 해결합니다.
+
+```{r}
+dataset$leadTime <- dataset$leadTime %>% as.numeric(units = "days")
+ggplot(dataset) +
+  geom_boxplot(aes(x = `Sub-Category`, y = leadTime)) +
+  coord_flip()
+```
+
+위의 그림으로 부터 `leadTime`에 대해서 아래와 같은 결론을 내릴 수 있습니다.  
+
++ 모든 상품에 대해서 중간값이 4일이다.  
++ Furnishing, Machines, Chairs, Bookcases와 같이 크기가 클 수 있는 제품의 경우에도 `leadTime`이 특별히 길다고 말할 수 없다.
++ 전체 관찰값의 갯수는 `nrow(dataset): ` `r nrow(dataset)`이다.  그런데 `max(dataset$leadTime): ` `r max(dataset$leadTime)`이다.  `leadTime`이 `r max(dataset$leadTime)`인 경우는 총 `sum(dataset$leadTime==max(dataset$leadTime)):` `r sum(dataset$leadTime==max(dataset$leadTime))`건에 해당하며 이는 `sum(dataset$leadTime==max(dataset$leadTime))/nrow(dataset)*100:` `r sum(dataset$leadTime==max(dataset$leadTime))/nrow(dataset)*100`% 이다.  
++ 즉, `nrow(dataset)`건의 주문을 처리하면서 `leadTime`을 7일 내로 100% 처리했으며, 6일내로 94% 처리했다.  `leadTime`이 잘 관리되고 있음을 알 수 있다.  
+
+#### Task 3  
+
+만약에 `leadTime`의 분포가 long-tail의 모습을 보인다면, 즉 몇몇 제품의 `leadTime`이 이상하게 높았다면, 이런 케이스를 나열하고 분석하는 것이 Task 3의 목적이다.  그러나 Task 2의 분석 결과를 보면 `leadTime`이 대체로 잘 관리되고 있음을 알 수 있다.  그러므로 원래 의도한 Task 3를 수행하는 것은 큰 의미가 없다.  그렇기 때문에 Task 3의 원래 목적은 살리면서 내용을 변경하여 전체 상품의 6%에 해당하는 `leadTime`이 7일인 경우는 어떤 상품들이 많이 있는지 알아보자.  
+
+아래와 같은 관찰을 수행할 수 있다.  
++ Task 3-1: `leadTime`이 7인 주문을 `Category`와 `Sub-Category`로 나누어서 갯수를 관찰한다.  `Category`로 나눈 것은 pie-chart로 그리고 `Sub-Category`로 나눈 것은 항목의 갯수가 많으므로 pie-chart가 아닌 표로 정리한다.  
++ Task 3-2: 그러나 Task 3-1의 관찰은 갯수를 보는 것이 아니라 주문 갯수에 대비한 비율로 보아야 한다.  즉, `leadTime`이 7일인 Furniture 주문의 갯수를 보는 것이 아니라, 전체 Furniture 주문 중에서 `leadTime`이 7일인 경우의 비율을 계산하는 것이 바람직하다.  
+
+아래 코드로 Task 3-2를 수행해 봅니다.  
+
+```{r}
+task3_2a <- dataset %>% 
+  group_by(`Category`) %>%
+  summarise(maxLeadTimePercent = 100*sum(leadTime==7)/length(leadTime)) %>%
+  arrange(desc(maxLeadTimePercent))
+print(task3_2a)
+task3_2b <- dataset %>% 
+  group_by(`Sub-Category`) %>%
+  summarise(maxLeadTimePercent = 100*sum(leadTime==7)/length(leadTime)) %>%
+  arrange(desc(maxLeadTimePercent))
+print(task3_2b)
+```
+
+Sub-Category가 Supplies인 항목의 경우에는 주문의 10%이상의 `leadTime`이 7일에 해당했습니다.  그러므로 발주 process 효율성의 향상을 위해서는 Supplies물품을 주문 받은 이후 배송을 시행하기 까지 왜 오래 걸리는지 알아볼 필요가 있다는 결론을 내릴 수 있습니다!
+
+## 2. 마진이 가장 많이 남는 상품은 무엇인가?  
+
+#### Background & Strategy  
+
+기업의 입장에서는 매출과 이익이 모두 중요합니다.  각 Category와 Sub-Category에 대해서 기업의 매출과 이익에 얼마나 기여했는지 알아봅니다.  그리고 매출 대비 이익률을 알아볼 수 있습니다. (Profit-Revenue-Ratio)  
+
+또한 기업의 매출과 이익이 계속적으로 성장하고 있는지를 알아보는 것도 중요합니다.  그렇기 때문에 분기 단위로 나누어 위의 분석을 수행합니다.  
+
+#### Tasks Specification  
+
+1. 각 `Category`와 `Sub-Category`에 대해서 `Sales`와 `Profit`을 각각 Aggregate한다.  그리고 `Profit`을 `Sales`로 나누어서 `profitRatio`을 구한다.  
+
+2. 분기를 나타내는 변수를 생성하고 위의 분석을 반복한다.   
+
+#### Task 1  
+
+```{r}
+task1a <- dataset %>% 
+  group_by(Category) %>%
+  summarise(Sales = sum(Sales), Profit = sum(Profit)) %>% 
+  mutate(profitRatio = round(Profit/Sales,2)) %>%
+  arrange(desc(profitRatio))
+print(task1a)
+```
+
+```{r}
+# Reference: `M91.piechart`  
+ggplot(task1a, aes(x = "", y = Sales, fill = factor(Category))) +
+  geom_bar(width = 1, stat = "identity") +
+  theme(axis.line = element_blank(),
+        plot.title = element_text(hjust = 0.5)) +
+  labs(fill = "Category", x = NULL, y = NULL,
+       title = "Sales Contribution") +
+  coord_polar(theta = "y", start = 0)
+```
+
+```{r}
+ggplot(task1a, aes(x = "", y = Profit, fill = factor(Category))) +
+  geom_bar(width = 1, stat = "identity") +
+  theme(axis.line = element_blank(),
+        plot.title = element_text(hjust = 0.5)) +
+  labs(fill = "Category", x = NULL, y = NULL,
+       title = "Profits Contribution") +
+  coord_polar(theta = "y", start = 0)
+```
+
+Furniture의 경우에는 무려 74만불의 매출을 내고도 2만불에 못 미치는 이익률을 보였습니다.  Furniture와 같이 1) 부피와 무게가 커서 다루는데에 인력과 시간이 많이 필요하고, 2) 재고 상태로 보유하는 것이 저장, 운반, 감가상각의 관점에서 비용이 크고, 3) 반품이 생기면 완전 골치아픈 ㅠㅠ 분류가 심지어 이익률도 2%입니다. ㅠㅠ  
+
+Furniture에 대해서 떠오르는 질문은 다음과 같습니다.  
++ 1) Sub-Category를 보아도 다 이런 식인가? 대형 가구와 중소형 가구의 이익률이 다를 수도 있지 않나?  
++ 2) 처음부터 지금까지 Furniture 비지니스는 계속 이랬나? 최근의 IKEA의 습격을 당해서 마진율이 내려간 것인가?  
++ 3) 과연 Furniture 비지니스를 계속해야 하는가? 접지 않는다면 어떤 대안으로 돌파가 가능한가?에 대해서 전략을 세우고 결론을 내려야 합니다.  
+
+2)의 분석의 경우에는 IKEA의 동향에 대한 데이터를 추가로 확보하고 IKEA 매장의 근교 지역과 아닌 지역을 구분해서 비교하는 분석을 실시해야 할 것입니다.  
+
+```{r}
+task1b <- dataset %>% 
+  group_by(`Sub-Category`) %>%
+  summarise(Sales = sum(Sales), Profit = sum(Profit)) %>% 
+  mutate(profitRatio = round(Profit/Sales,2)) %>%
+  arrange(desc(profitRatio))
+task1b
+```
+
+위의 표는 아래와 같이 Diverging bar로 표현할 수도 있습니다.  
+
+```{r}
+# Reference: `M91.2.Deviation`
+task1b$profitHL <- 
+  ifelse(task1b$profitRatio < mean(task1b$profitRatio),
+         "below average", "above average")
+task1b <- task1b %>% arrange(profitRatio)
+# Convert to factor to preserve sorted order in plot.
+task1b$`Sub-Category` <- 
+  factor(task1b$`Sub-Category`, levels = task1b$`Sub-Category`)
+ggplot(task1b, 
+       aes(x = `Sub-Category`, y = profitRatio, label = profitRatio)) + 
+  geom_bar(stat = 'identity', aes(fill = profitHL), width = .5) +
+  scale_fill_manual(
+    name = "Profit Ratio",
+    labels = c("Below Average", "Above Average"),
+    values = c("below average" = "#f8766d", 
+               "above average" = "#00ba38")) + 
+  labs(title = "Diverging bar",
+       subtitle = "Profitability of each Sub-Category") +
+  coord_flip()
+```
+
+혹은 좀 더 modern look을 제공하는 아래와 같은 "Diverging Lollipip Chart"도 가능합니다.  
+
+```{r}
+# Reference: `M91.2.Deviation`
+ggplot(task1b, 
+       aes(x = `Sub-Category`, y = profitRatio, label = profitRatio)) + 
+  geom_point(stat = 'identity', fill = "black", size = 8) +
+  geom_segment(aes(y = 0, x = `Sub-Category`, 
+                   yend = profitRatio, xend = `Sub-Category`),
+               color = "black") +
+  geom_text(color = "white", size = 3) + 
+  labs(title = "Diverging Lollipop Chart",
+       subtitle = "Profitability of each Sub-Category") + 
+  ylim(-0.2, 0.5) +
+  coord_flip()
+```
+
+이익률 하위 부분의 Storage, Chairs, Bookcases, Tables 모두 가구류에 해당합니다.  제가 만약에 이 기업을 경영자라면 해당 소형 가구라인의 유지를 전면적으로 고민할 것 같습니다.  
+
+이익률이 높은 Sub-Category들의 경우에는 이익률은 높지만 실제 이익의 총량은 얼마 안되는 품목들도 많이 있습니다.  Labels, Envelopes, Fastener, Art의 경우에는 이익 자체가 크지 않습니다. (봉투를 팔아서 돈을 벌면 얼마나 벌겠습니까...)  같은 table을 이익순으로 정렬하는 것이 다른 시각을 제공할 수 있습니다.  
+
+```{r}
+task1b %>% arrange(desc(Profit, Sales))
+```  
+
+#### Task 2   
+
+2. 분기를 나타내는 변수를 생성하고 위의 분석을 반복한다. 
+
+```{r}
+task2 <- dataset %>% 
+  mutate(year    = substr(`Order Date`, 1, 4),
+         quarter = ceiling(as.numeric(substr(`Order Date`, 6, 7))/3)) %>%
+  select(year, quarter, Category, `Sub-Category`, Profit, Sales) %>%
+  group_by(year, quarter, Category) %>%
+  summarise(Sales = sum(Sales), Profit = sum(Profit))
+task2$year    <- factor(task2$year)
+task2$quarter <- factor(paste0("Q", task2$quarter))
+head(task2)
+```
+
+```{r}
+ggplot(task2, aes(x = factor(Category), y = Sales, fill = factor(Category))) +
+  geom_bar(stat = 'identity') +
+  facet_grid(year~quarter) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(title = "Sales Trend") 
+```
+
+특이하게도 대체적으로 1분기, 2분기, 3분기, 4분기로 갈수록 매출이 급격하게 늘어나는 것을 볼 수 있습니다.  시계열의 이런 경향을 계절성(seasonality)라고 합니다.  시계열 자료에서 경향의 구성 요소는 크게 1) 트렌드, 2) 계절성, 3) 그외의 잡음으로 생각할 수 있습니다.  우선 계절성은 어떤 고정된 길이의 시간에 따라서 주기적인 모습(cyclic pattern)을 보이는 것을 의미합니다.  인간의 삶과 밀접한 연관이 있는 시계열 데이터는 대부분 계절성이 있습니다.  교통 수단의 이용량의 경우에는 출퇴근 시간과 낮시간의 패턴에 계절성이 있고, 주간에 대해서 요일별로의 계절성이 있습니다.  미국 소비자의 쇼핑 패턴을 보면 대부분의 소비가 겨울에 집중되는 것을 알 수 있습니다.  그렇기 때문에 기업의 매출과 이익의 성장을 단순히 "전월대비"로 볼게 아니라, "전년동월대비" 관점으로 보아야합니다.  
+
+위의 자료에서는 우선 매출량의 트렌드는 긍정적입니다.  연도가 지나면서 점점 매출이 늘어나고 있습니다.  그리고 retail 상품이기에 계절성이 매우 뚜렷한 특징을 보이고 있습니다.  만약에 B2C 비지니스가 아닌 제조업체 등의 B2B 비지니스였다면, 이렇게 뚜렷한 계절성을 보이지는 않았을 것입니다.  
+
+```{r}
+ggplot(task2, aes(x = factor(Category), y = Profit, fill = factor(Category))) +
+  geom_bar(stat = 'identity') +
+  facet_grid(year~quarter) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(title = "Profit Trend")
+```
+
+기업의 순이익과 직결되는 Profit에 대한 시계열 분석입니다.  앞에서 살펴본 매출과 비슷한 패턴을 보이는 것을 확인할 수 있습니다.  2014년 1분기에는 전년과 전전년 동분기에 비해서 Technology 제품에 대해서 큰 수익을 거둔것을 살펴볼 수 있습니다.  만약에 조금더 분석을 해본다면 2012년, 2013년, 2014년의 1분기에 대해서 각각 어떤 상품들이 팔렸는지 알고 싶습니다.  예를 들어서 2014년 1분기에 아이폰의 새로운 버전이 나왔고 그것을 해당 쇼핑몰에서 많이 판매하였다면, 그것이 매출에 크게 기여하였다라고 말할수 있겠네요.  앞의 분석에서 문제로 제기했던 Furniture의 경우에는 2014년도 4분기에는 전년과 전전년 동분기에 대비해서 순이익이 적었습니다.  이것 역시 이유를 더 살펴보고 2015년에의 Furniture 관련 전략을 수립할 필요가 있어보입니다.  
+
+## 3. 가장 많은 상품을 구매한 고객은 누구이며 언제 구매하였는가? (ok)  
+
+Customer Name에 대해서 aggregate해서 우리의 가장 loyal customer를 찾아보자.
+그사람의 구매내역을 살펴보자.
+
+## 4. 가장 판매가 부진한 상품은 무엇이고 이유는 무엇인가? (ok)  
+
+판매가 부진하다는 것은 팔려고 내놓은 물건 리스트가 필요함.  
+
+## 5. 많이 팔리는 상품의 가격수준과 일정가격 이하 상품의 판매량은 어떠한가? (ok)   
+
+각 subcategory에 대해서 전체 매출과 이익에 대한 기여도를 살펴보자.    
+
+가격대 별로 나누어서 매출과 이익에 대한 기여도를 살펴보자.  
+
+## 6. Discount가 많을 수록 매출이 늘어나는가?  
+
+```{r}
+unique(dataset$Category)
+unique(dataset$Discount)
+unique(dataset$`Sub-Category`)
+```
+
+## 7. 지역별로 가장 많이 팔리는 상품은 무엇인가? (ok)  
+
+```{r}
+unique(dataset$Region)
+unique(dataset$Segment)
+unique(dataset$`Sub-Category`)
+```
+
+## 8. `Order Date`를 기반으로 동시구매가 많이 일어나는 상품은 무엇인가? (ok)  
+
+```{r}
+min(dataset$`Order Date`)
+max(dataset$`Order Date`)
+length(unique(dataset$`Customer Name`))
+nrow(dataset)
+```
+
+동시 구매라는 것이 개인별로 시기별로 생각할 수 있음.  개인별로는 동시구매를 알 정도로 개별 고객의 레코드가 많지 않음  
+
+```{r}
+length(unique(dataset$`Customer Name`))
+nrow(dataset)
+```
+
+Month단위로 묶어서 동기간 구매로 보는 것이 나을듯  
+
+## 9. 특정상품의 판매시기와 지역별 수요를 파악해보자 (ok)  
+
+4개 지역별 각 category별로 월별 heat map을 그리자  

@@ -3,14 +3,12 @@
 + 부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수    
 + https://github.com/LearningSpoonsR/LS-DS (강의 페이지) 
 + https://www.facebook.com/groups/440130033101009/ (비공개 그룹 - 가입신청 해주세요)
-+ 일정    
-  + 2018.12.23 ~ 2019.01.27 (5회)     
-  + **2018.12.30 휴강**     
-  + 매주 일요일 10:30 ~ 13:30  
-  + 2018.12.23, 2019.1.6, 2019.1.13, 2019.1.20, 2019.1.27   
 + 코스매니저: 김형종 (출결등 기타)  
 + 강사이메일: `learningSpoonsR@gmail.com`  
-+ https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html
++ 한글 R 메뉴얼 
+  + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
++ 기수강생 작업물 
+  + http://bitly.kr/1G0Q
 
 ***   
 

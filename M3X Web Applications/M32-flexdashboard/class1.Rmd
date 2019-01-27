@@ -1,0 +1,50 @@
+---
+title: "Multiple Pages"
+output: flexdashboard::flex_dashboard
+---
+
+Page 1 {data-orientation=rows}
+=====================================     
+   
+Row {data-height=500}
+-------------------------------------
+
+### Scatterplot
+
+```{r}
+library(dplyr)
+library(ggplot2)
+a <- ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy, color = class), position = "jitter") + 
+  geom_smooth(aes(x = displ, y = hwy))
+library(plotly)
+ggplotly(a)
+```
+
+Row {data-height=500}
+-------------------------------------
+   
+### Table 
+
+```{r}
+b <- mpg %>% 
+  group_by(class) %>% 
+  summarise(hwy = round(mean(hwy),1), cty = mean(cty) %>% round(1))
+library(kableExtra)
+t(b) %>% kable() %>% kable_styling(bootstrap_options = "striped", full_width = FALSE)
+```   
+    
+### Box plot 
+
+```{r}
+c <- ggplot(mpg) + geom_boxplot(aes(x = class, y = hwy, fill = class)) + coord_flip()
+ggplotly(c)
+```
+
+Page 2
+=====================================  
+    
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(aes(color = class)) + facet_wrap(~ class)
+```

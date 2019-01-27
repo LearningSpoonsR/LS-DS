@@ -1,0 +1,153 @@
+---
+title: "LearningSpoonsR_lifeCountry"
+author: "Geon Seung Lee"
+date: "2019-01-14"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. 자료 불러오기  
+
+
+### 1-1. 폴더 만들기  
+
+C:/LS-DS/classProject라는 폴더를 만드세요.
+
+### 1-2. Rmd 파일 만들기  
+
+Rstudio를 열어서 File -> New File -> R Script를 하면 새로운 소스 파일이 생성됩니다.  
+RStudio를 완전히 닫고 탐색기에서 `classProject1.Rmd`을 더블클릭하여 엽니다.
+
+### 1-3. 데이터셋 받기  
+
+[github](https://github.com/LearningSpoonsR/LS-DS/tree/master/classProject)에서 lifeCountry.csv 파일을 다운받아서 위 폴더에 넣으세요.  
+
+이제 분석을 위한 모든 준비가 끝났습니다.
+
+### 1-4. 데이터셋 R로 불러오기  
+
+실습데이터를 `dataset`으로 불러오도록 하겠습니다.  
+
+```{r, warning=FALSE, message=FALSE}
+dataset <- read.csv("lifeCountry.csv", stringsAsFactors = FALSE)
+library(dplyr)
+library(ggplot2)
+```
+
+## 2. 실습하기  
+
+### 2-1. 데이터는 총 몇개의 행과 열로 되어 있습니까?  
+
+데이터 구조 확인  
+
+```{r}
+str(dataset)
+```
+
+데이터는 총 `r dim(dataset)[1]`개의 행과 `r dim(dataset)[2]`개의 열로 이루어져 있습니다.  
+
+### 2-2. 가장 GDP가 높고 낮은 나라는 어디인가요? 가장 기대 수명이 길고 짧은 나라는 어디인가요?  
+
+가장 GDP가 높은 나라는 `r dataset %>% arrange(desc(GDP_per_Capita)) %>% head(1) %>% select(Country)` 입니다.  
+**`r dataset %>% arrange(desc(GDP_per_Capita)) %>% head(1) %>% select(Country)`**의 Data는 아래와 같습니다.  
+
+```{r, message=FALSE}
+library(pander)
+dataset %>% arrange(desc(GDP_per_Capita)) %>% head(1) %>% pander()
+  # %>% kable() # %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+가장 GDP가 낮은 나라는 `r dataset %>% arrange(GDP_per_Capita) %>% head(1) %>% select(Country)` 입니다.    
+**`r dataset %>% arrange(GDP_per_Capita) %>% head(1) %>% select(Country)`**의 Data는 아래와 같습니다.  
+
+```{r, message=FALSE, eval=FALSE}
+dataset %>% arrange(GDP_per_Capita) %>% head(1) %>% kable() %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+가장 기대수명이 높은 나라는 `r dataset %>% arrange(desc(Life.Expectancy)) %>% head(1) %>% select(Country)` 입니다.  
+**`r dataset %>% arrange(desc(Life.Expectancy)) %>% head(1) %>% select(Country)`**의 Data는 아래와 같습니다.  
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+dataset %>% arrange(desc(Life.Expectancy)) %>% head(1) %>% kable() %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+가장 기대수명이 낮은 나라는 `r dataset %>% arrange(Life.Expectancy) %>% head(1) %>% select(Country)` 입니다.  
+**`r dataset %>% arrange(Life.Expectancy) %>% head(1) %>% select(Country)`**의 Data는 아래와 같습니다.  
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+dataset %>% arrange(Life.Expectancy) %>% head(1) %>% kable() %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+### 2-3. 대륙별로 GDP와 기대수명의 평균을 구해보세요.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+dataset %>% group_by(Continent) %>% summarise(avg_GDP = mean(GDP_per_Capita), avg_LE = mean(Life.Expectancy)) %>% arrange(desc(avg_GDP)) %>% kable() %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```
+
+### 2-4. 각 나라의 GDP를 X축으로, 기대수명을 Y축으로 산점도를 그리고 대륙에 따라서 점의 색깔이 달라지게 해보세요.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+ggplot(data = dataset, mapping = aes(x=GDP_per_Capita, y=Life.Expectancy))+
+  geom_point(aes(color=Continent))
+```
+
+### 2-5. facet을 이용해서 대륙별로 GDP와 기대수명에 대한 산점도를 그려보세요.
+
+```{r, message=FALSE, warning=FALSE}
+a <- ggplot(data = dataset, mapping = aes(x=GDP_per_Capita, y=Life.Expectancy))+
+  geom_point(aes(color=Continent))
+a <- a+facet_wrap(~ Continent)
+print(a)
+```
+
+### 2-6. 국가별로 성별에 따라 기대수명이 다릅니다. mutate 함수를 사용해서 ageSexDiff라는 변수를 만들어보세요.
+
+```{r, message=FALSE, warning=FALSE}
+dataset<-dataset %>% mutate(ageSexDiff = abs(Female-Male))
+dataset %>% arrange(desc(ageSexDiff)) %>% head()
+```
+
+### 2-7. 어떤 대륙에서 ageSexDiff가 가장 크고 작은가요?
+
+```{r, message=FALSE, warning=FALSE}
+dataset %>% group_by(Continent) %>% summarise(avg_ageSexDiff=mean(ageSexDiff)) %>% arrange(desc(avg_ageSexDiff))
+```
+
+## 3. 자유로운 분석
+
+### 3-1. 인구를 포함하여 X축에 GDP, Y축에 기대수명으로 버블차트를 만들어보세요.
+
+"각 국가 인구별 GDP/기대수명"  
+
+```{r, message=FALSE, warning=FALSE}
+b<- ggplot(dataset, mapping = aes(x=GDP_per_Capita, y=Life.Expectancy))+
+  labs(subtitle = "GDP/Life.Expectancy",
+       title= "Bubble Chart")
+b + geom_jitter(aes(col=Continent, size=Population)) +
+  geom_smooth(aes(col=Continent), method="lm", se=F)
+```
+
+### 3-2. 각 대륙별로 버블차트를 만들어보세요.  
+
+```{r, message=FALSE, warning=FALSE}
+b + geom_jitter(aes(col=Continent, size=Population)) +
+  geom_smooth(aes(col=Continent), method="lm", se=F) +
+  facet_wrap( ~ Continent)
+```
+
+### 3-3. 각 대륙별 GDP 및 기대수명에 대한 박스플롯을 만들어보세요.  
+
+1) GDP BOX PLOT  
+
+```{r, message=FALSE, warning=FALSE}
+ggplot(dataset, aes(x=Continent, y=GDP_per_Capita)) +
+  geom_boxplot() +
+  geom_text(aes(label=GDP_per_Capita)) 
+```
+
+# 박스플롯에서 아웃라이러를 제외한 최대/상위25/중간값/하위25/최소 데이터값만 표기하고 싶습니다.  
+
+
