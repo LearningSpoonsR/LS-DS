@@ -1,10 +1,14 @@
 # R로 시작하는 데이터 분석 및 시각화    
 
-+ 부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수    
-+ https://github.com/LearningSpoonsR/LS-DS (강의 페이지) 
-+ https://www.facebook.com/groups/440130033101009/ (비공개 그룹 - 가입신청 해주세요)
-+ 코스매니저: 김형종 (출결등 기타)  
-+ 강사이메일: `learningSpoonsR@gmail.com`  
++ h2(부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수)    
++ 강의 페이지
+  + https://github.com/LearningSpoonsR/LS-DS   
++ Facebook 비공개 그룹 - 친구 신청 해주세요  
+  + https://www.facebook.com/groups/440130033101009/ 
++ 코스매니저  
+  + 김형종 (출결등 기타)  
++ 강사이메일  
+  + `learningSpoonsR@gmail.com`  
 + 한글 R 메뉴얼 
   + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
 + 기수강생 작업물 
