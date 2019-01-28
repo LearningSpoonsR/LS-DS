@@ -16,10 +16,10 @@
 
 *Sim:* `toc: true`를 Yaml 헤더에 추가하면 됩니다. 
 
-`title: "classProject1"`
-`output:` 
-`  html_document:`
-`    toc: true`
+`title: "classProject1"`  
+`output:`     
+`  html_document:`  
+`    toc: true`  
 
 이렇게 작성하면 html 초반에 차례가 나옵니다.  
 
