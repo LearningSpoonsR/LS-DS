@@ -18,8 +18,8 @@
 
 `title: "classProject1"`  
 `output:`     
-`  html_document:`  
-`    toc: true`  
+`<space 2 times> html_document:`  
+`<space 4 times> toc: true`  
 
 이렇게 작성하면 html 초반에 차례가 나옵니다.  
 
