@@ -13,7 +13,7 @@
   + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
 + 기수강생 작업물 
   + http://bitly.kr/1G0Q  
-+ PDF 조판을 위한 texLive 설치 가이드 (!5분 동영상)   
++ PDF 조판을 위한 texLive 설치 가이드 (15분 동영상)   
   + https://youtu.be/V1Q6vEuoAQ0
 
 ***   
