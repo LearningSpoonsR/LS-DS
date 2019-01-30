@@ -1,0 +1,157 @@
+---
+title: "docx template 템플릿 "
+author: "learningSpoonsR"
+date: "`r Sys.Date()`"
+output: 
+  word_document:
+    toc: true
+    reference_docx: template1.docx
+---
+
+```{r setup, include=FALSE}
+# set global chunk options  
+knitr::opts_chunk$set(echo = TRUE)
+# set pander table-layout options
+library(pander)
+panderOptions('table.alignment.default', function(df)
+    ifelse(sapply(df, is.numeric), 'right', 'left'))
+panderOptions('table.split.table', Inf)
+panderOptions('big.mark', ",")
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
++ 이 문서는 R Markdown 으로 만들어진 문서입니다. 
++ 위의 yaml header 부분에서 `toc: true` 라인을 주석처리 하여 `# toc: true` 처럼 만들면 차례를 만들지 않습니다. 
++ 위의 yaml header 부분에서 사용하는 `template1.docx`를 `.Rmd`파일과 같은 폴더에 넣고 컴파일 하세요. 
++ R Markdown에 대해서 더 알고 싶으시면 <http://rmarkdown.rstudio.com>.
+
+# I. 그래프   
+
+그래프는 아래처럼 사용이 가능합니다. You can also embed plots, for example:  
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+`echo = FALSE` parameter를 r chunk control option으로 사용해서 코드는 안 보이고 플랏만 보입니다.  
+
+# II. 표  
+
+코드의 아웃풋을 바로 표로 출력할 수 있습니다.
+
+## 1. default  
+
+아래처럼 그냥 console에서 보이듯이 출력할 수 있습니다. 
+
+```{r cars}
+summary(cars)
+```
+
+## 2. knitr 이용  
+
+`knitr` 패키지의 `kable()`을 이용하면 더 깔끔하게 출력됩니다.    
+
+```{r, message=FALSE}  
+library(dplyr)  
+df <- mtcars %>% 
+  mutate(make_model = row.names(mtcars)) %>%
+  filter(cyl==4) %>% 
+  select(make_model, mpg, wt) %>% 
+  mutate(wt = wt*1000) %>% 
+  arrange(make_model)
+```
+
+```{r, echo=FALSE}
+library(knitr)
+kable(df)
+``` 
+
+## 3. pander 이용  
+
+`pander` 패키지도 매우 강력한 기능을 제공합니다.  
+
++ 아래 코드 블럭은 `pander` 패키지를 사용할 때에 흔히 사용하는 옵션입니다. 
+    + 아래 코드블럭은 `.Rmd` 코드의 맨 앞에 넣어주었기에, 해당 문서에서 출력하는 표들이 일관된 규칙을 가지게 합니다. 
+    + 수치는 오른쪽 정렬, 수치가 아니면 왼쪽 정렬을 하는 것이 보이시나요? 
+    + 1000 이상의 수치는 자동으로 3자리마다 컴마를 찍어주는 옵션도 보이시나요?  
+
+```{r, eval=FALSE}
+# set pander table-layout options
+library(pander)
+panderOptions('table.alignment.default', function(df)
+    ifelse(sapply(df, is.numeric), 'right', 'left'))
+panderOptions('table.split.table', Inf)
+panderOptions('big.mark', ",")
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
+```{r}
+library(pander)
+pander(df)  
+```
+
+# III. 다른 기능  
+
+## 1. Bullet Points  
+
+아래와 같은 기능을 "bullet points"라고 합니다. 
+
++ bullet1
++ bullet2
+    + bullet2-1
+    + bullet2-2
+        + bullet2-2-1
+        + bullet2-2-2
++ bullet3
+    1. 아이템 1
+    2. 아이템 2  
+
+## 2. Numbered bullets  
+
+숫자를 넣은 bullet points도 가능합니다. 
+
+1. blahblah 
+    1. blah1
+    2. blah2
+2. blahblah 
+    1. blah1
+    2. blah2
+3. blahblah 
+    + blah1
+    + blah2 
+    
+# III. 인용  
+
+인용어구는 좌우로 들여쓰는 것이 일반적인 규칙입니다. 또한 가운데로 정렬하면 눈에 띕니다. 
+
+> "I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times, I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed." -- Michael Jordan  
+
+> "스스로를 존경하면 다른 사람도 당신을 존경할 것이다." -- 공자
+
+# IV. Rmarkdown 조판을 위한 Word template 만드는 방법  
+
+이번 수강생 분들이 보고서 작성 업무에의 활용에 대한 기대가 크다고 하셔서 아래의 정보를 바탕으로 만들어 보았습니다.
+
+템플릿 파일인 `template1.docx` 파일을 MS Word에서 열어서 스타일을 수정하면 됩니다. 
+
+1. 동영상
+    + [Link: Yihui Xie's video](https://vimeo.com/110804387)
+    + <https://vimeo.com/110804387> 
+2. 튜토리얼
+    + [Link: `rmarkdown`](https://rmarkdown.rstudio.com/articles_docx.html)
+    + <https://rmarkdown.rstudio.com/articles_docx.html>
+    
+# V. 레벨1 헤더는 이렇게 보입니다. This is a level-I header.  
+
+## 1. 레벨2 헤더는 이렇게 보입니다. This is a level-II header.  
+
+### 1) 레벨3 헤더는 이렇게 보입니다. This is a level-III header.  
+
+#### i) 레벨4 헤더는 이렇게 보입니다. This is a level-IV header.  
+
+<br> 
+
+> "마크다운과 LaTeX와 같은 문서 조판 프로그램들의 철학은 "장식이 화려한 문서가 아니라 논리적인 문서는 자체로 아름답다."라는 것입니다. 위의 Level별 헤더 기능, bullet points, numbered points 기능을 잘 활용하면 일관되고 논리적인 문서를 쉽게 만들 수 있습니다. 또한 R 언어의 기능과 조화를 이루어 사용한다면 빠르게 분석 보고서를 만들어 낼 수 있습니다." 
+
+> "조판된 문서의 포맷이 마음에 드시나요? MS 워드 실력이 전문가 수준이 아니라면 이렇게 스타일링을 직접하고 차례를 만들려면 꽤 많은 시간이 들지 않을까 싶네요. 남은 수업들도 열심히 들어주시고, 이런 skill을 꼭 여러분 일터로 가져가시길 기대합니다."  
+
