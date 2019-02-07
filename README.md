@@ -22,7 +22,7 @@
 ## 수업 순서  
 
 M11 (Intro) -> M41 (OECD) ->  M12 (`base`) -> M13 (Quiz) ->    
-M21 (`dplyr`) -> M22 (`rmarkdown`) -> M23 (`ggplot2`) -> M24 (`ggplot2` Gallery) -> M25, M26, M27 (Templates) ->    
+M21 (`dplyr`) -> M22 (`rmarkdown`) -> M23 (`ggplot2`) -> M24 (`ggplot2` Gallery) -> M25, M26, M28 (Templates) ->    
 M32 (`flexdashboard`) -> M43 (retail) ->   
 M51 (`tidyr`) -> M52 (time-series) ->   
 M33 (Shiny) -> M46 (retail2)  
