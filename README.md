@@ -39,31 +39,31 @@ M33 (Shiny) -> M46 (retail2)
 | `M12` | base    | `base`      | Data Type과 Data Structure에 대해서 논의합니다. |  
 | `M13` | Quiz 1  | `rmarkdown` | `M12` review (`.docx`) |  
   
-## M2X: The First Project - Carseat Sales    
+## M2X: The First Project  
 
-+ 사용하기 편한 간단한 패키지들을 학습합니다. 
-+ Carseats Sales 데이터를 이용해서 `rmarkdown`으로 작성된 report를 만듭니다.
++ 데이터 분석 프로젝트의 전 과정의 요소를 학습합니다. 
 
 |     | 제목    | 관련 packages | Description |      
 | ----|:-------:|:------:|:-----------:|    
-| `M21` | flow    | `dplyr`, `ggplot2`, `rmarkdown`, `ISLR` | `ISLR`의 `Carseats` 매출데이터로 자료 처리, 시각화, 문서화의 전 과정을 다룹니다. |  
-| `M22` | CarseatsReport | `rmarkdown` (`.html`, `.docx`, `.pdf`) | 실제로 분석 결과를 보고서로 작성합니다. |  
-| `M23` | More on `ggplot2` | `ggplot2` | 시각화 기법에 대해서 좀 더 깊이있게 다룹니다. |  
-| `M24` | `ggplot2` Gallery | `ggplot2` | 사용성이 높은 `ggplot2`를 이용한 아름다운 시각화 예제를 살펴봅니다. |
-| `M25` | `.pdf` | `rmarkdown`, texlive | 한글로 된 pdf문서를 작성할 수 있는 템플릿입니다. `M22`에 pdf 조판을 위한 textlive 프로그램 설치 과정을 진행해야 합니다. |
-| `M26` | `beamer` | `rmarkdown`, texlive | 한글로 된 프리젠테이션 문서(수업 강의노트)를 작성할 수 있는 템플릿입니다. `M22`에 pdf 조판을 위한 textlive 프로그램 설치 과정을 진행해야 합니다. |
-| `M27` | `slidy` | `rmarkdown` | `rmarkdown`을 사용하면 손쉽게 `.html`로 된 프리젠테이션 문서를 만들 수 있습니다. 이에 해당하는 `slidy` 포맷의 템플릿입니다. |   
+| `M21` | `dplyr`    | `dplyr`, `ISLR` | `ISLR`의 `Carseats` 매출데이터로 자료 처리 과정을 다룹니다. |  
+| `M22` | `rmarkdown` | `rmarkdown` (`.html`, `.docx`, `.pdf`) | 분석 결과를 보고서와 웹페이지로 만드는 법을 배웁니다. |  
+| `M23` | `ggplot2` | `ggplot2` | 시각화 기법에 대해서 배웁니다. |  
+| `M24` | `ggplot2` Gallery | `ggplot2` | `ggplot2`를 이용한 아름다운 시각화 사례들을 제공합니다. |
+| `M25` | `.pdf` | `rmarkdown`, texlive | 한글로 된 pdf문서를 작성할 수 있는 템플릿입니다. pdf 조판을 위한 textlive 프로그램 설치 과정이 선행되어야 합니다. |
+| `M26` | `beamer` | `rmarkdown`, texlive | 한글로 된 프리젠테이션 문서(수업 강의노트)를 작성할 수 있는 템플릿입니다. pdf 조판을 위한 textlive 프로그램 설치 과정이 선행되어야 합니다. |
+| `M28` | `docx` | `rmarkdown` | `rmarkdown`을 사용해서 분석 결과와 시각화 자료를 한 번에 MS 워드 파일로 만듭니다. |   
 
 > **M3X** 부터는 dependency가 없습니다.  
 > 즉, M1X와 M2X까지를 익숙하게 다룰 수 있다면 M3X이후에는 모듈 각각에 대해서 독립적으로 이해하고 사용할 수 있습니다.  
 
-## M3X: Textmining & Web Applications  
+## M3X: Web Applications  
 
-+ Flexdashboard와 Shiny Application으로 구현해 봅니다.  
++ 분석 결과를 정리하여 Dashboard를 제작합니다.  
++ 정적이고 portable한 flexdashboard와  
++ 사용자의 input에 interactive하게 동작하는 Shiny Application을 배웁니다.  
 
 |     | 제목    | 관련 packages | Description |      
 | ----|:-------:|:------:|:-----------:|    
-| `M31` | I have a dream  | `tm`, `KONLP`, `wordcloud`, function | 마틴루터킹 목사의 "I have a dream"에 대해 Wordcloud 분석을 하고, 이를 다양한 텍스트 파일 포맷과 한/영 문서에 대해서도 일반화 시킵니다. |  
 | `M32` | `flexdashboard` | `flexdashboard`, `rmarkdown` | `rmarkdown`을 다룰수 있다면 손쉽게 이를 `.html`의 대시보드로 제작할 수 있습니다. 이는 반응형 대시보드(사용자의 마우스/키보드 동작에 반응)로 연장되는 `shiny` 패키지의 기본이 됩니다. |    
 | `M33` | `shiny` on fd | `shiny`, `flexdashboard`, `rmarkdown` | `flexdashboard`와 `rmarkdown`을 다룰수 있다면 손쉽게 반응형 대시보드(사용자의 마우스/키보드 동작에 반응)또한 구현할 수 있습니다. `shiny`는 빠른 시간에 구현할 수 있는, elegant하고 professional한 프리젠테이션 기법이 됩니다. | 
 
