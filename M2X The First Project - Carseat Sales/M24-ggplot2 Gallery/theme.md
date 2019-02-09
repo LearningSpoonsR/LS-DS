@@ -78,6 +78,8 @@ Theme elements are documented together according to inheritance, read more about
 
 ### `others`  
 
+|Category | Argument | Description |    
+|---|---|---|   
 |	others	|	...	|	additional element specifications not part of base ggplot2. If supplied validateneeds to be set to FALSE.	|
 |		|	complete	|	set this to TRUE if this is a complete theme, such as the one returned bytheme_grey(). Complete themes behave differently when added to a ggplot object. Also, when setting complete = TRUE all elements will be set to inherit from blank elements.	|
 |		|	validate	|	TRUE to run validate_element(), FALSE to bypass checks.	|
