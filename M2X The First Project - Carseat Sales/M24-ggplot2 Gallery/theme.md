@@ -39,8 +39,7 @@ Theme elements are documented together according to inheritance, read more about
 |		|	legend.box.spacing	|	The spacing between the plotting area and the legend box (unit)	|	  
 | others |	legend.background	|	background of legend (element_rect(); inherits from rect)	|	  
 |		|	legend.margin	|	the margin around each legend (margin())	|	  
-|		|	legend.spacing, legend.spacing.x, legend.spacing.y	|	the spacing between legends (unit). legend.spacing.x &legend.spacing.y inherit from legend.spacing or can be specified separately	|	  
-
+|		|	legend.spacing, legend.spacing.x, legend.spacing.y	|	the spacing between legends (unit). legend.spacing.x &legend.spacing.y inherit from legend.spacing or can be specified separately	|	    
 |		|	legend.position	|	the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)	|	  
 |		|	legend.direction	|	layout of items in legends ("horizontal" or "vertical")	|	  
 |		|	legend.justification	|	anchor point for positioning legend inside plot ("center" or two-element numeric vector) or the justification according to the plot area when positioned outside the plot	|	  
