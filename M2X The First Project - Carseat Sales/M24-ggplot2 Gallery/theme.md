@@ -53,6 +53,15 @@ Theme elements are documented together according to inheritance, read more about
 |		|	strip.text, strip.text.x, strip.text.y	|	facet labels (element_text(); inherits from text). Horizontal facet labels (strip.text.x) & vertical facet labels (strip.text.y) inherit fromstrip.text or can be specified separately	|	  
 |		|	strip.switch.pad.grid	|	space between strips and axes when strips are switched (unit)	|	  
 |		|	strip.switch.pad.wrap	|	space between strips and axes when strips are switched (unit)	|	  
+|	others	|	...	|	additional element specifications not part of base ggplot2. If supplied validateneeds to be set to FALSE.	|
+|		|	complete	|	set this to TRUE if this is a complete theme, such as the one returned bytheme_grey(). Complete themes behave differently when added to a ggplot object. Also, when setting complete = TRUE all elements will be set to inherit from blank elements.	|
+|		|	validate	|	TRUE to run validate_element(), FALSE to bypass checks.	|
+|		|	line	|	all line elements (element_line())	|
+|		|	rect	|	all rectangular elements (element_rect())	|
+|		|	text	|	all text elements (element_text())	|
+|		|	title	|	all title elements: plot, axes, legends (element_text(); inherits from text)	|
+|		|	aspect.ratio	|	aspect ratio of the panel	|
+
 
 
 
