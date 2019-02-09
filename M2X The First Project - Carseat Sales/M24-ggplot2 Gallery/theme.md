@@ -26,23 +26,24 @@ Theme elements are documented together according to inheritance, read more about
 
 |Category | Argument | Description |    
 |---|---|---|   
-|	legend	|	legend.background	|	background of legend (element_rect(); inherits from rect)	|	  
-|		|	legend.margin	|	the margin around each legend (margin())	|	  
-|		|	legend.spacing, legend.spacing.x, legend.spacing.y	|	the spacing between legends (unit). legend.spacing.x &legend.spacing.y inherit from legend.spacing or can be specified separately	|	  
-|		|	legend.key	|	background underneath legend keys (element_rect(); inherits from rect)	|	  
+|	`legend.key`	|	legend.key	|	background underneath legend keys (element_rect(); inherits from rect)	|	  
 |		|	legend.key.size, legend.key.height, legend.key.width	|	size of legend keys (unit); key background height & width inherit fromlegend.key.size or can be specified separately	|	  
-|		|	legend.text	|	legend item labels (element_text(); inherits from text)	|	  
+|	`legend.text`	|	legend.text	|	legend item labels (element_text(); inherits from text)	|	  
 |		|	legend.text.align	|	alignment of legend labels (number from 0 (left) to 1 (right))	|	  
-|		|	legend.title	|	title of legend (element_text(); inherits from title)	|	  
+|`legend.title`	|	legend.title	|	title of legend (element_text(); inherits from title)	|	  
 |		|	legend.title.align	|	alignment of legend title (number from 0 (left) to 1 (right))	|	  
-|		|	legend.position	|	the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)	|	  
-|		|	legend.direction	|	layout of items in legends ("horizontal" or "vertical")	|	  
-|		|	legend.justification	|	anchor point for positioning legend inside plot ("center" or two-element numeric vector) or the justification according to the plot area when positioned outside the plot	|	  
-|		|	legend.box	|	arrangement of multiple legends ("horizontal" or "vertical")	|	  
+|`legend.box`		|	legend.box	|	arrangement of multiple legends ("horizontal" or "vertical")	|	  
 |		|	legend.box.just	|	justification of each legend within the overall bounding box, when there are multiple legends ("top", "bottom", "left", or "right")	|	  
 |		|	legend.box.margin	|	margins around the full legend area, as specified using margin()	|	  
 |		|	legend.box.background	|	background of legend area (element_rect(); inherits from rect)	|	  
 |		|	legend.box.spacing	|	The spacing between the plotting area and the legend box (unit)	|	  
+|`others` |	legend.background	|	background of legend (element_rect(); inherits from rect)	|	  
+|		|	legend.margin	|	the margin around each legend (margin())	|	  
+|		|	legend.spacing, legend.spacing.x, legend.spacing.y	|	the spacing between legends (unit). legend.spacing.x &legend.spacing.y inherit from legend.spacing or can be specified separately	|	  
+
+|		|	legend.position	|	the position of legends ("none", "left", "right", "bottom", "top", or two-element numeric vector)	|	  
+|		|	legend.direction	|	layout of items in legends ("horizontal" or "vertical")	|	  
+|		|	legend.justification	|	anchor point for positioning legend inside plot ("center" or two-element numeric vector) or the justification according to the plot area when positioned outside the plot	|	  
 
 ### `panel`  
 
