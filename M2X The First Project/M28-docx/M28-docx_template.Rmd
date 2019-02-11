@@ -1,5 +1,5 @@
 ---
-title: "docx template 템플릿 "
+title: "M28 - docx template 템플릿 "
 author: "learningSpoonsR"
 date: "`r Sys.Date()`"
 output: 
@@ -20,10 +20,12 @@ panderOptions('big.mark', ",")
 panderOptions('keep.trailing.zeros', TRUE)
 ```
 
-+ 이 문서는 R Markdown 으로 만들어진 문서입니다. 
-+ 위의 yaml header 부분에서 `toc: true` 라인을 주석처리 하여 `# toc: true` 처럼 만들면 차례를 만들지 않습니다. 
-+ 위의 yaml header 부분에서 사용하는 `template1.docx`를 `.Rmd`파일과 같은 폴더에 넣고 컴파일 하세요. 
-+ R Markdown에 대해서 더 알고 싶으시면 <http://rmarkdown.rstudio.com>.
++ 이 문서는 R Markdown 으로 만들어진 문서입니다.
++ Yaml header
+    + `toc: true` 라인을 주석처리 하여 `# toc: true` 처럼 만들면 차례를 만들지 않습니다.
+    + `template1.docx`를 `.Rmd`파일과 같은 폴더에 넣고 컴파일 하세요.
+    + 혹은 `reference_docx: C:\LS-DS\template1.docx`와 같이 경로를 입력해주세요.
++ To learn more about R Markdown: <http://rmarkdown.rstudio.com>.  
 
 # I. 그래프   
 
@@ -33,18 +35,18 @@ panderOptions('keep.trailing.zeros', TRUE)
 plot(pressure)
 ```
 
-`echo = FALSE` parameter를 r chunk control option으로 사용해서 코드는 안 보이고 플랏만 보입니다.  
+`echo = FALSE` parameter를 r chunk의 control option으로 사용해서 코드는 안 보이고 플랏만 보입니다.  
 
 # II. 표  
 
 코드의 아웃풋을 바로 표로 출력할 수 있습니다.
 
-## 1. default  
+## 1. default 출력 방식   
 
 아래처럼 그냥 console에서 보이듯이 출력할 수 있습니다. 
 
 ```{r cars}
-summary(cars)
+summary(cars) # 한글 주석은 잘 깨져요 ㅠㅠ 
 ```
 
 ## 2. knitr 이용  
@@ -61,7 +63,7 @@ df <- mtcars %>%
   arrange(make_model)
 ```
 
-```{r, echo=FALSE}
+```{r, message=FALSE}
 library(knitr)
 kable(df)
 ``` 
@@ -85,10 +87,31 @@ panderOptions('big.mark', ",")
 panderOptions('keep.trailing.zeros', TRUE)
 ```
 
-```{r}
+```{r, message=FALSE}
 library(pander)
 pander(df)  
 ```
+
+## 4. `markdown` 영역에서 표 그리기  
+
+`rmarkdown`의 `markdown` 영역에서도 간단하게 표를 그릴 수 있습니다.  
+
+| **구성요소**    | **font**                    | **size**       |
+|-----------------|:---------------------------:|---------------:|  
+| (왼쪽 정렬)     | (가운데 정렬)               | (오른쪽 정렬)  |
+| Title           | Palatino Linotype, 나눔고딕 | 18, bold       |
+| Author          | Palatino Linotype, 나눔명조 | 12             |
+| Level 1 header  | Palatino Linotype, 나눔고딕 | 14, bold       |
+| Level 2 header  | Palatino Linotype, 나눔고딕 | 12, bold       |
+| Level 3 header  | Palatino Linotype, 나눔고딕 | 12             |
+| Level 4 header  | Palatino Linotype, 나눔명조 | 12, italic     |
+| TOC level 1     | Palatino Linotype, 나눔명조 | 12             |
+| TOC level 2,3   | Palatino Linotype, 나눔명조 | 12             |
+| 일반 텍스트     | Palatino Linotype, 나눔명조 | 11             |
+| 인용 텍스트     | Palatino Linotype, 나눔명조 | 11, italic     |
+| 코드 블럭       | Courier New, 나눔고딕코딩   | 10             |
+| 코드 (backtick) | Courier New                 |                |
+
 
 # III. 다른 기능  
 
@@ -114,13 +137,17 @@ pander(df)
     1. blah1
     2. blah2
 2. blahblah 
-    1. blah1
-    2. blah2
-3. blahblah 
     + blah1
     + blah2 
-    
-# III. 인용  
+
+## 3. inline R code  
+
++ 전차종 `mpg`의 평균은 `mean(df$mpg)`명령어로 계산이 가능하죠?
++ markdown 영역에서 back tick으로 감싸서 "r mean(df$mpg)"을 입력하면 아래처럼 사용이 가능합니다
++ `mean(df$mpg):` `r mean(df$mpg)`와 같습니다.
++ 보고서의 서술에서 R output 값을 수치입력없이 사용할 수 있습니다.
+
+# IV. 인용  
 
 인용어구는 좌우로 들여쓰는 것이 일반적인 규칙입니다. 또한 가운데로 정렬하면 눈에 띕니다. 
 
@@ -128,9 +155,9 @@ pander(df)
 
 > "스스로를 존경하면 다른 사람도 당신을 존경할 것이다." -- 공자
 
-# IV. Rmarkdown 조판을 위한 Word template 만드는 방법  
+# V. Rmarkdown 조판을 위한 Word template 만드는 방법  
 
-이번 수강생 분들이 보고서 작성 업무에의 활용에 대한 기대가 크다고 하셔서 아래의 정보를 바탕으로 만들어 보았습니다.
+이번 수강생 분들께서 보고서 작성 업무에의 활용에 대한 기대가 크다고 하셔서 아래의 정보를 바탕으로 만들어 보았습니다.
 
 템플릿 파일인 `template1.docx` 파일을 MS Word에서 열어서 스타일을 수정하면 됩니다. 
 
@@ -141,7 +168,7 @@ pander(df)
     + [Link: `rmarkdown`](https://rmarkdown.rstudio.com/articles_docx.html)
     + <https://rmarkdown.rstudio.com/articles_docx.html>
     
-# V. 레벨1 헤더는 이렇게 보입니다. This is a level-I header.  
+# VI. 레벨1 헤더는 이렇게 보입니다. This is a level-I header.  
 
 ## 1. 레벨2 헤더는 이렇게 보입니다. This is a level-II header.  
 
@@ -151,7 +178,14 @@ pander(df)
 
 <br> 
 
-> "마크다운과 LaTeX와 같은 문서 조판 프로그램들의 철학은 "장식이 화려한 문서가 아니라 논리적인 문서는 자체로 아름답다."라는 것입니다. 위의 Level별 헤더 기능, bullet points, numbered points 기능을 잘 활용하면 일관되고 논리적인 문서를 쉽게 만들 수 있습니다. 또한 R 언어의 기능과 조화를 이루어 사용한다면 빠르게 분석 보고서를 만들어 낼 수 있습니다." 
+# VII. 마치면서  
 
-> "조판된 문서의 포맷이 마음에 드시나요? MS 워드 실력이 전문가 수준이 아니라면 이렇게 스타일링을 직접하고 차례를 만들려면 꽤 많은 시간이 들지 않을까 싶네요. 남은 수업들도 열심히 들어주시고, 이런 skill을 꼭 여러분 일터로 가져가시길 기대합니다."  
+~~과연 템플릿 작업은 끝이 있는 작업인가~~
+
+> "Markdown과 LaTeX와 같은 문서 조판 프로그램들의 철학은 **"훌륭한 문서는 장식이 화려한 문서가 아니라 논리적이고 일관적인 문서이다."** 라는 것입니다. Level별 헤더 기능, bullet points, numbered points 기능을 잘 활용하면 일관되고 논리적인 문서를 쉽게 만들 수 있습니다. R 언어의 기능과 조화를 이루어 사용한다면 쉽게 재현 가능한 분석 보고서를 만들어 낼 수 있습니다."  
+
+> "조판된 문서의 포맷이 마음에 드시나요? 남은 수업들도 열심히 들어주시고, 이런 skill을 꼭 여러분 일터로 가져가시길 기대합니다." 
+
+Lastly updated on `r Sys.Date()`  
+
 
