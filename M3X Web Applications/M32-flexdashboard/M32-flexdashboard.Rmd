@@ -11,8 +11,9 @@ output:
     slide_level: 2  
     theme: Montpellier
     toc: yes
+  ioslides_presentation: default
   slidy_presentation: default
-mainfont: NanumGothic
+mainfont: NanumMyeongjo # NanumGothic  
 fontsize: 9pt
 classoption: t
 ---  
@@ -30,22 +31,26 @@ knitr::opts_chunk$set(warning = FALSE)
 
 ## Motivation   
 
-Previously...  
+#### Previously...  
 
 + `dplyr` - 전처리 & 표  
 + `ggplot2` - 차트  
 + `rmarkdown` - 문서화 (pdf, docx, html)  
 
-Now...
+#### Now...
 
 + `flexdashboard`  
-    - Advanced `rmarkdown`  
-    - (정적인) html dashboard  
-    - Monitoring & Reporting & Presentation  
+    + Advanced `rmarkdown`  
+    + html dashboard  
+    + 압축적인 정보 배열로 효과적인 보고서 및 모니터링 도구   
+
+```{r}
+"Express Yourself"
+```
   
 ## Easy \& interactive dashboards for R  
 
-+ R Markdown을 사용하여 관련 데이터 시각화 그룹을 대시 보드로 게시!    
++ R Markdown을 사용하여 **시각화 그룹**을 **대시 보드**로 게시합니다.     
     1. 다양한 구성 요소 지원   
     2. 격자 그래픽    
     3. 표 형식의 데이터   
@@ -83,7 +88,7 @@ Now...
 
 ##  
 
-![](fig/fig2.png)\    
+![](fig/fig2.png){height=330px}\    
 
 ## 2) Chart Stack (Scrolling) - 상하로 scroll  
 
@@ -94,7 +99,7 @@ Now...
 
 ##  
 
-![](fig/fig3.png)\  
+![](fig/fig3.png){height=500px}\  
 
 ## 3) Focal Chart (Top) - main-sub 상하  
 
@@ -104,7 +109,7 @@ Now...
 
 ##  
 
-![](fig/fig4.png)\  
+![](fig/fig4.png){height=500px}\    
 
 ## 4) Focal Chart (Left) - main-sub 좌우  
 
@@ -114,7 +119,7 @@ Now...
 
 ##  
 
-![](fig/fig5.png)\  
+![](fig/fig5.png){height=500px}\      
 
 ## 5) Chart Grid (2 by 2)   
 
@@ -124,16 +129,17 @@ Now...
 
 ##  
 
-![](fig/fig6.png)\  
+![](fig/fig6.png){height=500px}\  
 
-## 6) abset Column - main-sub 좌우 (tab)  
+## 6) Tabset Column - main-sub 좌우 (tab)  
 
 + 오른쪽 열을 두 개의 탭으로 표시합니다.   
 + 탭은 표시 할 구성 요소 수가 많고 사용자가 스크롤하지 않아도 되게 하는 경우에 특히 유용합니다.   
++ `fill` vs `scroll` vs `tabset` vs multiple pages  
 
 ##  
 
-![](fig/fig7.png)\  
+![](fig/fig7.png){height=500px}\  
 
 ## 7) Tabset Row - main-sub 상하 (tab)     
 
@@ -142,7 +148,7 @@ Now...
   
 ##  
 
-![](fig/fig8.png)\  
+![](fig/fig8.png){height=500px}\    
 
 ## 8) Multiple Pages    
 
@@ -152,7 +158,7 @@ Now...
 
 ##  
 
-![](fig/fig9.png)\  
+![](fig/fig9.png){height=300px}\    
 
 ## 9) Input Sidebar   
 
@@ -162,7 +168,7 @@ Now...
 
 ##  
 
-![](fig/fig11.png)\  
+![](fig/fig11.png){height=300px}\  
 
 ## 10) Input Sidebar (Global) - Multiple Pages + Sidebar    
 
@@ -171,33 +177,65 @@ Now...
 
 ##  
 
-![](fig/fig12.png)\  
-  
+![](fig/fig12.png){height=300px}\  
   
 ## 많이 익숙해지셨나요? R관련 서적을 몇 개 소개해드립니다.
 
-![](fig/fig14.png)\  
+\lc 
+
+**R for Data Science**  
+
++ 기본서, 수업 교재보다 상세  
++ <https://r4ds.had.co.nz/>  
+
+**ggplot2**  
+
++ `ggplot2`와 시각화 원리  
++ <https://github.com/hadley/ggplot2-book>  
+
+\rc  
+
+**R Packages**  
+
++ R 패키지를 만드는 법  
++ <http://r-pkgs.had.co.nz/>  
+
+**Advanced R**  
+
++ 고급 사용자로 나아가기   
++ <http://adv-r.had.co.nz/>  
+
+\ec  
+
+| | | | |  
+|-|-|-|-|  
+| ![](fig/fig_book1){height=60px} | ![](fig/fig_book2){height=60px} | ![](fig/fig_book3){height=60px} | ![](fig/fig_book4){height=60px} |      
+| ![](fig/fig_book1k){height=60px} | ![](fig/fig_book2k){height=60px} |                              | ![](fig/fig_book4k){height=60px} |      
 
 # Part 3. 실습!  
 
-## Step 1. Create blank dashboard   
+## Step 1. 먼저 비어있는 대시보드를 만듭니다.  
 
-![](fig/fig-p1.png)\  
+#### page 1
 
-##  
-
-![](fig/fig-p2.png)\  
-
-## Step 2. Fill in the blanks  
-
-![](fig/fig-p3.png)\  
+![](fig/fig-p1.png){height=280px}\  
 
 ##  
 
-![](fig/fig-p4.png)\   
+#### page 2  
+
+![](fig/fig-p2.png){height=280px}\    
+
+## Step 2. 비어있는 대시보드를 채웁니다.  
+
+#### page 1  
+
+![](fig/fig-p3.png){height=280px}\ 
 
 ##  
+ 
+#### page 2  
 
-```{r}
-"Express Yourself"
-```
+![](fig/fig-p4.png){height=280px}\    
+
+  

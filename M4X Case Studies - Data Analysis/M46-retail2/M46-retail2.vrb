@@ -1,0 +1,58 @@
+\frametitle{Shiny Presentation}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{load("M46\_final.Rdata")}를 이용해서 데이터를 불러옵니다.\\
+\item
+  위의 \texttt{8}과 \texttt{10}을 사용자의 인풋으로 받아서 다음 작업을
+  수행합니다.\\
+\item
+  Correlogram
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{input\$mat\_size}를
+    \texttt{seq(from\ =\ 8,\ to\ =\ 14,\ by\ =\ 2)}에서 선택\\
+  \item
+    \texttt{pair\_mat} 만들기 (from \texttt{purchaseCount} and
+    \texttt{productTable})\\
+  \item
+    \texttt{fig\_corr} 만들기 (from \texttt{pair\_mat})\\
+  \end{itemize}
+\item
+  \texttt{Top\_N} table
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{input\$topPair\_N}를
+    \texttt{seq(from\ =\ 10,\ to\ =\ 30,\ by\ =\ 5)}에서 선택\\
+  \item
+    \texttt{Top\_N} 만들기 (from \texttt{purchaseCount} and
+    \texttt{productTable})\\
+  \end{itemize}
+\item
+  flexdashboard + shiny로 다음을 포함한 대시보드를 만들어 보세요.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    사용자 인풋창\\
+  \item
+    3번 결과물\\
+  \item
+    4번 결과물\\
+  \end{itemize}
+\item
+  결과물
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \url{https://learningspoonsr.shinyapps.io/M46-retail2-correl/}
+  \end{itemize}
+\end{enumerate}
+

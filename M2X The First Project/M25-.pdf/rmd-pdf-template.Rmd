@@ -13,7 +13,8 @@ output:
     includes:    
       in_header: rmd-pdf-template_files/latex-topmatter.tex  
   smaller: true
-mainfont: NanumGothic
+mainfont: NanumMyeongjo # NanumGothic # Palatino Linotype 
+monofont: Courier New 
 classoption: a4paper
 ---
 

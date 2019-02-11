@@ -1,0 +1,85 @@
+---
+title: "Sidebar"
+output: flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+Inputs {.sidebar}
+-------------------------------------
+
+```{r}
+# shiny inputs defined here
+numericInput("mat_size", label = h2("Choose size of correlogram"), value = 10, 
+             min = 8, max = 20, step = 2)
+sliderInput("topPair_N", label = h2("How many pairs?"), value = 10,
+            min = 10, max = 40, step = 5)
+```
+ 
+Column {data-width=600}
+-------------------------------------
+
+```{r}
+load("M46_final.Rdata")
+```
+
+### Correlogram  
+    
+```{r}
+# renderPrint(input$mat_size)
+# input$mat_size <- 8
+renderPlot({
+  library(ggplot2)
+  library(ggcorrplot)
+  library(dplyr)
+  pair_mat <- purchaseCount[names(pairCount[1:input$mat_size]),
+                          names(pairCount[1:input$mat_size])]
+  pair_mat_name <-
+    left_join(data.frame(ProductID = colnames(pair_mat)), productTable)
+  rownames(pair_mat) <- pair_mat_name[,"Product Name"] %>% substr(1,20)
+  colnames(pair_mat) <- rownames(pair_mat)
+  fig_corr <-
+    ggcorrplot(
+      pair_mat, hc.order = TRUE, type = "lower", lab = TRUE,
+      lab_size = 3, method="circle",
+      colors = c("tomato2", "white", "springgreen3"),
+      title="Correlogram of mtcars", ggtheme=theme_bw)
+  fig_corr
+})
+```
+   
+Column {data-width=400}
+-------------------------------------
+   
+### Table  
+
+```{r}
+renderTable({
+  library(dplyr)
+  # Replace diagonals to 0 
+  purchaseCount_offdiag <- purchaseCount
+  diag(purchaseCount_offdiag) <- 0
+  # Find >=2 counts and build data.frame
+  top_indexes <- 
+    which(purchaseCount_offdiag >= 2, arr.ind = TRUE) %>% data.frame()
+  Top_N <- data.frame(
+    ID_x = apply(top_indexes, 1, 
+                 function(x) colnames(purchaseCount_offdiag)[x[1]]),
+    ID_y = apply(top_indexes, 1, 
+                 function(x) colnames(purchaseCount_offdiag)[x[2]]),
+    count = apply(top_indexes, 1, 
+                  function(x) purchaseCount_offdiag[x[1], x[2]]),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+  # replace ID with `ProductID` using `left_join`
+  Top_N <- Top_N %>%
+    left_join(productTable, by = c("ID_x"="ProductID")) %>% 
+    select(`Product Name`, ID_y, count) %>% 
+    left_join(productTable, by = c("ID_y"="ProductID")) %>% 
+    select(`Product Name.x`, `Product Name.y`, count)
+  Top_N[,1] <- substr(Top_N[,1], 1, 30)
+  Top_N[,2] <- substr(Top_N[,2], 1, 30)
+  Top_N[sample(1:nrow(Top_N), input$topPair_N),] 
+})
+```   
+

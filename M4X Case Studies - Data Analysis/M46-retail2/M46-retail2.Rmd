@@ -13,7 +13,7 @@ output:
     toc: yes
   ioslides_presentation: default
   slidy_presentation: default
-mainfont: NanumGothic
+mainfont: NanumMyeongjo # NanumGothic  
 fontsize: 9pt
 classoption: t
 ---  
@@ -28,10 +28,10 @@ knitr::opts_chunk$set(background = '718CBA')
 
 ## I. Background   
 
-+ Continued from `M43`    
++ Continued from `M43-retail1`     
     1. 배송 기간 분석 (`Ship Date`를 기반으로 배송이 가장 오래걸리는 상품은 무엇인가?)  
     2. 마진이 가장 많이 남는 상품은 무엇인가?  
-    3. `M46`에서는 **소비자 별 구매 기록을 분석해보자**  
+    3. **`M46`에서는 소비자 별 구매 기록을 분석해보자**  
 
 + 맥주와 기저귀  
     + Data-driven marketing의 고전적 예제  
@@ -51,6 +51,7 @@ knitr::opts_chunk$set(background = '718CBA')
 
 \lc  
 
++ 이 노트는 제작 과정을 최대한 재현한 노트입니다. 분석가의 생각의 흐름을 느껴보세요.  
 + From `M24`,    
     0. About  
     1. **Correlation: 두 변수가 얼마나 상관관계가 있는가?**   
@@ -176,7 +177,7 @@ dataset %>% select(`Product Name`, `Customer Name`) %>%
 
 #### Discussion  
 
-1. ID variable 혹은 Key variable은 데이터를 체계적으로 관리하는 도구     
+1. ID variable(Key variable)은 데이터를 체계적으로 관리하는 도구     
 2. 없다면 유일성을 담보할 수 있는 방법으로 만들어 내야 함   
 3. 체계적으로 준비된 데이터 셋은 `join`및 조회가 용이함   
 
@@ -378,7 +379,7 @@ purchaseCount[1:4,1:3]
 \vspace{10pt}  
 
 ```{r}
-purchase$Purchases %>% head(3)
+purchase$Purchases %>% head(3) %>% t() %>% t()
 ```
 
 \ec  
@@ -643,8 +644,14 @@ save.image("M46_final.Rdata")
     + 사용자 인풋창   
     + 3번 결과물  
     + 4번 결과물  
+6. 결과물  
+    + <https://learningspoonsr.shinyapps.io/M46-retail2-correl/>  
     
-## 
+## Sketch Notes    
+
+| | | | |   
+|-|-|-|-|  
+| ![](fig/dev1.jpg){width=80px} | ![](fig/dev4.jpg){width=80px} | ![](fig/dev2.jpg){width=80px} | ![](fig/dev3.jpg){width=80px} |  
 
 + Verumtamen oportet me bodie et cras et sequenti die ambulare.     
 + 오늘도 내일도 그 다음날도 계속해서 내 길을 가야 한다.  

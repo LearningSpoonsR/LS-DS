@@ -1,0 +1,64 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+  runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+```{r}
+load("M46_final.Rdata")
+```
+
+Inputs {.sidebar}
+-------------------------------------
+
+```{r}
+library(shiny)
+# numericInput 
+numericInput(inputId = "mat_size", label = "Choose mat_size", value = 10,
+             min = 8, max = 14, step = 2)
+# sliderInput 
+# shiny inputs defined here
+```
+ 
+Column {data-width=500}
+-------------------------------------
+    
+### Chart 1
+    
+```{r}
+# input <- NULL
+# input$mat_size <- 10
+renderPlot({
+  library(dplyr)
+  input$mat_size
+  mat_size <- 8
+  pair_mat <- purchaseCount[names(pairCount[1:input$mat_size]),
+                            names(pairCount[1:input$mat_size])]  
+  pair_mat_name <- 
+  left_join(data.frame(ProductID = colnames(pair_mat)), productTable) 
+  rownames(pair_mat) <- pair_mat_name[,"Product Name"] %>% substr(1,20)
+  library(ggplot2)
+  library(ggcorrplot)
+  colnames(pair_mat) <- rownames(pair_mat)
+  fig_corr <- 
+    ggcorrplot(
+      pair_mat, hc.order = TRUE, type = "lower", lab = TRUE, 
+      lab_size = 3, method="circle", 
+      colors = c("tomato2", "white", "springgreen3"),
+      title="Correlogram of mtcars", ggtheme=theme_bw)
+  fig_corr
+})
+```
+   
+Column {data-width=500}
+-------------------------------------
+   
+### Chart 2
+
+```{r}
+``` 
