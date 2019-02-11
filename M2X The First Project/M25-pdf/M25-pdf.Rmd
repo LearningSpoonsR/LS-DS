@@ -1,25 +1,28 @@
 ---
-title: "rmd pdf template "  
+title: "M25 - pdf "  
 author: "Learning Spoons"  
 date: "`r Sys.Date()`"  
 output:   
   pdf_document:  
-    latex_engine: xelatex  
+    latex_engine: xelatex
     highlight: haddock  
     keep_tex: true  
-    pandoc_args: [
-     "-V", "classoption=twocolumn"
-    ]
+    # pandoc_args: [
+    #  "-V", "classoption=twocolumn"
+    # ]
     includes:    
       in_header: rmd-pdf-template_files/latex-topmatter.tex  
   smaller: true
-mainfont: NanumMyeongjo # NanumGothic # Palatino Linotype 
-monofont: Courier New 
+mainfont: NanumMyeongjo # NanumGothic # Palatino Linotype
+monofont: Courier New
 classoption: a4paper
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(background = '718CBA')  
+# library(extrafont)
+# fonts()
 ```
 
 ## R Markdown 한글 
@@ -29,12 +32,17 @@ Code의 9,10,11 번째 라인의 pound sign(#)을 제거하고 위의 줄과 ind
 When you click the **Knit** button a document will be generated.  
 
 ```{r cars}
-summary(cars)
+summary(cars)  
+```  
+
+```{r, warning = FALSE}
+plot(1:10) # 한글 주석! 
+c("한글", "벡터")  
 ```
 
 ## Including Plots
 
-```{r pressure, echo=FALSE, fig.height = 3}
+```{r pressure, echo=FALSE, fig.height = 3, warning = FALSE}
 plot(pressure)
 ```
 

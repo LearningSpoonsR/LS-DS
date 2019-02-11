@@ -1,4 +1,4 @@
-\documentclass[twocolumn]{article}
+\documentclass[a4paper]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -26,7 +26,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={rmd pdf template},
+            pdftitle={M25 - pdf},
             pdfauthor={Learning Spoons},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -114,7 +114,7 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{rmd pdf template}
+  \title{M25 - pdf}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
     \author{Learning Spoons}
@@ -122,7 +122,26 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-02-08}
+    \date{2019-02-12}
+
+% Hangul in rchunk 2019-02-12  
+% Not the output yet
+\usepackage[hangul]{kotex}
+\usepackage{pdflscape}
+\usepackage{colortbl}
+% \usepackage[table]{xcolor}
+\newcolumntype{U}{>{\columncolor[gray]{0.8}}c}
+\usepackage{tabularx,booktabs}
+\usepackage{boxedminipage}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{rotfloat}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+\usepackage{multirow}
+
 
 \usepackage{titlepic}
 \usepackage{graphicx}
@@ -151,7 +170,7 @@ When you click the \textbf{Knit} button a document will be generated.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(cars)}
+\KeywordTok{summary}\NormalTok{(cars)  }
 \end{Highlighting}
 \end{Shaded}
 
@@ -165,9 +184,27 @@ When you click the \textbf{Knit} button a document will be generated.
 ##  Max.   :25.0   Max.   :120.00
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{) }\CommentTok{# 한글 주석! }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M25-pdf_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\StringTok{"한글"}\NormalTok{, }\StringTok{"벡터"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "한글" "벡터"
+\end{verbatim}
+
 \subsection{Including Plots}\label{including-plots}
 
-\includegraphics{rmd-pdf-template_files/figure-latex/pressure-1.pdf}
+\includegraphics{M25-pdf_files/figure-latex/pressure-1.pdf}
 
 \subsection{Line Numbering}\label{line-numbering}
 

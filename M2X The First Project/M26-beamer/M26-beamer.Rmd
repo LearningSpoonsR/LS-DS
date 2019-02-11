@@ -14,12 +14,14 @@ output:
   ioslides_presentation: default
   slidy_presentation: default
 mainfont: NanumMyeongjo # NanumGothic  
+monofont: Courier New
 fontsize: 9pt
 classoption: t
 ---  
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning=FALSE}
 library(rmarkdown)
+# library(extrafont)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(background = '718CBA')
 ```
@@ -75,8 +77,9 @@ classoption: t
 
 2. Right Column   
 
-```{r}
-plot(1:10)
+```{r, warning = FALSE}
+plot(1:10) # 한글 주석! 
+c("한글", "벡터")  
 ```
   
 \ec  
