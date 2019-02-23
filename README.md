@@ -1,14 +1,11 @@
 # R로 시작하는 데이터 분석 및 시각화    
 
 + **부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수**    
-+ 강의 페이지
-  + https://github.com/LearningSpoonsR/LS-DS   
++ 강의 페이지 <https://github.com/LearningSpoonsR/LS-DS>   
 + Facebook 비공개 그룹 - 친구 신청 해주세요  
-  + https://www.facebook.com/groups/440130033101009/ 
-+ 코스매니저  
-  + 김형종 (출결등 기타)  
-+ 강사이메일  
-  + `learningSpoonsR@gmail.com`  
++ 코스매니저 - 김형종 (출결등 기타)  
++ 강사이메일 - `learningSpoonsR@gmail.com`  
+
 + 한글 R 메뉴얼 
   + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
 + 기수강생 작업물 
@@ -22,7 +19,8 @@
 ## 수업 순서  
 
 M11 (Intro) -> M41 (OECD) ->  M12 (`base`) -> M13 (Quiz) ->    
-M21 (`dplyr`) -> M22 (`rmarkdown`) -> M23 (`ggplot2`) -> M24 (`ggplot2` Gallery) -> M25, M26, M28 (Templates) ->    
+M21 (`dplyr`) -> M22 (`rmarkdown`) -> M23 (`ggplot2`) -> 
+M25, M26, M28 (Templates) -> M24 (`ggplot2` Gallery) ->    
 M32 (`flexdashboard`) -> M43 (retail) ->   
 M51 (`tidyr`) -> M52 (time-series) ->   
 M33 (Shiny) -> M46 (retail2)  
@@ -49,8 +47,8 @@ M33 (Shiny) -> M46 (retail2)
 | `M22` | `rmarkdown` | `rmarkdown` (`.html`, `.docx`, `.pdf`) | 분석 결과를 보고서와 웹페이지로 만드는 법을 배웁니다. |  
 | `M23` | `ggplot2` | `ggplot2` | 시각화 기법에 대해서 배웁니다. |  
 | `M24` | `ggplot2` Gallery | `ggplot2` | `ggplot2`를 이용한 아름다운 시각화 사례들을 제공합니다. |
-| `M25` | `.pdf` | `rmarkdown`, texlive | 한글로 된 pdf문서를 작성할 수 있는 템플릿입니다. pdf 조판을 위한 textlive 프로그램 설치 과정이 선행되어야 합니다. |
-| `M26` | `beamer` | `rmarkdown`, texlive | 한글로 된 프리젠테이션 문서(수업 강의노트)를 작성할 수 있는 템플릿입니다. pdf 조판을 위한 textlive 프로그램 설치 과정이 선행되어야 합니다. |
+| `M25` | `.pdf` | `rmarkdown`, texlive | 한글로 된 pdf문서를 작성할 수 있는 템플릿입니다. pdf 조판을 위한 texlive 프로그램 설치 과정이 선행되어야 합니다. |
+| `M26` | `beamer` | `rmarkdown`, texlive | 한글로 된 프리젠테이션 문서(수업 강의노트)를 작성할 수 있는 템플릿입니다. pdf 조판을 위한 texlive 프로그램 설치 과정이 선행되어야 합니다. |
 | `M28` | `docx` | `rmarkdown` | `rmarkdown`을 사용해서 분석 결과와 시각화 자료를 한 번에 MS 워드 파일로 만듭니다. |   
 
 > **M3X** 부터는 dependency가 없습니다.  
