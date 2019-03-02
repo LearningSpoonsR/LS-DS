@@ -632,6 +632,15 @@ ggplot(mpg) + geom_bar(aes(x=class)) +
 dev.off() # finish  
 ```
 
+```{r, eval=FALSE, echo=FALSE}
+# update 2019-02-13
+a <- ggplot(mpg) + # render 
+  geom_bar(aes(x=class)) + 
+  coord_flip() 
+ggsave("out_file.png", a, # save  
+       dpi = 300, width = 9, height = 7.5)
+```
+
 \rc
 
 + `plotly` - html에서 각종 추가 기능 제공  

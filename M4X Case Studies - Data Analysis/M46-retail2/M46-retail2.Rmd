@@ -656,4 +656,9 @@ save.image("M46_final.Rdata")
 + Verumtamen oportet me bodie et cras et sequenti die ambulare.     
 + 오늘도 내일도 그 다음날도 계속해서 내 길을 가야 한다.  
 
+##  
+
+##  
+
+blank  
 
