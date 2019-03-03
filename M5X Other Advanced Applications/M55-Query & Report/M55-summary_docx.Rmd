@@ -1,0 +1,76 @@
+---
+title: "M55 - Summary Report "
+author: "learningSpoonsR"
+date: "`r Sys.Date()`"
+output: 
+  word_document:
+    toc: true
+    reference_docx: template1.docx
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+# set global chunk options  
+knitr::opts_chunk$set(echo = TRUE)
+# set pander table-layout options
+library(pander)
+panderOptions('table.alignment.default', function(df)
+    ifelse(sapply(df, is.numeric), 'right', 'left'))
+panderOptions('table.split.table', Inf)
+panderOptions('big.mark', ",")
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
+# I. About    
+
+<br>
+
++ `M55-shiny.Rmd` 에서는 바탕화면에 `dataset_filtered.csv` 파일을 만들었습니다.
++ `M55-summary_docx.Rmd`는 해당 데이터 파일을 이용해서 리포트를 만듭니다.
++ `M55-shiny.Rmd`에서는 `M55-summary_docx.Rmd`를 자동으로 실행시키는 `actionButton`을 제공합니다.
+
+# II. 데이터 불러오기  
+
+<br>
+
+```{r, echo=FALSE}
+my_desktop_folder <- file.path(Sys.getenv("USERPROFILE"), "Desktop")
+dataset <- read.csv(paste0(my_desktop_folder, "/dataset_filtered.csv"), stringsAsFactors = FALSE)
+dataset$Order.Date <- as.Date(dataset$Order.Date)  
+```
+
+데이터 셋의 범위는  
+
++ 주문 일자가 `r min(dataset$Order.Date)`부터 `r max(dataset$Order.Date)`에 해당합니다. 
++ `Category`는 `r unique(dataset$Category)`이고,
++ `Sub.Category`는 `r unique(dataset$Sub.Category)`을 포함합니다.
+
+# III. 간단한 몇 가지 분석  
+
+## 1. `Sub.Category`별 이익  
+
+<br>
+
+```{r}
+dataset %>% 
+  group_by(Sub.Category) %>% 
+  summarise(sumProfit = sum(Profit)) %>% 
+  arrange(desc(sumProfit)) %>% 
+  pander()
+```
+
+## 2. 일자별 이익  
+
+<br>
+
+```{r}
+dataset %>% group_by(Order.Date) %>% summarise(sumProfit = sum(Profit)) %>%
+  ggplot(aes(x = Order.Date, y = sumProfit)) + geom_point() + geom_line()
+```
+
+> "I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times, I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed." -- Michael Jordan  
+
+> "스스로를 존경하면 다른 사람도 당신을 존경할 것이다." -- 공자
+
+
