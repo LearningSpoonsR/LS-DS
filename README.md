@@ -6,6 +6,8 @@
 + 코스매니저 - 김형종 (출결등 기타)  
 + 강사이메일 - `learningSpoonsR@gmail.com`  
 
+![](remember.jpg)\  
+ 
 + 한글 R 메뉴얼 
   + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
 + 기수강생 작업물 
