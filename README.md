@@ -6,12 +6,28 @@
 + 코스매니저 - 김형종 (출결등 기타)  
 + 강사이메일 - `learningSpoonsR@gmail.com`  
 
+***   
+
+# Philosophy 
+
 ![](remember.jpg)   
- 
-+ 한글 R 메뉴얼 
-  + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
+
+> "A person who never made a mistake never tried anything new" - A. Einstein
+> "It is often necessary to do it in the wrong way first to learn the right way." - Hadley Wickham (from R Packages) 
+
+***   
+
+# 참고자료 
+
++ R for Data Science
+  + 웹사이트: https://r4ds.had.co.nz/ 
+  + (크롬에서 우클릭 -> 번역기능 사용) 
+  + 한글 역서도 출판되어 있음
+  + <http://book.interpark.com/product/BookDisplay.do?_method=detail&sc.shopNo=0000400000&sc.prdNo=298756807>
 + 기수강생 작업물 
   + http://bitly.kr/1G0Q  
++ 한글 R 메뉴얼 
+  + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
 + PDF 조판을 위한 texLive 설치 
   + 다운로드 사이트 <http://www.ktug.org/xe/?mid=Install>
   + 설치 가이드 (15분 동영상) <https://youtu.be/V1Q6vEuoAQ0>
