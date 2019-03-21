@@ -12,7 +12,7 @@
 
 ![](remember.jpg)   
 
-> "A person who never made a mistake never tried anything new" - A. Einstein
+> "A person who never made a mistake never tried anything new" - A. Einstein  
 > "It is often necessary to do it in the wrong way first to learn the right way." - Hadley Wickham (from R Packages) 
 
 ***   
