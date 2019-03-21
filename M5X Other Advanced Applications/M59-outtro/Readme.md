@@ -65,6 +65,14 @@
 - fb그룹 - 댓글/Like/잡담/질문/의견 독려  
 - 일하시다가 디버깅이나 아이디어도 질문 독려   
 
-> "A person who never made a mistake never tried anything new" - *A. Einstein*  
+## Epilogue
 
-> "It is often necessary to do it in the wrong way first to learn the right way." - *Hadley Wickham (from **R Packages**)*
++ 수업들으신 것이 여러분에게 즐거운 경험이었고 앞으로의 삶에서 도움이 되길 바라는 마음입니다.  
++ 수업을 하다보면 생각보다 가르치는 사람도 배우는게 무척 많습니다. 수강생 분들 표정을 통해서 설명이 미비했던 부분을 알게되어 더 좋은 교수법을 생각하고 다른 방법으로 전달하는 방법을 배웁니다. 수업에서 배운 내용 안에서만 안주하지 않으려는 마인드를 가진 분들이 택한 알고리즘이나 새로운 기능을 통해서 항상 지적인 경계를 벗어하는 계기가 됩니다. 
++ 그리고 적극적인 태도로 본인의 comfort zone을 넘어가려는 분들에게 더 좋은 미래가 있음을 보게되는 보람은 다른 것과 비교할 수 없습니다.
++ 적극적이고 새로운 관점을 가지려는 태도의 중요성은 데이터 분석과 데이터 사이언스에서도 마찬가지로 중요합니다. 잘 짜여진 교과서와 수업에서 등장하는 tidy한 dataset에서 시작해서 정형화된 결론이 나오는게 끝이 아니라, 탐구하고 생각하려는 의지를 통해서만 훨씬 복잡한 실제 데이터와 세상을 깊이 이해할 수 있습니다. 기초통계와 간단한 분석만으로도 깊이 생각하고 계속 시도하면 다른 누구도 발견하지 못한 것을 발견하고 조직과 세상에 영향을 줄 수 있습니다. 
++ 수업 이후에도 페이스북이나 이메일을 통해서 얘기 나누시고 싶으신 것은 편하게 말씀해 주세요. 감사합니다! 
+
+> Science is not knowledge but a way of thinking. - Carl Sagan  
+> It's not that I'm so smart, it's just that I stay with problems longer. - Albert Einstein  
+
