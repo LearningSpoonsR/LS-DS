@@ -49,10 +49,8 @@ M33 (Shiny) -> M46 (retail2)
 
 1. Github 페이지 상단은 아래 그림처럼 생겼습니다. Code옆에 Issue를 클릭합니다. 
 
-![](git1.png)
-
 <p align="center">
-  <img src="git1.png" width="480">
+  <img src="git1.png" width="700">
 </p>
 
 
