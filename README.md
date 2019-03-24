@@ -47,7 +47,10 @@ M33 (Shiny) -> M46 (retail2)
 
 # V. Github에 댓글 다는법 (질문 & 답변 & 오류 신고등) 
 
-
+1. ![](git1.png)  
+2. ![](git2.png)  
+3. ![](git3.png)  
+4. ![](git4.png)  
 
 ***  
 
