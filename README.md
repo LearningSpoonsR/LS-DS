@@ -49,7 +49,7 @@ M33 (Shiny) -> M46 (retail2)
 
 1. Github 페이지 상단은 아래 그림처럼 생겼습니다. Code옆에 Issue를 클릭합니다. 
 
-![](git1.png)   
+![](git1.png){fig-width=400px}   
 
 2. 댓글을 달고 싶은 Module 번호를 찾아서 들어갑니다.  
 
