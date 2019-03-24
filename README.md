@@ -1,4 +1,4 @@
-# R로 시작하는 데이터 분석 및 시각화    
+# I. R로 시작하는 데이터 분석 및 시각화    
 
 + **부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수**    
 + 강의 페이지 <https://github.com/LearningSpoonsR/LS-DS>   
@@ -8,7 +8,7 @@
 
 ***   
 
-# Philosophy 
+# II. Philosophy 
 
 ![](remember.jpg)   
 
@@ -17,7 +17,7 @@
 
 ***   
 
-# 참고자료 
+# III. 참고자료 
 
 + R for Data Science
   + 웹사이트: https://r4ds.had.co.nz/ (크롬에서 우클릭 -> 번역기능 사용) 
@@ -34,7 +34,7 @@
 
 ***   
 
-## 수업 순서  
+# IV. 수업 순서  
 
 M11 (Intro) -> M41 (OECD) ->  M12 (`base`) -> M13 (Quiz) ->    
 M21 (`dplyr`) -> M22 (`rmarkdown`) -> M23 (`ggplot2`) -> 
@@ -45,7 +45,13 @@ M33 (Shiny) -> M46 (retail2)
 
 ***  
 
-# 모듈 소개  
+# V. Github에 댓글 다는법 (질문 & 답변 & 오류 신고등) 
+
+
+
+***  
+
+# VI. 모듈 소개  
 
 ## M1X: Introduction & Basics    
   
