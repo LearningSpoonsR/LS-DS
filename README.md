@@ -53,19 +53,23 @@ M33 (Shiny) -> M46 (retail2)
   <img src="git1.png" width="700">
 </p>
 
-
-
 2. 댓글을 달고 싶은 Module 번호를 찾아서 들어갑니다.  
 
-![](git2.png)  
+<p align="center">
+  <img src="git2.png" width="700">
+</p>
 
 3. 회원가입이 안 되어 있으면 이렇게 나옵니다. Github 가입을 권장드립니다. (스팸성사이트가 아니라 전세계에서 개발자들이 가장 많이 사용하는 사이트입니다.) 
 
-![](git3.png)  
+<p align="center">
+  <img src="git3.png" width="700">
+</p>
 
 4. 회원 가입후에는 아래처럼 댓글을 달 수 있습니다. 
 
-![](git4.png)  
+<p align="center">
+  <img src="git4.png" width="700">
+</p>
 
 ***  
 
