@@ -51,7 +51,11 @@ M33 (Shiny) -> M46 (retail2)
 
 ![](git1.png)
 
-<img src="git1.png" width="48">
+<p align="center">
+  <img src="git1.png" width="480">
+</p>
+
+
 
 2. 댓글을 달고 싶은 Module 번호를 찾아서 들어갑니다.  
 
