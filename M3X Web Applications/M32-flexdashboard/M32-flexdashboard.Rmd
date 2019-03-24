@@ -1,7 +1,9 @@
 ---
 title: 'M32 - Flexdashboard '
-author: 'LearningSpoonsR '
-date: "`r Sys.Date()`"
+author: "`learningSpoonsR@gmail.com`"     
+date: \includegraphics[height=0.5in]{myRmdBeamerStyle/logo_ls.png} \includegraphics[height=0.3in]{myRmdBeamerStyle/logo_R.png}  
+# author: learningSpoonsR  
+# date: "`r Sys.Date()`"  
 output:
   beamer_presentation:
     colortheme: default
@@ -14,6 +16,7 @@ output:
   ioslides_presentation: default
   slidy_presentation: default
 mainfont: NanumMyeongjo # NanumGothic  
+# monofont: Courier New
 fontsize: 9pt
 classoption: t
 ---  
@@ -62,7 +65,9 @@ knitr::opts_chunk$set(warning = FALSE)
     3. Shiny를 사용하여 시각화를 동적으로 구현할 수 있습니다.    
     4. Semi-interactive: htmlwidget (`plotly` & `dygraph`)
 + <https://rmarkdown.rstudio.com/flexdashboard/index.html>   
-+ **파일 – 새파일 – Rmarkdown – Template – Flexdashboard! - Knit**   
++ 따라하기 
+    1. `install.packages("flexdashboard")`  
+    2. **파일 – 새파일 – Rmarkdown – Template – Flexdashboard! - Knit**   
 
 # Part 2. Sample Layouts   
 
@@ -156,9 +161,23 @@ knitr::opts_chunk$set(warning = FALSE)
 + 두 번째 페이지에서는 orientation을 바꾼게 보이시나요?  
 + 사용자 정의 `data-width` 및 `data-height` 특성이있는 여러 열과 행을 사용하는 방법도 설명합니다.     
 
+**Multiple Pages** 
+
+This layout defines multiple pages using a level 1 markdown header (==================). Each page has its own top-level navigation tab. Further, the second page uses a distinct orientation via the data-orientation attribute. The use of multiple columns and rows with custom data-width and data-height attributes is also demonstrated.
+
 ##  
 
-![](fig/fig9.png){height=300px}\    
+\lc 
+
+![](fig/fig21.png){height=300px}\
+
+\rc
+
+![](fig/fig23.png){height=150px}\
+
+![](fig/fig24.png){height=150px}\
+
+\ec 
 
 ## 9) Input Sidebar   
 
@@ -226,7 +245,7 @@ knitr::opts_chunk$set(warning = FALSE)
 
 ![](fig/fig-p2.png){height=280px}\    
 
-## Step 2. 비어있는 대시보드를 채웁니다.  
+## Step 2. 비어있는 대시보드를 아래와 같이 채워보세요.    
 
 #### page 1  
 
@@ -238,4 +257,118 @@ knitr::opts_chunk$set(warning = FALSE)
 
 ![](fig/fig-p4.png){height=280px}\    
 
-  
+## 정답 (`M32-practice_step1.Rmd`)
+
+\lc
+
+```{r, eval=FALSE}
+#| ---
+#| title: "M32 실습"  
+#| output: flexdashboard::flex_dashboard
+#| ---
+#| 
+#| Page 1 {data-orientation=rows}
+#| =====================================     
+#|    
+#| Row {data-height=600}
+#| -------------------------------------
+#| 
+#| ### Scatter plot 
+#|
+#| ```{r}
+#| # scatter plot
+#| ```
+#|
+```
+
+\rc
+
+```{r, eval=FALSE}
+#| Row {data-height=400}
+#| -------------------------------------
+#|   
+#| ### Table
+#| 
+#| ```{r}
+#| # table  
+#| ```   
+#|    
+#| ### Box plot  
+#| 
+#| ```{r}  
+#| # box plot
+#| ```
+#|
+#| Page 2     
+#| =====================================  
+#|
+#| Scatter plot + facet  
+#| 
+#| ```{r}
+#| scatter + facet
+#| ```
+#| 
+```
+
+\ec
+
+
+## 정답 (`M32-practice_step2.Rmd`)(1/2)
+
+### Scatter plot 
+
+```{r, eval=FALSE}
+library(ggplot2)
+library(plotly)
+a1 <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + geom_point(aes(color = class))
+a2 <- a1 + geom_smooth()
+ggplotly(a2)
+```
+
+### Table  
+
+```{r, eval=FALSE}
+library(dplyr)
+library(kableExtra)
+b <- mpg %>% group_by(class) %>%
+  summarise(hwy = round(mean(hwy), 1), cty = round(mean(cty), 1)) %>%
+  arrange(desc(hwy)) %>% t()
+b %>% kable() %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE)
+# https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
+```   
+
+### Box plot  
+
+```{r, eval=FALSE}  
+c <- ggplot(mpg) + geom_boxplot(aes(x = class, y = hwy, fill = class)) + coord_flip()
+ggplotly(c)
+```
+
+### Page 2     
+
+```{r, eval=FALSE}
+a3 <- a1 + facet_wrap(~ class)
+ggplotly(a3)
+```
+
+## More examples of `flexdashboard`  
+
++ Must visit! 
++ <https://rmarkdown.rstudio.com/flexdashboard/examples.html>  
+
+
+
+## 
+
+\begin{aquote}{}  
+Non scholae sed vitae discimus.  
+\end{aquote}  
+
+\begin{aquote}{}  
+우리는 학교를 위해서가 아니라 인생을 위해서 배운다.   
+\end{aquote}  
+ 
+
+
+

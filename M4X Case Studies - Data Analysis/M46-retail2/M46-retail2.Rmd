@@ -1,22 +1,25 @@
 ---
-title: 'M46-retail2 '
-author: 'LearningSpoonsR '
-date: "`r Sys.Date()`"
-output:
-  beamer_presentation:
-    colortheme: default
-    includes:
-      in_header: myRmdBeamerStyle/latex-topmatter.tex
-    latex_engine: xelatex
-    slide_level: 2  
-    theme: Montpellier
-    toc: yes
-  ioslides_presentation: default
-  slidy_presentation: default
-mainfont: NanumMyeongjo # NanumGothic  
-fontsize: 9pt
-classoption: t
----  
+title: "M46-retail2"    
+author: "`learningSpoonsR@gmail.com`"     
+date: \includegraphics[height=0.5in]{myRmdBeamerStyle/logo_ls.png} \includegraphics[height=0.3in]{myRmdBeamerStyle/logo_R.png}  
+# author: learningSpoonsR  
+# date: "`r Sys.Date()`"  
+output:    
+  beamer_presentation:  
+    colortheme: default  
+    includes:  
+      in_header: myRmdBeamerStyle/latex-topmatter.tex  
+    latex_engine: xelatex  
+    slide_level: 2   
+    theme: Montpellier  
+    toc: yes  
+  ioslides_presentation: default  
+  slidy_presentation: default  
+mainfont: NanumMyeongjo # NanumGothic   
+# monofont: Courier New
+fontsize: 9pt  
+classoption: t  
+---    
 
 ```{r setup, include=FALSE}
 library(rmarkdown)
@@ -24,11 +27,11 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(background = '718CBA')
 ```
 
-# Background
+# I. Background  
 
-## I. Background   
+##  
 
-+ Continued from `M43-retail1`     
++ Continued from `M43-retail`       
     1. 배송 기간 분석 (`Ship Date`를 기반으로 배송이 가장 오래걸리는 상품은 무엇인가?)  
     2. 마진이 가장 많이 남는 상품은 무엇인가?  
     3. **`M46`에서는 소비자 별 구매 기록을 분석해보자**  
@@ -43,77 +46,73 @@ knitr::opts_chunk$set(background = '718CBA')
     + "이 상품을 구매한 사람이 자주 본 물건"  
     + "You may also like..."   
 
-# Goal  
+# II. Goal  
 
-## II. Goal  
+##  
 
 #### 목표 결과물 (Target output)  
 
 \lc  
 
-+ 이 노트는 제작 과정을 최대한 재현한 노트입니다. 분석가의 생각의 흐름을 느껴보세요.  
++ 이 노트는 제작 과정을 최대한 재현하였습니다.   
 + From `M24`,    
-    0. About  
+    0. About   
     1. **Correlation: 두 변수가 얼마나 상관관계가 있는가?**   
     2. Deviation  
-    3. Ranking 
-    4. Distribution  
+    3. Ranking  
+    4. Distribution   
     5. Composition  
     6. Change  
     7. Groups  
 
 \rc  
 
-![](fig/fig2.png){height=200px}\
+![](fig/fig2.png){height=200px}\  
 
 \ec      
     
 ##  
 
-#### 목표 결과물 (Target output)  
+#### 목표 결과물 (Target output)   
 
-+ From `M24. 1. Correlation`,  
++ From `M24. Section Correlation`,    
 
-![](fig/fig3.png)\  
+![](fig/fig3.png)\   
 
-##  
+##   
 
-#### 필요한 데이터셋의 구조  
+#### 필요한 데이터셋의 구조   
 
 \lc  
 
-**We need...** 
+**We need...**  
 
-![필요한 데이터 구조](fig/fig4.png){width=180px}
+![필요한 데이터 구조](fig/fig4.png){width=180px}   
 
-\rc  
+\rc   
 
-**for...**
+**for...**  
 
-![최종 output 시안](fig/fig5.png){width=180px}
+![최종 output 시안](fig/fig5.png){width=180px}  
 
 \ec  
 
-## 
+# III. Data Review   
 
-# Data Review  
+##   
 
-## III. Data Review  
-
-```{r}
+```{r} 
 library(tidyverse) # dplyr + ggplot2 + tidyr + ...
 library(readxl)
 dataset <- read_excel("retail.xlsx")
 ```
 
-+ `tidyverse` 많이도 포함하고 있네요.  
-+ rmarkdown 문서에 r chunk의 아웃풋 출력을 안하려면 `message=FALSE`하면 됩니다.
++ `tidyverse` 많이도 포함하고 있네요.   
++ rmarkdown 문서에 r chunk의 아웃풋 출력을 안하려면 `message=FALSE`하면 됩니다.  
 
-## 
+##  
 
-이렇게 생긴 데이터이고...  
-
-\vspace{10pt}  
+#### 이렇게 생긴 데이터이고...  
 
 ```{r}  
 str(dataset)  
@@ -121,9 +120,7 @@ str(dataset)
 
 ## 
 
-이런 변수들이 있구나... 
-
-\vspace{10pt}  
+#### 이런 변수들이 있구나...  
 
 ```{r}
 colnames(dataset) 
@@ -131,21 +128,15 @@ colnames(dataset)
 
 \vspace{15pt}  
 
-관련 데이터는...  
-
-\vspace{10pt}  
+#### 관련 데이터는...  
 
 ```{r}
 dataset %>% select(`Product Name`, `Customer Name`) %>% head()
 ```
 
-\vspace{10pt}  
-
 ## 
 
-각각 컬럼의 `unique`한 value의 갯수는...   
-
-\vspace{10pt}  
+#### 각각 컬럼의 `unique`한 value의 갯수는...   
 
 ```{r}
 dataset %>% select(`Product Name`, `Customer Name`) %>% 
@@ -154,10 +145,10 @@ dataset %>% select(`Product Name`, `Customer Name`) %>%
 
 \vspace{15pt}  
 
-**암튼 `dataset`을 이용해서 Figure 1 모양의 구조를 만드는 preprocessing을 하면 되겠구나!** 
+#### 암튼 `dataset`을 이용해서 Figure 1 모양의 구조를 만드는 preprocessing을 하면 되겠구나!  
 
 
-# Preprocessing  
+# IV. Preprocessing  
 
 ## Preprocessing 1: Assign IDs    
 
@@ -181,9 +172,9 @@ dataset %>% select(`Product Name`, `Customer Name`) %>%
 2. 없다면 유일성을 담보할 수 있는 방법으로 만들어 내야 함   
 3. 체계적으로 준비된 데이터 셋은 `join`및 조회가 용이함   
 
-## 
+##  
 
-#### Solution  
+#### Solution   
 
 1. `Customer Name`의 유일성 (uniqueness)  
     + 각각 다른 `CustomerID`가 있어야 함  
@@ -201,8 +192,6 @@ dataset %>% select(`Product Name`, `Customer Name`) %>%
 
 **Step 1.** `unique`를 사용해서 유일한 조합을 생성하여 `customerTable`에 저장  
 
-\vspace{10pt} 
-
 ```{r}
 customerTable <- dataset %>% select(`Postal Code`, `Customer Name`) %>% unique() 
 customerTable %>% head()
@@ -211,8 +200,6 @@ customerTable %>% head()
 \vspace{15pt} 
 
 **Step 1-1.** 구매기록에 몇명의 고객이 있는지 확인    
-
-\vspace{10pt} 
 
 ```{r}
 dim(customerTable)  
@@ -223,19 +210,17 @@ dim(customerTable)
 **Step 1-2.** `CustomerID` 변수를 만들기  
 
 1. 일련 번호 생성  
-2. google "how to add leading zeros R"  
-
-\vspace{10pt} 
+2. google "how to add leading zeros R" (`M12 Appendix`)    
 
 ```{r}
 library(stringr)
 x <- 1:nrow(customerTable) %>% str_pad(5, pad = "0") # make 5-digit string by padding "0"
-head(x, 3)
+head(x, 3)  
 ```
 
 \vspace{15pt} 
 
-3. `CustomerID` 변수 완성  
+3. `CustomerID` 변수 완성   
 
 ```{r}
 customerTable$CustomerID <- paste0("cus", x)
@@ -244,7 +229,7 @@ customerTable %>% head(3)
 
 ##  
 
-**Step 2.** 같은 방법으로 `productTable` 만들기  
+**Step 2.** 같은 방법으로 `productTable` 만들기   
 
 \vspace{10pt} 
 
@@ -256,8 +241,6 @@ productTable <- productTable %>%
 productTable %>% head(3)
 ```
 
-\vspace{15pt} 
-
 ## 
 
 **Step 3.** 원래 데이터셋에 `CustomerID`와 `ProductID`를 부여  
@@ -265,8 +248,6 @@ productTable %>% head(3)
 \vspace{10pt}
 
 **Step 3-1.** `CustomerID` 부여  
-
-\vspace{10pt}
 
 ```{r}
 head(dataset[,c(5, 11:12)], 2)
@@ -287,8 +268,6 @@ dataset[c(5, 11:12, 21)] %>% head(2)
 
 **Step 3-2.** 같은 방법으로 `ProductID` 부여  
 
-\vspace{10pt}  
-
 ```{r}
 dataset <- left_join(x = dataset, y = productTable, 
                      by = c("Manufacturer", "Product Name"))
@@ -298,8 +277,6 @@ dataset <- left_join(x = dataset, y = productTable,
 
 **Step 4.** 전처리 완료! 필요한 변수만 모아서 `dataset2`라고 이름 붙임!  
 
-\vspace{10pt}  
-
 ```{r}
 dataset2 <- dataset %>% 
   select(CustomerID, ProductID, `Postal Code`, 
@@ -308,17 +285,11 @@ dataset2 <- dataset %>%
 dataset2[108:110,]
 ```
 
-##  
-
-##  
-
-##  
-
 ## Preprocessing 2  
 
 #### Strategy  
 
-![](fig/fig6.png)\  
+![](fig/fig6.png)\   
 
 ## 
 
@@ -327,8 +298,6 @@ dataset2[108:110,]
 \lc  
 
 **Before**  
-
-\vspace{10pt}
 
 ```{r}
 dataset2 %>% 
@@ -339,8 +308,6 @@ dataset2 %>%
 \rc  
 
 **After**   
-
-\vspace{10pt}
 
 ```{r}
 purchase <- dataset2 %>%
@@ -361,8 +328,6 @@ head(purchase)
 
 **Prepare an empty matrix, `purchaseCount`**  
 
-\vspace{10pt}
-
 ```{r}
 uProductID <- unique(dataset2$ProductID)
 purchaseCount <- 
@@ -376,10 +341,8 @@ purchaseCount[1:4,1:3]
 
 **And with `purchase$Purchase`**  
 
-\vspace{10pt}  
-
 ```{r}
-purchase$Purchases %>% head(3) %>% t() %>% t()
+purchase$Purchases %>% head(3) %>% t() %>% t()  
 ```
 
 \ec  
@@ -387,8 +350,6 @@ purchase$Purchases %>% head(3) %>% t() %>% t()
 ##  
 
 **Fill `purchaseCount`**  
-
-\vspace{10pt}  
 
 ```{r, eval=FALSE, message=FALSE}
 library(stringr)
@@ -411,13 +372,13 @@ beep()
 load("M46_middle.Rdata")
 ```
 
-\vspace{10pt}
+\vspace{10pt}  
 
 ```{r}
-purchaseCount[1:4,1:3]
+purchaseCount[1:4,1:3]  
 ```
 
-##  
+##   
 
 ```{r}
 a
@@ -435,9 +396,9 @@ b-a
 
 + Discussion  
     + 속도를 빠르게 하려면 어떻게 해야할까요?  
-    + Hint?  
+    + Hint: 2배로 빨라집니다.   
 
-# Results  
+# V. Results  
 
 ## Result 1  
 
@@ -447,19 +408,15 @@ b-a
 + 해당 제품 구매 건수를 빼주면 pair 구매 건수가 집계됨  
 + 그것을 내림차순으로 정렬하면 `pairCount`완성  
 
-\vspace{10pt}
-
 ```{r}
 pairCount <- colSums(purchaseCount) - diag(purchaseCount)
 pairCount <- sort(pairCount, decreasing = TRUE)
 head(pairCount)
 ```
 
-\vspace{15pt}  
-
 ##  
 
-**Step. 2.** pair 구매가 많았던 8개 `ProductID`만 골라서 8 by 8 표로 표현  
+**Step. 2.** pair 구매가 많았던 8개 `ProductID`만 골라서 8 by 8 표로 표현   
 
 + `mat_size`를 `8`로 지정   
 + `pairCount[1:mat_size]`의 `names`들이 `productID` 형식으로 표현되어 있으므로... 
@@ -481,8 +438,6 @@ pair_mat %>% head()
 + `pair_mat`의 index들을 `productID`형식에서 `productName`형식으로 바꾸려면?  
 + 먼저 `productTable`을 이용해서 `pair_mat`의 ID를 매치시킴  
 
-\vspace{10pt}
-
 ```{r}
 pair_mat_name <- 
   left_join(data.frame(ProductID = colnames(pair_mat)), productTable) 
@@ -492,8 +447,6 @@ pair_mat_name %>% head()
 ##  
 
 + `pair_mat`의 `rownames`를 교체  
-
-\vspace{10pt}
 
 ```{r}
 rownames(pair_mat) <- pair_mat_name[,"Product Name"] %>% substr(1,20)
@@ -509,8 +462,6 @@ pair_mat
 
 **Step. 3.** pair 구매가 2회 이상이었던 10개 case를 random하게 출력    
 
-\vspace{10pt} 
-
 ```{r}
 topPair_N <- 10  
 # Replace diagonals to 0 
@@ -521,10 +472,10 @@ top_indexes <-
   which(purchaseCount_offdiag >= 2, arr.ind = TRUE) %>% data.frame()
 top_indexes %>% head()
 colnames(purchaseCount_offdiag) %>% head()
-```
+``` 
 
 ##  
-
+ 
 ```{r}
 Top_N <- data.frame(
   ID_x = apply(top_indexes, 1, 
@@ -544,7 +495,7 @@ Top_N <- Top_N %>%
   select(`Product Name.x`, `Product Name.y`, count)
 ```
 
-## 
+##   
 
 ```{r}
 Top_N[,1] <- substr(Top_N[,1], 1, 30)
@@ -556,17 +507,13 @@ Top_N %>% head(2)
 
 `Top_N`에서 random하게 `topPair_N`개 행을 뽑으면 끝!  
 
-\vspace{10pt} 
-
 ```{r}
 Top_N[sample(1:nrow(Top_N), topPair_N),]
 ```
   
 ## Result 2    
 
-**Step. 1.** 예제 코드를 이용해 Correlogram 그리기 연습  
-
-\vspace{10pt} 
+**Step. 1.** 예제 코드를 이용해 Correlogram 그리기 연습   
 
 ```{r}
 library(ggplot2)
@@ -581,7 +528,7 @@ fig_sample <-
     title="Correlogram of mtcars", ggtheme=theme_bw)
 ```
 
-## 
+##  
 
 ```{r}
 fig_sample
@@ -590,8 +537,6 @@ fig_sample
 ## 
 
 **Step. 2.** `pair_mat`를 이용해 correlogram 그리기  
-
-\vspace{15pt} 
 
 ```{r}
 colnames(pair_mat) <- rownames(pair_mat)
@@ -603,15 +548,15 @@ fig_corr <-
     title="Correlogram of mtcars", ggtheme=theme_bw)
 ```
 
-## 
+##   
 
 ```{r}
-fig_corr
+fig_corr  
 ```
 
-# Summary  
+# VI. Summary  
 
-## Summary  
+##  
 
 ```{r, eval=FALSE}
 save.image("M46_final.Rdata")
@@ -647,18 +592,21 @@ save.image("M46_final.Rdata")
 6. 결과물  
     + <https://learningspoonsr.shinyapps.io/M46-retail2-correl/>  
     
-## Sketch Notes    
+## Sketch Notes      
 
 | | | | |   
 |-|-|-|-|  
 | ![](fig/dev1.jpg){width=80px} | ![](fig/dev4.jpg){width=80px} | ![](fig/dev2.jpg){width=80px} | ![](fig/dev3.jpg){width=80px} |  
 
-+ Verumtamen oportet me bodie et cras et sequenti die ambulare.     
-+ 오늘도 내일도 그 다음날도 계속해서 내 길을 가야 한다.  
+\begin{aquote}{}
+Verumtamen oportet me bodie et cras et sequenti die ambulare.     
+\end{aquote}
+
+\begin{aquote}{}
+오늘도 내일도 그 다음날도 계속해서 내 길을 가야 한다.  
+\end{aquote}
+
+##   
 
 ##  
-
-##  
-
-blank  
 

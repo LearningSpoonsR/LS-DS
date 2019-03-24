@@ -70,10 +70,10 @@ knitr::opts_chunk$set(background = '718CBA')
 ## 데이터 불러오기 (`Quandl`)   
 
 + 글로벌 금융 데이터 베이스 제공업체   
-+ **Quandl:Bloomberg = 위키피디아가:브리터니커**의 관례를 지향  
++ **Quandl:Bloomberg = 위키피디아:브리터니커**의 관계를 지향  
 
 ```{r, message = FALSE, cache = TRUE}
-library(Quandl)
+library(Quandl) #  `quantmod` is another library for financial data  
 Quandl.api_key("SD27xu59qZmj-YCnxwDm")
 MSFT <- Quandl("WIKI/MSFT")
 str(MSFT)
@@ -186,7 +186,7 @@ dygraph(MSFT_xts[,2]) %>% dyRangeSelector()
 
 # Part 4. `lubridate`로 시간 데이터 다루기    
 
-## `lubridate`로 시계열 데이터 다루기  
+## `lubridate`로 시계열 데이터 다루기 (`M13` 참조)   
 
 ```{r, message=FALSE}
 library(lubridate)

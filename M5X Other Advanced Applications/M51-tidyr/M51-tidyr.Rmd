@@ -1,22 +1,25 @@
 ---
-title: "M51-`tidyr` "
-author: "LearningSpoonsR "
-date: "`r Sys.Date()`"
-output:
-  beamer_presentation:
-    colortheme: default
-    includes:
-      in_header: myRmdBeamerStyle/latex-topmatter.tex
-    latex_engine: xelatex
-    slide_level: 2  
-    theme: Montpellier
-    toc: yes
-  ioslides_presentation: default
-  slidy_presentation: default
-mainfont: NanumMyeongjo # NanumGothic  
-fontsize: 9pt
-classoption: t
----
+title: "M51-`tidyr`"
+author: "`learningSpoonsR@gmail.com`"     
+date: \includegraphics[height=0.5in]{myRmdBeamerStyle/logo_ls.png} \includegraphics[height=0.3in]{myRmdBeamerStyle/logo_R.png}  
+# author: learningSpoonsR  
+# date: "`r Sys.Date()`"  
+output:    
+  beamer_presentation:  
+    colortheme: default  
+    includes:  
+      in_header: myRmdBeamerStyle/latex-topmatter.tex  
+    latex_engine: xelatex  
+    slide_level: 2   
+    theme: Montpellier  
+    toc: yes  
+  ioslides_presentation: default  
+  slidy_presentation: default  
+mainfont: NanumMyeongjo # NanumGothic   
+# monofont: Courier New
+fontsize: 9pt  
+classoption: t  
+---    
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -79,8 +82,8 @@ df2
 ![](fig/fig1.png){height=100}\  
 
 1. `inner`  
-2. `full` (`outer`)  
-3. `left`  
+2. `left`  
+3. `full` (`outer`)  
 4. `right`  
 
 \ec 
@@ -92,8 +95,7 @@ df2
 ```{r, eval=FALSE}
 inner_join(df1, df2) # dplyr 
 merge(x = df1, y = df2, by = "CustomerId") # base 
-sqldf("SELECT CustomerId, Product, State 
-       FROM df1 JOIN df2 USING(CustomerID)") # sqldf   
+sqldf("SELECT * FROM df1 JOIN df2 USING(CustomerID)") # sqldf   
 ```
 
 ```{r, echo=FALSE}
@@ -102,11 +104,31 @@ inner_join(df1, df2)
 
 \vspace{10pt} 
 
-#### 2. Outer Join (full) 
+## 
+
+#### 2. Left Join 
+
+```{r, eval=FALSE}
+left_join(df1, df2) # dplyr
+merge(x = df1, y = df2, by = "CustomerId", all.x = TRUE) # base
+sqldf("SELECT * FROM df1 LEFT JOIN df2 USING(CustomerID)") # sqldf  
+```
+
+```{r, echo=FALSE}
+left_join(df1, df2)
+```
+
+##  
+
+#### 3. Outer Join (full) 
 
 ```{r, eval=FALSE}
 full_join(df1, df2) # dplyr 
 merge(x = df1, y = df2, by = "CustomerId", all = TRUE) # base 
+# sqldf does not support FULL JOIN, needing three lines.    
+a <- sqldf("SELECT * FROM df1 LEFT JOIN df2 USING(CustomerID)")    
+b <- sqldf("SELECT * FROM df2 LEFT JOIN df1 USING(CustomerID)")  
+union(a,b) # Other set operations: intersect(a,b), setdiff(a,b), setdiff(b,a)
 ```
 
 ```{r, echo=FALSE}
@@ -115,26 +137,13 @@ full_join(df1, df2)
 
 ## 
 
-#### 3. Left Join 
-
-```{r, eval=FALSE}
-left_join(df1, df2) # dplyr
-merge(x = df1, y = df2, by = "CustomerId", all.x = TRUE) # base
-sqldf("SELECT CustomerId, Product, State 
-       FROM df1 LEFT JOIN df2 USING(CustomerID)") # sqldf  
-```
-
-```{r, echo=FALSE}
-left_join(df1, df2)
-```
-
-\vspace{10pt} 
-
 #### 4. Right Join
 
 ```{r, eval=FALSE}
 right_join(df1, df2) # dplyr
-merge(x = df1, y = df2, by = "CustomerId", all.y = TRUE) # base
+merge(x = df1, y = df2, by = "CustomerId", all.y = TRUE) # base  
+# sqldf does not support RIGHT JOIN, just swapping the input order.    
+sqldf("SELECT * FROM df2 LEFT JOIN df1 USING(CustomerID)") # sqldf  
 ```
 
 ```{r, echo=FALSE}
@@ -156,7 +165,7 @@ right_join(df1, df2)
 
 + `join`할때 사용할 `key`변수를 구체화  
     + `by =` argument로 key 변수를 아래처럼 지정합니다.  
-    + `by =`을 입력하지 않으면 같은 이름의 변수를 찾아서 key로 사용합니다. 
+    + `by =` 을 입력하지 않으면 같은 이름의 변수를 찾아서 key로 사용합니다. 
 
 ```{r, eval=FALSE}
 inner_join(df1, df2)
@@ -190,12 +199,24 @@ df3
 + 여러가지 이유로 위처럼 `NA` (결측치)가 생깁니다.  
 + 주로 3가지 방법으로 해결합니다.   
     1. 결측치가 있는 관찰값을 제거하기  
-    2. 결측치를 다른 수치로 대체하기 (평균, 0 등의 값)  
-    3. 그대로 두고 함수를 적용할 때 주의해서 분석 (많은 함수들에서 `na.rm=TRUE`등의 옵션 사용이 가능합니다.)  
+    2. 그대로 두고 함수를 적용할 때 주의해서 분석    
+    3. 결측치를 다른 수치로 대체하기 (평균, 0 등의 값)  
     
 ##  
 
 1. 결측치가 있는 관찰값을 제거하기  
+
+\lc   
+
+**`dplyr`**   
+
+```{r}
+df3 %>% filter(!is.na(State))
+```
+
+\rc   
+
+**`base`**  
 
 ```{r}
 is.na(df3$State)
@@ -215,19 +236,56 @@ df3[!is.na(df3$State),]
 df3[which(!is.na(df3$State)),]  
 ```
 
+\ec   
+
+
 ## 
 
-2. 결측치를 다른 수치로 대체하기 (평균, 0등의 값)  
+2. 그대로 두고 함수를 적용할 때 주의해서 분석  
+
++ 많은 함수들에서 `na.rm=TRUE`의 옵션 사용이 가능합니다. 
 
 ```{r}
-is.na(df3$Population) %>% which() 
 mean(df3$Population)
 mean(df3$Population, na.rm = TRUE)
-df3$Population[is.na(df3$Population) %>% which()] <- mean(df3$Population, na.rm = TRUE)
+sd(df3$Population)
+sd(df3$Population, na.rm = TRUE)
+```
+
+##  
+
+3. 결측치를 다른 수치로 대체하기 (평균, 0등의 값)  
+
+\lc  
+
+**`dplyr`**  
+
+```{r}
+df3 %>% mutate(
+  Population = 
+    if_else(
+      is.na(Population), # Condition
+      mean(Population, na.rm = TRUE), # T 
+      Population)) # F
+```
+
+\rc 
+
+**`base`** 
+
+```{r}
+is.na(df3$Population) 
+df3$Population[is.na(df3$Population)] <- 
+  mean(df3$Population, na.rm = TRUE)
 df3
 ```
 
-# Part II. Workding with "tidy" data    
+\ec 
+
+
+
+
+# Part II. From "untidy" to "tidy"  
 
 ## 0. 단정한 데이터?  
 
@@ -403,7 +461,7 @@ table3 %>% separate(rate, into = c("cases", "population"), sep = "/")
 
 \vspace{10pt}  
 
-**참고: Classical method**    
+**참고: Classical method** (`stringr`)    
 
 ```{r}
 table3$cases <- 
@@ -411,14 +469,22 @@ table3$cases <-
 table3$popul <- 
   sapply(strsplit(table3$rate, split = "/"), function(x) x[2])
 ```
-  
-<!-- 
 
 ## Summary  
 
-+ "**0. 목 적**"을 다시 한 번 볼까요?  
-+ `M51`이 끝나면서 무엇을 꼭 기억해야 할까요?   
++ `M51`이 끝나면 무엇을 꼭 기억해야 할까요?   
+    + `join`에는 4가지 종류가 있다.   
+    + 강의노트를 잘 보관하고 수업을 기억하면, 언젠가는 노가다 위기를 타개해 줄 것이다.   
+    + Github에 "Star"를 한다.  
 
---> 
+\vspace{20pt} 
+
+\begin{aquote}{-- Bill Gates}
+I always like to hire a lazy person to do a difficult job, because a lazy person will find an easy way to do it.   
+\end{aquote}  
+
+
+
+
 
 

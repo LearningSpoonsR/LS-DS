@@ -1,7 +1,9 @@
 ---
 title: "M43-retail " 
-author: 'LearningSpoonsR '
-date: "`r Sys.Date()`"
+author: "`learningSpoonsR@gmail.com`"     
+date: \includegraphics[height=0.5in]{myRmdBeamerStyle/logo_ls.png} \includegraphics[height=0.3in]{myRmdBeamerStyle/logo_R.png}  
+# author: learningSpoonsR  
+# date: "`r Sys.Date()`"  
 output:
   beamer_presentation:
     colortheme: default
@@ -14,6 +16,7 @@ output:
   ioslides_presentation: default
   slidy_presentation: default
 mainfont: NanumMyeongjo # NanumGothic  
+# monofont: Courier New
 fontsize: 9pt
 classoption: t
 ---  
@@ -22,7 +25,7 @@ classoption: t
 library(rmarkdown)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(background = '718CBA')
-source("../../LSR.R")
+# source("../../LSR.R")
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -37,15 +40,19 @@ library(ggplot2)
     + 파일로 받은 경우에는 엑셀이나 메모장으로 확인
 
 2. 전처리  
-    + **Tidy data.frame**은 각 column이 변수, 각 row가 관찰값에 대응됩니다.   
-    + 전처리는 데이터가 tidy하지 않은 경우에 tidy하게 바꾸는 작업을 의미합니다.  
-
-3. 전처리 과정의 특징  
     + raw 데이터가 다양하고 복잡하고 지저분할수록...  
-    + 세밀한 관찰력과 때로는 창의력을 요하기도 합니다.    
-    + 노동집약적이기도 하지만, 데이터 구조를 이해하는 데에 큰 도움을 줍니다.    
+    + 관찰력과 창의력을 요구합니다.    
+    + 데이터 구조를 이해하는 데에 큰 도움을 줍니다.    
     + 얻게되는 처리 경험이 분석가로서의 자신감을 높여줍니다.    
-    
+
+\begin{aquote}{-- Leo Tolstoy}
+Happy families are all alike; every unhappy family is unhappy in its own way.
+\end{aquote}
+
+\begin{aquote}{-- Hadley Wickham}
+Tidy datasets are all alike; every messay dataset is messy in its own way.
+\end{aquote}
+
 ##  
  
 #### Online 판매 업체의 개별 판매 기록 데이터입니다. 
@@ -397,7 +404,7 @@ ggplot(task21, aes(x = "", y = Profit, fill = factor(Category))) +
 ```{r}
 task22 <- dataset %>% 
   group_by(`Sub-Category`) %>%
-  summarise(Sales = sum(Sales), Profit = sum(Profit)) %>% 
+  summarise(numRecords = length(Sales), Sales = sum(Sales), Profit = sum(Profit)) %>% 
   mutate(profitRatio = round(Profit/Sales,2)) %>%
   arrange(desc(profitRatio))
 task22

@@ -1,7 +1,9 @@
 ---
 title: "M23 - `ggplot2`"  
-author: "LearningSpoonsR "
-date: "`r Sys.Date()`"  
+author: "`learningSpoonsR@gmail.com`"     
+date: \includegraphics[height=0.5in]{myRmdBeamerStyle/logo_ls.png} \includegraphics[height=0.3in]{myRmdBeamerStyle/logo_R.png}  
+# author: learningSpoonsR  
+# date: "`r Sys.Date()`"  
 output:
   beamer_presentation:
     colortheme: default
@@ -14,9 +16,10 @@ output:
   ioslides_presentation: default
   slidy_presentation: default
 mainfont: NanumMyeongjo # NanumGothic  
+# monofont: Courier New
 fontsize: 9pt
 classoption: t
----  
+---    
 
 ```{r setup, include=FALSE}
 library(ggplot2)
@@ -31,11 +34,22 @@ theme_set(theme_minimal())
 
 #### 시각화 
 
-+ 간단한 그래프는 다른 어떤 장치보다 데이터 분석가의 마음에 더 많은 정보를 제공합니다. - John Tukey    
+\begin{aquote}{-- John Tukey}  
+간단한 그래프는 다른 어떤 장치보다 데이터 분석가의 마음에 더 많은 정보를 제공합니다.  
+\end{aquote}
+
+#### 효과적인 차트란 어떤 것일까요?
+
++ 사실을 왜곡하지 않고 올바른 정보를 전달하세요
++ 단순하지만 우아합니다. 많은 생각을 하지 않아도 이해할 수 있습니다.
++ 미학은 정보를 가리기보다는 정보를 지원합니다.
++ 너무 많은 정보를 담지 않습니다.
+
+## 
 
 #### 데이터셋 불러오기 `mpg`  
 
-+ `ggplot2` 패키지에 내장된 데이터셋   
++ `ggplot2` 패키지에 내장된 데이터셋 (`library(ggplot2)`를 실행하면 사용가능)  
 + 1999년 부터 2008년 까지의 38개 차종 연비 데이터   
 + 데이터셋 `diamond`, `iris`와 함께 R에서 가장 많이 예제로 쓰임  
 
@@ -65,7 +79,11 @@ theme_set(theme_minimal())
 
 \lc 
 
-```{r}
+```{r echo=FALSE}
+library(ggplot2)
+```
+
+```{r, eval=FALSE}
 library(ggplot2)
 ? mpg # getting help from web 
 help(mpg) # getting help from help panel
@@ -112,46 +130,48 @@ ggplot(data = <DATA>) +
 
 ##
 
-```{r, fig.width=7, fig.height=2}
-suppressMessages(library(gridExtra)) # grid.arrange()
-a <- ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, color = class))
-b <- ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, size = class))
-grid.arrange(a, b, nrow=1, ncol=2)
+```{r, echo=FALSE, message=FALSE}
+library(gridExtra)
 ```
 
-\vspace{-10pt}
+```{r, fig.width=7, fig.height=4}
+a <- ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+a
+```
 
-\lc 
++ `a`는 `ggplot` 그래픽 객체  
++ `color=class`: `class` 변수의 값에 따라 color가 다르게
 
-+ `ggplot2`  
-    + `a`와 `b`는 각각 graph 객체  
-    + `color=class`: `class` 변수의 값에 따라 color가 다르게  
-    + `size=class`: `class`변수의 값에 따라 size가 다르게  
+## 
 
-\rc 
+```{r, fig.width=7, fig.height=4}
+b <- ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+b
+```
 
-+ others  
-    + `suppressMessages()`는 "로딩되었습니다."와 같은 메시지를 보기 싫을때 사용  
-    + `gridExtra`는 grid.arrange 함수를 사용하게 해 줌  
-    + `grid.arrange(a, b, nrow=1, ncol=2)`: `a`와 `b`를 1개행, 2개열에 배치  
-
-\ec 
++ `size=class`: `class`변수의 값에 따라 size가 다르게  
 
 ##  
 
-```{r, fig.width=7, fig.height=2.5}
+```{r, fig.width=7, fig.height=4}
 c <- ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
-d <- ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, shape = class))
-grid.arrange(c, d, nrow=1, ncol=2)
+c
 ```
 
-+ `ggplot2`  
-    + `alpha=class`: `class` 변수의 값에 따라 alpha(진하기)가 다르게  
-    + `shape=class`: `class`변수의 값에 따라 shape이 다르게   
++ `alpha=class`: `class` 변수의 값에 따라 alpha(진하기)가 다르게  
+
+## 
+
+```{r, fig.width=7, fig.height=3.5}
+d <- ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+d
+```
+
++ `shape=class`: `class`변수의 값에 따라 shape이 다르게   
 
 ## Discussion
 
@@ -165,13 +185,13 @@ grid.arrange(c, d, nrow=1, ncol=2)
 + Numeric 변수 
     + 수치 변수, 정량적 변수, numeric, quantative  
     + 크고 작음이 있음, 더할 수 있음
-    + `size`  
-    + `alpha`: 상한/하한이 있는 경우에 더 적합  
+    + `size`   
+    + `alpha`: 상한/하한이 있는 경우에 적합 (eg. 농도, 빈도, 확률) 
 + Categorical 변수 
     + 범주형 변수, 정성적 변수, categorical, factor, qualitative  
     + 집합. A,B,C로 치환 가능, 더할 수 없음, 크고 작음이 없음  
     + `color`: 10개 미만의 범주에서 사용  
-    + `shape`: 7개 미만의 범주에서 사용 
+    + `shape`: 7개 미만의 범주에서 사용, 컬러프린트 없을 때. 
 
 # II. Faceting  
 
@@ -184,8 +204,8 @@ ggplot(data = mpg) +
 ```
 
 + `facet_wrap(~ class, nrow = 2)`  
-    + `class`를 x축으로 하여
-    + 2행으로 배열  
+    + 이산변수인 `class`의 값에 따라서 분할하여 배열  
+    + `nrow=2`에 의해 2행으로 배열  
 
 ## Facets (2 variables) - `facet_grid`
 
@@ -196,39 +216,54 @@ ggplot(data = mpg) +
 ```
 
 + `facet_grid(drv ~ cyl)`  
-    + `cyl`을 x축으로    
-    + `drv`를 y축으로  
-    + grid 모양으로 배열  
+    + 이산변수인 `drv`와 `cyl`의 값에 따라 분할하여 배열 
+    + 2차원의 `grid` 형태로 배열하는데, 
+    + `drv`를 y축(세로)으로 `cyl`을 x축(가로)으로 배열     
 
 ## Discussion  
-
-\lc 
 
 + Do `facet`  
     1. Data가 충분히 많을 때  
     2. Categorical 변수별로 각각의 distribution을 보고 싶을 때 
 
-\rc
-
-+ Don't `facet`  
++ Do Not `facet`  
     1. 근접 비교를 하고 싶을 때  
     2. Reader들의 사전 지식 수준이 높을때  
 
-\ec 
++ Do and Don't `facet`! 
+    1. No facet &rarr; Yes facet 순서로  
+    2. 전체를 보여준 후에 나누어서 보여주며 top-down approach로 표현  
 
 # III. 중첩  
 
 ## `geom_point` vs `geom_smooth`  
 
-```{r, fig.width=7, fig.height=3.5}
-e <- ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy))
-f <- ggplot(data = mpg) + 
-  geom_smooth(mapping = aes(x = displ, y = hwy))
+```{r}
+e <- ggplot(data = mpg) + geom_point(mapping = aes(x = displ, y = hwy))
+f <- ggplot(data = mpg) + geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+
+\lc 
+
+```{r, eval=FALSE}
+e
+```
+
+\rc 
+
+```{r, eval=FALSE}
+f
+```
+
+\ec 
+
+\vspace{10pt}
+
+```{r, echo=FALSE, fig.width=7, fig.height=2.5}
 grid.arrange(e, f, nrow = 1, ncol = 2)
 ```
 
-\lc  
+\lc 
 
 + `geom_point`: 점으로 표시   
 
@@ -236,8 +271,8 @@ grid.arrange(e, f, nrow = 1, ncol = 2)
 
 + `geom_smooth`: curve로 표시  
 
-\ec  
-    
+\ec 
+
 ## mapping의 상속    
 
 ```{r, fig.width=7, fig.height=2.5}
@@ -245,6 +280,25 @@ g <- ggplot(data = mpg) +
   geom_smooth(mapping = aes(x = displ, y = hwy))
 h <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_smooth()
+```
+
+\lc 
+
+```{r, eval=FALSE}
+g
+```
+
+\rc 
+
+```{r, eval=FALSE}
+h
+```
+
+\ec 
+
+\vspace{10pt}
+
+```{r, fig.width=7, fig.height=2.5, echo=FALSE}
 grid.arrange(g, h, nrow = 1, ncol = 2)
 ```
 
@@ -259,12 +313,29 @@ i <- ggplot(data = mpg) +
   geom_smooth(mapping = aes(x = displ, y = hwy))
 j <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_point() + geom_smooth()
+```
+
+\lc 
+
+```{r, eval=FALSE}
+i
+```
+
+\rc 
+
+```{r, eval=FALSE}
+j
+```
+
+\ec 
+
+```{r, fig.width=7, fig.height=2.5, echo=FALSE}
 grid.arrange(i, j, nrow = 1, ncol = 2)
 ```
 
 + `i`와 `j`는 동일한 결과를 만듬   
 + `j`의 `geom_point()`와 `geom_smooth()`는 앞의 `ggplot()`에서 `mapping`을 상속받음    
-+ 코드가 간결해짐    
++ 상속 기능을 이용해 `j`의 코드가 간결해짐    
 
 ##  
 
@@ -274,6 +345,25 @@ k <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 l <- ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_smooth(aes(linetype = drv)) + 
   geom_point(aes(color = drv))
+```
+
+\lc 
+
+```{r, eval=FALSE}
+k
+```
+
+\rc 
+
+```{r, eval=FALSE}
+l
+```
+
+\ec 
+
+\vspace{10pt}
+
+```{r, fig.width=7, fig.height=2.5, echo=FALSE}
 grid.arrange(k, l, nrow = 1, ncol = 2)
 ```
 
@@ -285,18 +375,27 @@ grid.arrange(k, l, nrow = 1, ncol = 2)
 
 ## Summary so far     
 
-+ `Data`, `Aesthetic`, `Geometric Object`를 명시하여 그림을 rendering.   
-+ 변수의 성격을 이해하여 `size, alpha, color, shape`와 `facet`등의 기능을 사용   
-
 ```{r, eval=FALSE}
-ggplot(data = <DATA>) + 
-  <GEOM_FUNCTION>(mapping = aes(<MAPPING>))
+ggplot(data = <DATA>) + <GEOM_FUNCTION>(mapping = aes(<MAPPING>))  
 ```
 
-1. 그림의 목적을 정하고   
-2. X (explanatory variable – 설명 변수)의 개수와 각 변수의 중요도와 순서   
-3. Y (dependent variable)를 명시  
-4. ggplot 객체를 rendering  
+1. Y 변수 결정  
+    + **무엇을** 설명하고 싶은가? 
+    + 목적 (target) 변수가 일반적으로 Y변수가 됨  
+2. X 변수 결정  
+    + **무엇으로** 설명할 수 있을까? 
+    + 설명 (explanatory) 변수가 X변수가 됨 
+3. X변수와 Y변수의 성격이 각각 어떠한가?  
+    + X변수는 이산/연속?  
+    + Y변수는 이산/연속? 
+    + `geom_function`이 결정됨 
+4. X, Y 변수외에 다른 추가할 수 있는 변수가 있을까?  
+    + 특성을 추가하여 그림의 정보량을 늘림 
+    + `size, alpha, color, shape, fill, dodge,...` 
+5. 그래프를 장식 
+    + 축, 격자, 레이블, 색깔, 폰트 크기 
+    + 좌표 변환 
+    + M24의 예제들과 특히 `theme()` 섹션 참조  
 
 ## `Carseats`와 additivity     
 
@@ -322,7 +421,7 @@ print(a)
 #### Amazingly Additive!    
 
 ```{r}
-# Add features to existing ggplot object by "Adding"  
+# Add features to existing ggplot object by "SIMPLY ADDING"  
 a <- a + facet_wrap(~ ShelveLoc)
 print(a)
 ```
@@ -347,7 +446,7 @@ a <- a + facet_wrap(~ Urban)
 #### `rmarkdown`과 함께 사용하면 매우 강력합니다.    
 
 + 스토리텔링 기반 발표 및 보고서 작성  
-    + 점점 깊이 들어가면서 발표    
+    + 점점 깊이 들어가면서 발표 (top-down)   
     + 좌우 혹은 상하로 배열하여 보고서 작성    
     + 좌우 혹은 상하로 배열하여 대시보드 작성 (`M32`)  
     + 사용자가 선택할 수 있게 대시보드 작성 (`M33)` 
@@ -364,7 +463,7 @@ a <- a + facet_wrap(~ Urban)
 2. Rstudio를 열어서 rmarkdown의 html형식에 해당하는 .Rmd파일을 만드세요.
 3. `classProject1.Rmd`로 위 폴더에 저장하세요. \br 
 3. Rstudio를 닫고 `classProject1.Rmd`를 더블클릭하여 실행하면 working directory가 자동으로 위의 폴더가 됩니다. \br  
-4. github `M41-longevity`에서 `lifeCountry.csv`파일을 다운받아서 위 폴더에 넣으세요. \br  
+4. github `M41-longevity/data`에서 `lifeCountry.csv`파일을 다운받아서 위 폴더에 넣으세요. \br  
 5. 이제 분석을 위한 모든 준비가 끝났습니다. \br  
 6. Infile/Preprocessing을 해야합니다.  `classProject1.Rmd`에서 `lifeCountry.csv`를 불러와서 `data.frame`으로 저장합니다. \br   
 7. 각 나라의 GDP와 기대수명에 대해서 산점도를 그리고 대륙에 따라서 점의 색깔이 달라지게 해보세요. \br    
@@ -375,18 +474,17 @@ a <- a + facet_wrap(~ Urban)
 
 ## GG? - Grammar of Graphics  
 
-- Motivation   
-    1. 그래픽스에 대한 원리가 없다면, 그래픽 관련 패키지와 함수는 단지 특수 경우의 모음일 뿐  
-    2. 요리 백과사전을 다 읽는 것 vs. 물과 기름과 불의 작용에 대해서 익히고 백과사전을 **찾아가면서** 요리하는 것  
-  
-- Advantage    
-    1. 새로운 package나 함수의 등장을 빠르게 반영   
-    2. 새로운 graphics를 만들어 내는 아이디어가 체계적이 됨  
-  
-- Features  
++ Features  
     1. 독립적이고 더할 수 있는 구성 요소들로 그래픽을 표현  
     2. 개발과정에서 그래프의 특징을 한 가지 씩, 반복적으로 바꾸면서 그래프를 만들어 감  
-    3. 생각의 흐름, 스토리텔링의 흐름과 연계시킬 수 있기에 interactive graphics와 잘 조화됨
+    3. 생각의 흐름, 스토리텔링과 연계시켜 interactive graphics와 잘 조화됨
++ Motivation   
+    1. 그래픽 관련 패키지와 함수는 단지 특수 경우의 모음일 뿐??  
+    2. 요리 백과사전을 다 읽는 것 vs. 물, 기름, 불을 익히고 백과사전을 보유하는 것   
++ Advantage    
+    1. 새로운 graphics를 만들어 내는 아이디어  
+    2. Data를 보는 직관과 상상력 
+    3. 효과적 Communication 
     
 ## 구성 요소  
 
@@ -420,6 +518,7 @@ ggplot(mpg) +
 
 ![](fig/fig1.png)\  
 
+
 # VI. More Plots  
 
 ## 
@@ -431,36 +530,59 @@ ggplot(mpg) +
 ```{r, message = FALSE, fig.width = 7, fig.height = 3}
 a <- ggplot(mpg) + geom_point(aes(displ, hwy, color = cyl))  
 b <- ggplot(mpg) + geom_point(aes(displ, hwy, color = cyl), position = "jitter")
+```
+
+\lc
+
+```{r, eval=FALSE}
+a
+``` 
+
+\rc 
+
+```{r, eval=FALSE}
+b
+``` 
+
+\ec 
+
+```{r, echo=FALSE, fig.width = 7, fig.height = 3}
 grid.arrange(a, b, nrow = 1, ncol = 2)
 ```
 
-## Barchart  
+## Barchart (count, density, distribution)  
 
 \lc  
 
-+ x축에 Categorical 변수를 넣어서  
++ `x`축에 Categorical 변수를 넣어서 
 + 각각의 값에 대해서 몇 개의 관찰값이 있는지를 보여줌.   
-+ \#count \#density \#distribution  
 
 ```{r, fig.width = 3, fig.height= 2.5}
 mpg$displ_fac <- 
   as.factor(round(mpg$displ,0))
-ggplot(mpg) + 
+a <- ggplot(mpg) + 
   geom_bar(aes(x = displ_fac))
+a
 ```
 
 \rc  
 
-+ x변수 외에도 다른 Categorical 변수를 추가할 수 있음.  
++ `y`축에 해당하는 값이 계산되어 있다면 `stat = "idendity"`를 geom_bar()에 넣어주어야 함.  
 
-```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) + 
-  geom_bar(aes(x = displ_fac, color = class))
+```{r, fig.width = 3, fig.height= 2, message=FALSE}
+library(dplyr)
+mpg_fac <- mpg %>% 
+  group_by(displ_fac) %>% 
+  summarise(cnt = length(displ_fac))
+b <- ggplot(mpg_fac) + 
+  geom_bar(aes(x = displ_fac, y = cnt), 
+           stat = "identity")
+b
 ```
 
-\ec
+\ec  
 
-##
+## `geom_bar()`에 다른 Categorical 변수 추가 
 
 #### `color` and `fill`  
 
@@ -469,8 +591,8 @@ ggplot(mpg) +
 + `color` - 테두리만 됨     
 
 ```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) + 
-  geom_bar(aes(x = displ_fac, color = class))
+ggplot(mpg, aes(x = displ_fac)) + 
+  geom_bar(aes(color = class))
 ```
 
 \rc
@@ -478,45 +600,46 @@ ggplot(mpg) +
 + `fill` - 채워짐     
 
 ```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) + 
-  geom_bar(aes(x = displ_fac, fill = class))
+ggplot(mpg, aes(x = displ_fac)) + 
+  geom_bar(aes(fill = class))
 ```
 
 \ec  
 
-##
+##  
 
-#### `position="dodge"`  
+#### `position="dodge"`    
 
-\lc  
+\lc    
 
-```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) + 
-  geom_bar(aes(x = displ_fac, fill = class))
+```{r, fig.width = 3, fig.height= 2.5}  
+ggplot(mpg, aes(x = displ_fac)) + 
+  geom_bar(aes(fill = class)) 
 ```
 
-+ 2개의 discrete 변수를 잘 처리하는 법?  
-    + 쌓아서 배치 vs 비껴서 배치  
-
-\rc
+\rc  
 
 ```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) + 
-  geom_bar(aes(x = displ_fac, fill = class),
+ggplot(mpg, aes(x = displ_fac)) + 
+  geom_bar(aes(fill = class),
            position = "dodge")
 ```
 
-\ec
+\ec  
 
-##  
++ discrete 변수를 잘 처리하는 법?   
+    + 쌓아서 배치 vs 비껴서 배치   
+    + 변수가 가지는 값의 갯수를 고려해야 함 (i.e. `unique()`)  
+
+##   
 
 #### Barchart (`position = "fill"`)  
 
 \lc  
 
 ```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) + 
-  geom_bar(aes(x = displ_fac, fill = class))
+ggplot(mpg, aes(x = displ_fac)) + 
+  geom_bar(aes(fill = class))
 ```
 
 + `class`의 각각의 `displ_fac` 값에서의 분포?  
@@ -525,8 +648,8 @@ ggplot(mpg) +
 \rc
 
 ```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) + 
-  geom_bar(aes(x = displ_fac, fill = class),
+ggplot(mpg, aes(x = displ_fac)) + 
+  geom_bar(aes(fill = class),
            position = "fill")  
 ```
 
@@ -535,50 +658,99 @@ ggplot(mpg) +
 
 ## Boxplot  
 
++ x는 이산 변수, y는 연속 변수 
++ x의 값에 따라 y의 분포를 보고 싶을 때
+
 \lc  
 
-+ 그룹 변수인 x의 각각의 값에 대해서 연속 변수인 y의 분포를 보기 위함.  
-
 ```{r, fig.width = 3, fig.height= 2.5}
-ggplot(mpg) +
-  geom_boxplot(aes(x = class, y = hwy))
+ggplot(mpg, aes(x = class, y = hwy)) + 
+  geom_boxplot()
 ```
 
 \rc
 
-+ 점으로 표현된 것은 이상치(outlier)로서 이상하게 높거나 낮은 값    
-+ 박스의 상단은 상위 25%, 하단은 하위 25%    
-+ 박스의 가운데 직선은 중간값   
-
-+ x변수의 값이 `character`라서 display가 복잡하네요.  
-+ 이럴때는 어떻게 할까요?   
+1. 박스의 가운데 직선은 중간값   
+2. 박스의 상단은 상위 25%, 하단은 하위 25%    
+3. 점으로 표현된 것은 이상치(outlier)로서 이상하게 높거나 낮은 값    
 
 \ec
+
+## Violin plot  
+
+\lc
+
+```{r, fig.width = 3, fig.height= 2.5}
+a <- ggplot(mpg, aes(x = class, y = hwy)) + 
+  geom_boxplot()
+a
+```
+
+\rc 
+
+```{r, fig.width = 3, fig.height= 2.5}
+b <- ggplot(mpg, aes(x = class, y = hwy)) + 
+  geom_violin()
+b
+```
+
+\ec 
+
+4. x변수의 값이 `character`라서 display가 복잡하네요.  
+5. 이럴때는 어떻게 할까요?   
 
 ## 
 
 #### `coord_flip()`  
 
-```{r, fig.width = 5, fig.height= 4}
-ggplot(mpg) +
-  geom_boxplot(aes(x = class, y = hwy)) +
-  coord_flip()
+\lc
+
+```{r, fig.width = 3, fig.height= 2.5}
+a + coord_flip()
 ```
+
+\rc
+
+```{r, fig.width = 3, fig.height= 2.5}
+b + coord_flip()
+```
+
+\ec 
+
+##
+
+#### 색깔을 넣어볼까요?
+
+\lc 
+
+```{r, fig.width = 3, fig.height= 2.5}
+a + coord_flip() + aes(fill=class)
+```
+
+\rc
+
+```{r, fig.width = 3, fig.height= 2.5}
+b + coord_flip() + aes(fill=class)
+```
+
+\ec 
+
++ 생각해보면 `aes()`도 `ggplot()`이나 `geom_XXX()`이후에도 추가가 가능해야 겠죠?  
 
 ##  
 
-#### `coord_flip()` for Barplot = ???  
+#### `coord_flip()` for Barplot 
 
 \lc
 
-```{r}
+```{r, fig.width = 3, fig.height= 2.5}
 ggplot(mpg, aes(x = class, fill=class)) + 
   geom_bar()
 ```
 
 \rc
 
-```{r}
+```{r, fig.width = 3, fig.height= 2.5}
 ggplot(mpg, aes(x = class, fill=class)) + 
   geom_bar() + coord_flip()
 ```
@@ -591,14 +763,14 @@ ggplot(mpg, aes(x = class, fill=class)) +
 
 \lc
 
-```{r}
+```{r, fig.width = 3, fig.height= 2.5}
 ggplot(mpg, aes(x = 1, fill = class)) + 
   geom_bar()
 ```
 
 \rc
 
-```{r}
+```{r, fig.width = 3, fig.height= 2.5}
 ggplot(mpg, aes(x = 1, fill = class)) + 
   geom_bar() + coord_polar(theta = "y")
 ```
@@ -621,61 +793,32 @@ ggplot(mpg, aes(x = "", fill = factor(class))) +
   
 ## ggplot 기타 기능 (저장 \& `plotly`)
 
-\lc
++ `ggplot`객체를 `png` 파일로 저장     
+\vspace{10pt}  
+```{r, eval=FALSE}
+a <- ggplot(mpg) + geom_bar(aes(x=class)) + coord_flip()
+ggsave(filename = "out_file.png", plot = a, dpi = 300, width = 9, height = 7.5)
+```  
 
-+ `ggplot`객체를 `png` 파일로 저장    
+\vspace{10pt}    
+
++ `plotly` - html에서 각종 추가 기능 제공      
+
+\vspace{10pt}    
 
 ```{r, eval=FALSE}
-png("out_file.png") # initiate
-ggplot(mpg) + geom_bar(aes(x=class)) + 
-  coord_flip() # save
-dev.off() # finish  
-```
-
-```{r, eval=FALSE, echo=FALSE}
-# update 2019-02-13
-a <- ggplot(mpg) + # render 
-  geom_bar(aes(x=class)) + 
-  coord_flip() 
-ggsave("out_file.png", a, # save  
-       dpi = 300, width = 9, height = 7.5)
-```
-
-\rc
-
-+ `plotly` - html에서 각종 추가 기능 제공  
-
-```{r, message=FALSE}
 library(plotly)
-a <- ggplot(mpg) + 
-  geom_bar(aes(x=class, fill=class))
-```
-
-\ec
-
-\vspace{10pt}
-
-\lc 
-
-```{r}
-a
-```
-
-\rc 
-
-```{r, eval=FALSE}
+a <- ggplot(mpg) + geom_bar(aes(x=class, fill=class))
 ggplotly(a) # better in html 
 ```
 
-![](fig/fig31.png)\
-
-\ec 
+![](fig/fig31.png){height=150px}\  
 
 # VII. Summary 
 
 ## Summary     
 
-#### 1 Variable  
++ 1 Variable  
 
 | 변수        | 이름       | Name         | `geom_()`                          |  
 |:-----------:|:----------:|:------------:|------------------------------------|  
@@ -685,37 +828,105 @@ ggplotly(a) # better in html
 | Discrete    | 막대차트   | bar plot     | `geom_bar()` `("dodge", "jitter")` |  
 | (이산 변수) | 파이차트   | pie chart    | `geom_bar()` + `coord_polar()`     |  
 
-#### 2 variables  
++ 2 Variables  
 
-| x          | y          | 이름     | Name         | `geom_()`                 |  
-|:----------:|:----------:|:--------:|:------------:|---------------------------|  
-| Discrete   | Continuous | 박스플랏 | box plot     | `geom_boxplot()`          |  
-|------------|------------|----------|--------------|---------------------------|  
-| Continuous | Continuous | 산점도   | scatter plot | `geom_point()` `"jitter"` |
-|            |            | 산점도   | scatter plot | `geom_smooth()`           | 
-
-
-
-| Continuous  | Continuous   | 산점도 | scatter plot | `geom_point()` | | (이산 변수) | 파이차트   | pie chart    | `geom_bar()` + `coord_polar()`              |  
+| x          | y          | 이름     | Name         | `geom_()`                      |  
+|:----------:|:----------:|:--------:|:------------:|--------------------------------|  
+| Discrete   | Continuous | 박스플랏 | box plot     | `geom_boxplot()`               |  
+|------------|------------|----------|--------------|--------------------------------|  
+| Continuous | Continuous | 산점도   | scatter plot | `geom_point()` `"jitter"`      |
+|            |            |          | line chart   | `geom_line()`, `geom_smooth()` | 
 
 ## More References    
 
-+ `M24-ggplot2-50examples` - ggplot의 갤러리 (50개 예제)   
-+ `M6X References/books/ggplot2.pdf`     
+1. `ggplot2` Cheatsheet
+2. `M24-ggplot-Gallery` - 50개의 예제    
+3. `M6X References/books/ggplot2.pdf`     
     + 무료 베포된 ggplot관련 영문 서적    
     + 번역본도 출간되어 있음   
-+ google: "ggplot gallery"  
+4. google: "ggplot gallery"  
     + <https://www.r-graph-gallery.com/portfolio/ggplot2-package/>  
 
-##  
+\vspace{30pt}  
 
-![](fig/fig8.png){height=300px}\  
+\begin{aquote}{}   
+Tantum videmus quantum scimus.  
+\end{aquote}   
+
+\begin{aquote}{}  
+아는 만큼 본다.   
+\end{aquote}  
+
+# VIII. 연습 문제  
 
 ## 
 
-![](fig/fig9.png){height=300px}\  
+1. `hwy`와 `cyl`을 이용해서 산점도(scatterplot)를 그려보세요. `cyl`과 같은 discrete variable을 이용해서 산점도를 그리면 어떤 일이 벌어지나요? 산점도가 어떤 그래프를 그려야 할까요? 
+
+```{r, eval=FALSE}
+ggplot(mpg, aes(x = cyl, y = hwy)) + geom_point()
+ggplot(mpg, aes(x = cyl, y = hwy)) + geom_boxplot()
+ggplot(mpg, aes(x = as.factor(cyl), y = hwy)) + geom_boxplot()
+ggplot(mpg, aes(x = as.factor(cyl), y = hwy)) + geom_violin()
+```
+
+
+## 
+
+2. 아래 명령은 무엇이 잘못되었나요? 모든점을 파란색으로 그리려면 어떻게 해야하나요?  
+
+```{r, fig.height = 3}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+```
+
+정답은 아래의 코드에 있습니다. 무엇이 다르나요?  
+```{r, eval=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```  
+
+이해되시나요? 즉, `aes()`에는 데이터마다 달라지는 특성, `geom_XXXXX`에는 데이터에 상관없이 공통적으로 적용되는 특성을 넣어줘야 합니다. 
+
+3. `mpg`의 어떤 변수가 categorical입니까? 어떤 변수가 continuous입니까? (Hint: `summary()`, `length(unique())`)  
+
+4. Continuous 변수로 `facet`을 하면 어떤 일이 벌어질까요? 
+
+
+## 
+
+5. 아래의 코드를 실행시켜 보세요. `facet_grid()`가 아니라 `facet_wrap()`을 사용한 것과 차이가 있나요? 
+
+```{r, eval=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+```
+
+6. 아래 코드를 실행해보세요. 어떤점을 새로 알게되었나요? 
+
+```{r, eval=FALSE}
+ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) + 
+  geom_bar(alpha = 1/5)
+
+ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
+  geom_bar(fill = NA)
+```
+
+7. `labs()` 함수는 레이블을 만듭니다. `? labs`를 콘솔에 쳐서 읽어보세요. 이를 이용해서 그래프의 제목, x축, y축에 글자를 넣어보세요.    
 
 
 
- 
+
+
+
+
+
+
+
+
 

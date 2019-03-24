@@ -1,0 +1,65 @@
+% make \begin{aquote} available (2019-03-02)
+\usepackage[style=british]{csquotes}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip1em
+  \hbox{}\nobreak\hfill #1%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+  {\savebox\mybox{#1}\begin{quote}\openautoquote\hspace*{-.7ex}}
+  {\unskip\closeautoquote\vspace*{1mm}\signed{\usebox\mybox}\end{quote}}
+
+% Hangul in rchunk (2019-02-12)  
+% Not the output yet
+% \usepackage[hangul]{kotex}
+% \usepackage{pdflscape}
+% \usepackage{colortbl}
+% \usepackage[table]{xcolor}
+% \newcolumntype{U}{>{\columncolor[gray]{0.8}}c}
+% \usepackage{tabularx,booktabs}
+% \usepackage{boxedminipage}
+% \usepackage{graphicx}
+% \usepackage{rotating}
+% \usepackage{rotfloat}
+% \usepackage{booktabs}
+% \usepackage{longtable}
+% \usepackage{subfigure}
+% \usepackage{wrapfig}
+% \usepackage{multirow}
+
+% declare overall beamer theme to use as baseline
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+
+% make code-output smaller (2018-05-23)
+% CODE CHUNK FONT
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{fontsize=\footnotesize,commandchars=\\\{\}}
+
+% two columns layout (2018-05-23)
+% \def\begcols{\begin{columns}}
+% \def\endcols{\end{columns}}
+% \def\begcol{\begin{column}}
+% \def\endcol{\end{column}}
+% left column; right column; end column.
+\def\lc{\begin{columns} \begin{column}{.48\textwidth}}
+\def\rc{\end{column} \begin{column}{.48\textwidth}}
+\def\ec{\end{column} \end{columns}}
+
+% vspace shortcut (2018-05-23)
+\def\br{\vspace{1pt}} % line break
+
+% make console-output footnotesize (2018-05-23)
+\makeatletter
+\def\verbatim{\footnotesize\@verbatim \frenchspacing\@vobeyspaces \@xverbatim}
+\makeatother
+
+
+\setlength{\parskip}{0pt}
+
+
+\setlength{\OuterFrameSep}{-4pt}
+\makeatletter
+\preto{\@verbatim}{\topsep=-5pt \partopsep=-5pt }
+\makeatother

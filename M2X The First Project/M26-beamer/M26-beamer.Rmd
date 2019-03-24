@@ -1,7 +1,9 @@
 ---
-title: "M26-Beamer template "  
-author: "LearningSpoonsR "
-date: "`r Sys.Date()`"  
+title: "M26-Beamer template"  
+author: "`learningSpoonsR@gmail.com`"     
+date: \includegraphics[height=0.5in]{myRmdBeamerStyle/logo_ls.png} \includegraphics[height=0.3in]{myRmdBeamerStyle/logo_R.png}  
+# author: learningSpoonsR  
+# date: "`r Sys.Date()`"  
 output:
   beamer_presentation:
     colortheme: default
@@ -33,15 +35,15 @@ knitr::opts_chunk$set(background = '718CBA')
 + Rmarkdown에서 한글로 beamer 문서를 제작할 수 있는 템플렛입니다.        
 + beamer는 slide형태의 pdf를 만드는 Tex 패키지입니다. 
 + 하위 폴더인 `myRmdBeamerStyle`에 `latex-topmatter.tex`와 `markdown_custom.css`가 있어야 합니다.    
-+ `M22-rmarkdown` 참조       
-    + pdf 조판을 위한 texlive 엔진이 필요합니다. (`M2X-rmd`를 참조)  \br
++ `M22-rmarkdown` 참조         
+    + pdf 조판을 위한 texlive 엔진이 필요합니다. (`M2X-rmd`를 참조)  \br  
 
 ## YAML Header  
 
 ```{r, eval=FALSE}
-title: "M26-Beamer template "  
-author: "LearningSpoonsR "
-date: "`r Sys.Date()`"  
+title: "M26-Beamer template"  
+author: learningSpoonsR
+date: "`r Sys.Date()`"
 output:
   beamer_presentation:
     colortheme: default
@@ -54,6 +56,7 @@ output:
   ioslides_presentation: default
   slidy_presentation: default
 mainfont: NanumMyeongjo # NanumGothic  
+monofont: Courier New
 fontsize: 9pt
 classoption: t
 ```  
