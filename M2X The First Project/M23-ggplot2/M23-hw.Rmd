@@ -1,0 +1,68 @@
+---
+title: "`ggplot` 연습문제"
+author: "`learningSpoonsR@gmail.com"  
+output: 
+  html_document:  
+    toc: true  
+---  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+```
+
++ `Rmd`파일을 이메일로 제출해주세요.  
+
+## 1. `hwy`와 `cyl`을 이용해서 산점도(scatterplot)를 그려보세요. `cyl`과 같은 discrete variable을 이용해서 산점도를 그리면 어떤 일이 벌어지나요?  
+
+```{r, eval=FALSE}
+ggplot(mpg, aes(x = cyl, y = hwy)) + geom_point()
+ggplot(mpg, aes(x = cyl, y = hwy)) + geom_boxplot()
+ggplot(mpg, aes(x = as.factor(cyl), y = hwy)) + geom_boxplot()
+ggplot(mpg, aes(x = as.factor(cyl), y = hwy)) + geom_violin()
+```
+
+## 2. 아래 명령은 무엇이 잘못되었나요? 모든점을 파란색으로 그리려면 어떻게 해야하나요?  
+
+```{r, fig.height = 3}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+```
+
+정답은 아래의 코드에 있습니다. 무엇이 다르나요?  
+```{r, eval=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```  
+
++ 이해되시나요? 즉, `aes()`에는 데이터마다 달라지는 특성을 넣고, `geom_XXXXX`에는 데이터에 상관없이 공통적으로 적용되는 특성을 넣어줘야 합니다.  
+
+## 3. `mpg`의 어떤 변수가 categorical입니까? 어떤 변수가 continuous입니까? (Hint: `summary()`, `length(unique())`)  
+
+## 4. Continuous 변수로 `facet`을 하면 어떤 일이 벌어질까요? 
+
+## 5. 아래의 코드를 실행시켜 보세요. `facet_grid()`가 아니라 `facet_wrap()`을 사용한 것과 차이가 있나요? 
+
+```{r, eval=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+```
+
+## 6. 아래 코드를 실행해보세요. 어떤점을 새로 알게되었나요? 
+
+```{r, eval=FALSE}
+ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) + 
+  geom_bar(alpha = 1/5)
+
+ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) + 
+  geom_bar(fill = NA)
+```
+
+## 7. `labs()` 함수는 레이블을 만듭니다. `? labs`를 콘솔에 쳐서 읽어보세요. 이를 이용해서 그래프의 제목, x축, y축에 글자를 넣어보세요.    
+

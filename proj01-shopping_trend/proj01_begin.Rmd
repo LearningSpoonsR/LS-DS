@@ -167,8 +167,8 @@ fig2 <- ggplot(dataset,
   facet_wrap(~ 상품군별)
 ggsave(plot = fig2, filename = "data/fig2.png", dpi = 300, width = 20, height = 10)
 
-fig2b <- fig2 + facet_wrap(~ 상품군별, scales = "free_y") # google: "facet to have different y axis"
-ggsave(plot = fig2b, filename = "data/fig2b.png", dpi = 300, width = 20, height = 10)
+fig2b <- fig2 + facet_wrap(~ 상품군별, scales = "free_y", ncol = 2) # google: "facet to have different y axis"
+ggsave(plot = fig2b, filename = "data/fig2b.png", dpi = 300, width = 8, height = 24)
 ```
 
 ![](data/fig2b.png)
