@@ -1,6 +1,10 @@
 # I. QnA 게시판 
 
-<https://github.com/LearningSpoonsR/LS-DS/issues/6>
+<https://github.com/LearningSpoonsR/LS-DS/issues/6>  
+
+
+
+
 
 # II. `dplyr` eqivalent in Python 
 
