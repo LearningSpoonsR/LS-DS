@@ -1,0 +1,75 @@
+---
+title: "Shopping Trends" # 매체별 거래내역   
+output: flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+Monthly deaths from bronchitis, emphysema and asthma in the
+UK, 1974–1979 (Source: P. J. Diggle, 1990, Time Series: A
+Biostatistical Introduction. Oxford, table A.3)
+
+```{r setup, include=FALSE}
+library(zoo)
+library(readxl)
+library(tidyverse)
+library(plotly)
+library(readxl)
+library(shiny)
+library(shinydashboard)
+library(gganimate)
+raw <- read_excel("data/온라인쇼핑몰_판매매체별_상품군별거래액_20190328095024.xlsx", sheet = "데이터")
+raw$상품군별 <- na.locf(raw$상품군별)
+my_tidy <- raw %>% 
+  gather(colnames(raw)[-(1:2)], key = "YM", value = "Revenue") %>%
+  mutate(Revenue = Revenue/100)
+my_tidy$YM <- as.Date(paste(substr(my_tidy$YM, 1, 4), substr(my_tidy$YM, 7, 8), 15, sep = "-"))
+```
+
+Sidebar {.sidebar}
+=====================================
+
+```{r}
+radioButtons(inputId = "sector", label = h3(""), 
+             choices = unique(my_tidy$상품군별))
+```
+
+Sector Analysis {data-orientation=rows}
+=====================================     
+   
+Row {data-height=500}
+-------------------------------------
+
+### Sector Growth   
+
+```{r}
+# input <- NULL
+# input$sector <- "신발"
+renderPlot({
+fig1 <- my_tidy %>% 
+  filter(상품군별==input$sector) %>% 
+  ggplot(aes(x = YM, y = Revenue, group = 판매매체별, color = 판매매체별)) +
+  geom_line() + 
+  geom_point() + 
+  transition_reveal(YM)
+fig1
+})
+```
+
+Row {data-height=500}
+-------------------------------------
+   
+### Internet vs. Mobile  
+
+```{r}
+```   
+    
+### Overall Sales  
+
+```{r}
+```
+   
+Reference    
+=====================================     
+
++ `value box` 
++ `gganimate`   
