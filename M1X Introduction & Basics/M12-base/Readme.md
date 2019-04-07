@@ -1,2 +1,3 @@
-+ 2019-01-30  
-+ 질문과 Appendix를 `M12`노트에 추가하였습니다.  
+# QnA 게시판  
+
+<https://github.com/LearningSpoonsR/LS-DS/issues/4>
