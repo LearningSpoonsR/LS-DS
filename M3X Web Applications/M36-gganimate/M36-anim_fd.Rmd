@@ -51,7 +51,7 @@ Column {.tabset}
 
 ![](fig_bar_2.gif)  
  
-### 여행 및 교통서비스  
+### 여행 및 교통서비스    
 
 ![](fig_bar_3.gif)  
     
@@ -60,7 +60,7 @@ Column {.tabset}
 
 ![](fig_bar_4.gif)  
 
-### 음식서비스  
+### 음식서비스 (Food) 
 
 ![](fig_bar_5.gif)  
 
