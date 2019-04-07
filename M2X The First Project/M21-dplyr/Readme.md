@@ -1,4 +1,8 @@
-# `dplyr` eqivalent in Python 
+# I. QnA 게시판 
+
+<https://github.com/LearningSpoonsR/LS-DS/issues/6>
+
+# II. `dplyr` eqivalent in Python 
 
 <https://gist.github.com/conormm/fd8b1980c28dd21cfaf6975c86c74d07> 
 
