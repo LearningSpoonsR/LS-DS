@@ -19,12 +19,16 @@
 
 # III. 참고자료 
 
-+ R for Data Science
-  + 웹사이트: https://r4ds.had.co.nz/ (크롬에서 우클릭 -> 번역기능 사용) 
++ **R for Data Science**
+  + **웹사이트**: https://r4ds.had.co.nz/ (크롬에서 우클릭 -> 번역기능 사용) 
   + 아마존: <https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399/ref=sr_1_3?keywords=r+for+data+science&qid=1553390913&s=gateway&sr=8-3>
   + 한글 역서도 출판되어 있음
-    + <http://book.interpark.com/product/BookDisplay.do?_method=detail&sc.shopNo=0000400000&sc.prdNo=298756807>
-+ 기수강생 작업물 
+    + <http://book.interpark.com/product/BookDisplay.do?_method=detail&sc.shopNo=0000400000&sc.prdNo=298756807> 
++ **Data Camp (무료)** 
+  + Introduction to R 
+  + 모바일 폰에서도 가능, 강의와 퀴즈로 연결되어 있음. 
+  + <https://www.datacamp.com/courses/free-introduction-to-r>
++ **기수강생 작업물** 
   + http://bitly.kr/1G0Q  
 + 한글 R 메뉴얼 
   + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
