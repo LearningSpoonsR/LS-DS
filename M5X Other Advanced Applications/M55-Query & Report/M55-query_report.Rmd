@@ -3,12 +3,14 @@ title: "M55 - Query & Report"
 output: 
   flexdashboard::flex_dashboard:
     source_code: embed 
+    theme: journal
 runtime: shiny
 ---
 
 ```{r global, include=FALSE}
 library(readxl)
 library(dplyr)
+library(shiny)
 library(ggplot2)
 library(DT)
 library(tidyr)
@@ -22,72 +24,51 @@ dataset <- dataset %>%
 dataset$`Order Date` <- as.Date(dataset$`Order Date`)
 ```
 
-Main  
-=======================================================================
-
-### 
+Sidebar {.sidebar}
+=====================================
 
 ```{r}
-# `shinyApp` needs two arguments: `ui` and `server`.    
-# `ui` is an object for "User Interface".  
-# `ui` includes input panels and other design features.  
-# `server` uses `input` to generate `output`  
-
-# Part 1. create `ui`  
-ui <- fillPage(
-  fillCol(flex = c(NA, 1), 
-    inputPanel(
-      # selectInput("region", "Region:", choices = colnames(WorldPhones)),
-      dateRangeInput(inputId = "dt_rng", label = "Date Range",
-                     min = min(dataset$`Order Date`), start = max(dataset$`Order Date`)-14,
-                     max = max(dataset$`Order Date`), end = max(dataset$`Order Date`)),
-      radioButtons(inputId = "class", label = "Category",
-                   choices = c("Furniture", "Office Supplies", "Technology")),
-      downloadButton("downloadData", label = "Save to CSV"),
-      actionButton("render_docx", "Report using csv")
-    ),
-    DT::dataTableOutput("dataset")
-  )
+dateRangeInput(inputId = "dt_rng", label = "Date Range",
+               min = min(dataset$`Order Date`), start = max(dataset$`Order Date`)-14,
+               max = max(dataset$`Order Date`), end = max(dataset$`Order Date`))
+radioButtons(inputId = "class", label = "Category",
+             choices = c("Furniture", "Office Supplies", "Technology"))
+downloadButton("downloadData", label = "Save to CSV")
+downloadHandler(
+  filename = function() {
+    "dataset_filtered.csv"
+  },
+  content = function(file) {
+    write.csv(datasetFiltered(), file)
+  }
 )
-# Part 2. create `server`   
-server <- function(input, output) {  
-  # Data Filtering using input values  
-  datasetFiltered <- reactive({
-    dataset %>%
-      filter(`Order Date` >= input$dt_rng[1] & `Order Date` <= input$dt_rng[2]) %>%
-      filter(Category == input$class)
-  })
-  # Display the filtered table  
-  output$dataset <- DT::renderDataTable({
-    datasetFiltered()
-  })
-  # Download filtered table to .csv  
-  output$downloadData <- downloadHandler(
-    filename = function() {
-      "dataset_filtered.csv"
-    },
-    content = function(file) {
-      write.csv(datasetFiltered(), file)
-    }
-  )
-  # Use the saved .csv to render a docx
-  observeEvent(input$render_docx, {
-    # library(beepr); beep() # simple way to check if this block is responding  
-    rmarkdown::render(
-      input = "M55-summary_docx.Rmd",
-      output_file =
-        paste0("summary_report_",
-               Sys.time() %>%
-                 strptime("%Y-%m-%d %H:%M:%OS") %>%
-                 str_replace_all(":", "-") %>%
-                 str_replace_all(" ", "-"),
-               ".docx"),
-      encoding = "UTF-8")
-  })
-}
+actionButton("render_docx", "Report using csv")
+observeEvent(input$render_docx, {
+  # library(beepr); beep() # simple way to check if this block is responding
+  rmarkdown::render(
+    input = "M55-summary_docx.Rmd",
+    output_file =
+      paste0("summary_report_",
+             Sys.time() %>%
+               strptime("%Y-%m-%d %H:%M:%OS") %>%
+               str_replace_all(":", "-") %>%
+               str_replace_all(" ", "-"),
+             ".docx"),
+    encoding = "UTF-8")
+})
+```
 
-# Part 3. use `shinyApp()` to combine `ui` and `server`    
-shinyApp(ui, server, options = list(height = 600))
+Main 
+=====================================
+
+```{r}
+datasetFiltered <- reactive({
+  dataset %>%
+    filter(`Order Date` >= input$dt_rng[1] & `Order Date` <= input$dt_rng[2]) %>%
+    filter(Category == input$class)
+})
+# Display the filtered table
+DT::renderDataTable({ datasetFiltered() })
 ```  
 
 References  
