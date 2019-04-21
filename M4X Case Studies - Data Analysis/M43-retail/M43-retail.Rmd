@@ -198,10 +198,12 @@ task11$avgLT <-
   task11$avgLT %>% 
   as.numeric(units = "days") %>% 
   round(2)
-task11$sdLT  <- 
-  task11$sdLT  %>% 
-  as.numeric(units = "days") %>% 
-  round(2)
+# class(task11$sdLT)
+task11$sdLT <- task11$sdLT/(3600*24) %>% round(1)
+# task11$sdLT <- 
+#   task11$sdLT  %>% 
+#   as.numeric(units = "days") %>% 
+#   round(2)
 ```
 
 \rc  
@@ -477,7 +479,7 @@ print(a)
 
 + **Overall**  
     + 같은 table을 이익순으로 정렬하는 것이 다른 시각을 제공할 수 있습니다.  
-    + 이익률이 높은 `Sub-Category`들의 경우에는 이익률은 높지만 실제 이익의 총량은 얼마 안되는 품목들도 많이 있습니다.  
+    + 이익률이 높은 `Sub-Category`들의 경우에는 이익률은 높지만 이익의 총량은 얼마 안되는 품목들도 많이 있습니다.  
     + Labels, Envelopes, Fastener, Art의 경우에는 이익 자체가 크지 않습니다.  
     
 + **Furniture**  
@@ -585,4 +587,75 @@ ggplot(task23, aes(x = factor(Category), y = Profit, fill = factor(Category))) +
 8. `Order Date`를 기반으로 동시구매가 많이 일어나는 상품은 무엇인가? \br
 9. 특정상품의 판매시기와 지역별 수요를 파악해보자 \br 
 ```
+
+## Appendix - `gganimate` 패키지 
+
++ `facet` 기능을 애니메이션으로 대체한다면 어떨까요?  
++ `gganimate`  
+    + `ggplot` 객체를 애니메이션으로 확장시켜 줍니다. 
+    + <https://www.datanovia.com/en/blog/gganimate-how-to-create-plots-with-beautiful-animation-in-r/>  
+
+```{r, message=FALSE}
+# install.packages('gganimate')
+library(gganimate)
+fig_static <- 
+  ggplot(task23, aes(x = factor(Category), y = Sales, fill = factor(Category))) +
+  geom_bar(stat = 'identity') + # for already aggregated quantity  
+  # facet_grid(year ~ quarter) + # x: quater, y: year 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + # rotate x_label 
+  labs(title = "Sales Trend") # title 
+```
+
++ `fig_static`은 40번째 슬라이드의 plot에서 `facet_grid` 기능만 뺀 것입니다.  
++ 시간의 흐름 (`year`와 `quarter`)에 따라서 막대 차트가 변화하는 것을 애니메이션으로 처리해볼까요? 
+
+## 
+
++ `year`와 `quarter`를 합해서 `Q_end`라는 변수를 만듭니다.  
+
+```{r}
+task23 <- task23 %>% 
+  mutate(Q_end = as.Date(paste(
+    year, as.numeric(substr(quarter, 2, 2))*3, 30, sep = "-"))) 
+```
+
++ `task23` 데이터 셋에 변수를 추가하여 업데이트 되었으므로 `fig_static`도 다시 정의해줍니다.  
+
+```{r}
+fig_static <- 
+  ggplot(task23, aes(x = factor(Category), y = Sales, fill = factor(Category))) +
+  geom_bar(stat = 'identity') + # for already aggregated quantity  
+#  facet_grid(year ~ quarter) + # x: quater, y: year 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + # rotate x_label 
+  labs(title = "Sales Trend") # title 
+```
+
+## 완성! 
+
++ 아래 명령을 실행하면 `ggplot` 객체의 확장이 완료됩니다. 
++ `htmlwidget`이라서 강의노트에서는 안 보이겠죠?  
+
+```{r, eval=FALSE}
+# install.packages("gifski")
+fig_dynamic <- 
+  fig_static + 
+  transition_time(Q_end) +
+  labs(title = "Year-Quarter: {frame_time}")
+``` 
+
+## 좀 더 현실적인 예제?  
+
+```{r, eval=FALSE}
+task23$year <- as.integer(task23$year)
+fig_dynamic2 <-
+  ggplot(task23, aes(x = factor(Category), y = Sales, fill = factor(Category))) +
+  geom_bar(stat = 'identity') +   
+  facet_wrap(~ quarter, nrow = 1) +  
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  transition_time(year) +
+  labs(title = "Year: {frame_time}")
+anim_save(filename = "fig_dynamic2.gif", 
+          animation = fig_dynamic2) # just like `ggsave()` 
+```
+
 
