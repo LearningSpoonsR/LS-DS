@@ -140,6 +140,13 @@ M33 (Shiny) -> M46 (retail2)
 
 ***  
 
+# VII. Recently added 
+
++ `M29-xaringan`
++ `M36-gganimate`
++ `M37-dust_map` 
++ `M47-dept` 
++ `M55-Query & Report`
 
 
 
