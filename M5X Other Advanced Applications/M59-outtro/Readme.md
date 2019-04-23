@@ -1,7 +1,3 @@
-# QnA 게시판   
-
-<https://github.com/LearningSpoonsR/LS-DS/issues/14>  
-
 ## About 
 
 + 부족한 강의 수강해주셔서 감사드립니다. 
