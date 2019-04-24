@@ -16,6 +16,11 @@
     9. 마지막 토픽이 끝나면 `Exercise`부분을 `dc_hw_submit.Rmd`에 copy and paste 하세요. (한 챕터가 끝날떄마다 옮겨 붙이시는걸 권장드립니다.)
 4. 작성하신 워드파일 `dc_hw_submit.Rmd`과 `dc_hw_submit.docs` 파일을 5월 16일 수업 전까지 보내주시면 됩니다.
 
-## 
+## 토론 게시판 
+
++ 실행 관련해서나 내용상으로 질문이 있으시면 아래 게시판을 사용하세요.
++ https://github.com/LearningSpoonsR/LS-DS/issues/21
++ 수강생분들끼리 서로 질문하고 답해주는 문화를 강력하게 권장합니다.
+
   
   
