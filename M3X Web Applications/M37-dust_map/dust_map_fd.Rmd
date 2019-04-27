@@ -1,0 +1,64 @@
+---
+title: "미세먼지 예보"
+author: "aceMK"
+output: flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+options(stringsAsFactors = FALSE)
+library(tidyverse)
+library(leaflet)
+source("update_dust_fcst.R", encoding="utf-8")
+load("dust_fcst.Rdata")
+pal <- colorFactor(c("green", "yellow", "red"), levels = c("좋음", "보통", "나쁨"))
+```
+
+```{r, echo=FALSE}
+day0_msg <- msgs %>% filter(day == "day0") %>% ungroup() %>% 
+  select(msg) %>% as.character() %>% str_replace_all('"', "") %>% 
+  str_split("seperator") %>% unlist() %>% sort(decreasing = FALSE) %>%
+  str_replace_all('○ ', "")
+day1_msg <- msgs %>% filter(day == "day1") %>% ungroup() %>% 
+  select(msg) %>% as.character() %>% str_replace_all('"', "") %>% 
+  str_split("seperator") %>% unlist() %>% sort(decreasing = FALSE) %>%
+  str_replace_all('○ ', "")
+```
+
+`r announce_date` `r announce_hour`시 발표
+
+### 오늘: `r day0_msg` 
+
+```{r, fig.align='center', echo=FALSE}
+kr <- leaflet(values) %>% 
+  setView(lng = 127.5, lat = 36.5, zoom = 6) %>% 
+  addTiles() %>%
+  addCircleMarkers(~lon, ~lat, 
+                   # popup = ~day0_PM10, 
+                   # label = ~day0_PM10,
+                   popup = ~day0,
+                   color = ~pal(day0_code),
+                   stroke = FALSE, 
+                   fillOpacity = 0.5,
+                   radius = 15)
+kr
+```
+
+### 내일: `r day1_msg` 
+
+```{r, fig.align='center', echo=FALSE}
+kr <- leaflet(values) %>% 
+  setView(lng = 127.5, lat = 36.5, zoom = 6) %>% 
+  addTiles() %>%
+  addCircleMarkers(~lon, ~lat, 
+                   # popup = ~day0_PM10, 
+                   # label = ~day0_PM10,
+                   popup = ~day1,
+                   color = ~pal(day1_code),
+                   stroke = FALSE, 
+                   fillOpacity = 0.5,
+                   radius = 15)
+kr
+```
+

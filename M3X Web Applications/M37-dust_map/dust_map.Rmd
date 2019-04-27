@@ -1,0 +1,47 @@
+---
+title: "Dust map"
+author: "learningSpoonsR"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(stringsAsFactors = FALSE)
+library(tidyverse)
+library(leaflet)
+source("update_dust_fcst.R", encoding="utf-8")
+load("dust_fcst.Rdata")
+```
+
+## Messages 
+
++ `r announce_date` `r announce_hour`시 발표   
+
+```{r}
+tgt <- "day0"
+day0_msg <- msgs %>% filter(day == tgt) %>% ungroup() %>% 
+  select(msg) %>% as.character() %>% str_replace_all('"', "") %>% 
+  str_split("seperator") %>% unlist() %>% sort(decreasing = FALSE) %>%
+  str_replace_all('○ ', "")
+```
+
+`r day0_msg` 
+
+## Draw map 
+
+```{r, out.width = '100%'}
+pal <- colorFactor(c("green", "yellow", "red"), levels = c("좋음", "보통", "나쁨"))
+kr <- leaflet(values) %>% 
+  setView(lng = 127.5, lat = 36.5, zoom = 6) %>% 
+  addTiles() %>%
+  addCircleMarkers(~lon, ~lat, 
+                   # popup = ~day0_PM10, 
+                   # label = ~day0_PM10,
+                   popup = ~day0,
+                   color = ~pal(day0_code),
+                   stroke = FALSE, 
+                   fillOpacity = 0.5,
+                   radius = 15)
+kr
+```
