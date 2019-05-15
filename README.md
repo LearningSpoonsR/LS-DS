@@ -26,6 +26,7 @@
   + Data Frame: https://learningspoonsr.shinyapps.io/05_data_frame/
   + `dplyr`: https://learningspoonsr.shinyapps.io/21_dplyr/
   + `ggplot2`: 
+  + **오류신고**: https://github.com/LearningSpoonsR/LS-DS/issues/22
 + **R for Data Science**
   + **웹사이트**: https://r4ds.had.co.nz/ (크롬에서 우클릭 -> 번역기능 사용) 
   + 아마존: <https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399/ref=sr_1_3?keywords=r+for+data+science&qid=1553390913&s=gateway&sr=8-3>
