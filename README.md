@@ -19,6 +19,13 @@
 
 # III. 참고자료 
 
++ **Interactive Tutorial**
+  + **모바일 폰에서도 가능합니다. 수강생 분들의 복습을 위해서 제작하고 있는 중입니다. 이상 기능이나 설명이 명확하지 않은 경우에 질문 주시면 매우 감사드리겠습니다.**
+  + Data Types: https://learningspoonsr.shinyapps.io/01_basics/
+  + Vector: https://learningspoonsr.shinyapps.io/02_vector/
+  + Data Frame: https://learningspoonsr.shinyapps.io/05_data_frame/
+  + `dplyr`: https://learningspoonsr.shinyapps.io/21_dplyr/
+  + `ggplot2`: 
 + **R for Data Science**
   + **웹사이트**: https://r4ds.had.co.nz/ (크롬에서 우클릭 -> 번역기능 사용) 
   + 아마존: <https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399/ref=sr_1_3?keywords=r+for+data+science&qid=1553390913&s=gateway&sr=8-3>
