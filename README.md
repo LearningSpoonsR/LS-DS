@@ -2,8 +2,8 @@
 
 + **부제: 마케팅/영업/기획/매출관리 직무가 무엇이든 데이터 분석은 필수**    
 + 강의 페이지 <https://github.com/LearningSpoonsR/LS-DS>   
-+ Facebook 비공개 그룹 - 친구 신청 해주세요  
-+ 코스매니저 - 김형종 (출결등 기타)  
++ Facebook 비공개 그룹 - 친구 신청 해주세요 (Min Kyu Sim으로 검색) 
++ 코스매니저 - 김형종, 정지원 (출결등 기타)  
 + 강사이메일 - `learningSpoonsR@gmail.com`  
 
 ***   
