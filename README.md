@@ -28,7 +28,7 @@
   + `ggplot2`: https://learningspoonsr.shinyapps.io/23_ggplot2/
   + **오류신고**: https://github.com/LearningSpoonsR/LS-DS/issues/22
   
-+ **R for Data Science**
++ **R for Data Science (RDC)**
   + **웹사이트**: https://r4ds.had.co.nz/ (크롬에서 우클릭 -> 번역기능 사용) 
   + 아마존: <https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399/ref=sr_1_3?keywords=r+for+data+science&qid=1553390913&s=gateway&sr=8-3>
   + 한글 역서도 출판되어 있음
@@ -54,6 +54,16 @@ M25, M26, M28 (Templates) -> M24 (`ggplot2` Gallery) ->
 M32 (`flexdashboard`) -> M43 (retail) ->   
 M51 (`tidyr`) -> M52 (time-series) ->   
 M33 (Shiny) -> M46 (retail2)  
+
+**권장 학습 순서**
+
+| 주차  |  강의노트 |     튜토리얼  |                             R for DS (Hadley)    |                  개인별 Project |
+|-------|-------|-------|-------|-------|
+| Week 1  | M11 M12 M13 | Data Type, Vector, Data Frame | Ch. 1, 2, 4, 6, 20  Ch 14, 15 | 프로젝트 구상해보기 |
+| Week 2  | M21 M22 M28 M29 |     dplyr | Ch. 5, 11, 18, 27, 29 | 업무와 연관된 데이터파일(엑셀)을 불러와서 분석하는 Rmd 코드만들기 (html, docx) |
+| Week 3 | M23 M24 |             ggplot2 | Ch. 3, 7, 26, 28 | 프로젝트 분석에 ggplot 객체 추가하기 | 
+| Week 4 | M32, M43 |     |    Ch. 29.6 |  html, docx 포맷에서 핵심적인 표와 그림을 대시보드로 옮기기 |
+| Week 5 | M33, M51, M52 |  | Ch. 29.7, 12, 16 |   대시보드에서 바람직한 interactive feature 추가 구현 |
 
 ***  
 
