@@ -46,16 +46,7 @@
 
 ***   
 
-# IV. 수업 순서  
-
-M11 (Intro) -> M41 (OECD) ->  M12 (`base`) -> M13 (Quiz) ->    
-M21 (`dplyr`) -> M22 (`rmarkdown`) -> M23 (`ggplot2`) -> 
-M25, M26, M28 (Templates) -> M24 (`ggplot2` Gallery) ->    
-M32 (`flexdashboard`) -> M43 (retail) ->   
-M51 (`tidyr`) -> M52 (time-series) ->   
-M33 (Shiny) -> M46 (retail2)  
-
-**권장 학습 순서**
+# IV. 스케줄 및 권장 학습
 
 | 주차  |  강의노트 |     튜토리얼  |                             R for DS (Hadley)    |                  개인별 Project |
 |---------|------------|------------|---------|--------|
@@ -63,7 +54,7 @@ M33 (Shiny) -> M46 (retail2)
 | Week 2  | M21 M22 M28 M29 |     dplyr | Ch. 5, 11, 18, 27 | 업무와 연관된 데이터파일(엑셀)을 불러와서 분석하는 Rmd 코드만들기 (html, docx) |
 | Week 3 | M23 M24 |             ggplot2 | Ch. 3, 7, 26, 28 | 프로젝트 분석에 ggplot 객체 추가하기 | 
 | Week 4 | M32, M43 |     |    Ch. 29 |  html, docx 포맷에서 핵심적인 표와 그림을 대시보드로 옮기기 |
-| Week 5 | M33, M51, M52 |  | Ch. 29, 12, 16 |   대시보드에서 바람직한 interactive feature 추가 구현 |
+| Week 5 | M33, M51, M52, M55 |  | Ch. 29, 12, 16 |   대시보드에서 바람직한 interactive feature 추가 구현 |
 
 ***  
 
