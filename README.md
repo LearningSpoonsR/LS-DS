@@ -25,21 +25,21 @@
   + Vector: https://learningspoonsr.shinyapps.io/02_vector/
   + Data Frame: https://learningspoonsr.shinyapps.io/05_data_frame/
   + `dplyr`: https://learningspoonsr.shinyapps.io/21_dplyr/
-  + `ggplot2`: 
+  + `ggplot2`: https://learningspoonsr.shinyapps.io/23_ggplot2/
   + **오류신고**: https://github.com/LearningSpoonsR/LS-DS/issues/22
+  
 + **R for Data Science**
   + **웹사이트**: https://r4ds.had.co.nz/ (크롬에서 우클릭 -> 번역기능 사용) 
   + 아마존: <https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399/ref=sr_1_3?keywords=r+for+data+science&qid=1553390913&s=gateway&sr=8-3>
   + 한글 역서도 출판되어 있음
     + <http://book.interpark.com/product/BookDisplay.do?_method=detail&sc.shopNo=0000400000&sc.prdNo=298756807> 
-+ **Data Camp (무료)** 
-  + Introduction to R 
-  + 모바일 폰에서도 가능, 강의와 퀴즈로 연결되어 있음. 
-  + <https://www.datacamp.com/courses/free-introduction-to-r>
+
 + **기수강생 작업물** 
   + http://bitly.kr/1G0Q  
+
 + 한글 R 메뉴얼 
   + https://homepage.usask.ca/~chl948/doc/manual/R-intro-ko.html  
+
 + PDF 조판을 위한 texLive 설치 
   + 다운로드 사이트 <http://www.ktug.org/xe/?mid=Install>
   + 설치 가이드 (15분 동영상) <https://youtu.be/V1Q6vEuoAQ0>
