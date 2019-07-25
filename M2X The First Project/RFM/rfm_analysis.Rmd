@@ -1,0 +1,96 @@
+---
+title: "RFM"
+author: "GS 홈쇼핑"
+output:
+  word_document:
+    reference_docx: template1.docx
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+```
+
+# 1. 고객별 등급 매기기 (`dplyr`)
+
+```{r}
+library(readxl)
+library(dplyr)
+dataset <- read_excel("retail.xlsx")
+# head(dataset, 2)
+cus_dataset <- dataset %>% 
+  group_by(`Customer Name`) %>%
+  summarise(Recent = max(`Order Date`),
+            Freq = n(),
+            Money = sum(Sales))
+cus_dataset <- cus_dataset %>% 
+  mutate(R_score = ntile(Recent, 5),
+         F_score = ntile(Freq, 5),
+         M_score = ntile(Money, 5)) %>% 
+  arrange(desc(Recent), desc(Freq), desc(Money)) %>% 
+  select(`Customer Name`, 
+         R_score, F_score, M_score,   
+         Recent, Freq, Money)  
+head(cus_dataset, 2)  
+```
+
+총 `r nrow(dataset)`개의 판매 기록을 집계하여 `r nrow(cus_dataset)`의 고객에 대해서 스코어링을 하였습니다.    
+
+# 2. 파레토 분석 - 20% 고객이 80%의 매출을 차지하는가? (`dplyr`)  
+
+```{r}
+pareto_M_score <- cus_dataset %>% 
+  group_by(M_score) %>%
+  summarise(tot_money = sum(Money)) %>% 
+  arrange(desc(tot_money))
+pareto_M_score <- pareto_M_score %>%
+  mutate(proportion = tot_money/sum(tot_money)) 
+pareto_M_score
+```
+
+# 3. 간단한 차트 그리기 (`ggplot2`)
+
+```{r}
+tot_rev <- sum(cus_dataset$Money)
+rev_anal <- cus_dataset %>% group_by(F_score, M_score) %>%
+  summarise(Rev = round(100*sum(Money)/tot_rev, 1))
+library(ggplot2)
+ggplot(rev_anal, aes(x = F_score, y = M_score, alpha = Rev)) + 
+  geom_tile(fill = "blue") + geom_text(aes(label = Rev))
+```
+
+# 4. RFM 분석이란 무엇인가? 
+
+RFM 분석은 고객별로 3개의 지표(R,M,F)를 기준으로 5분위로 나누어 점수를 매겨 고객을 분류하고 마켓팅 전략에 활용하는 마켓팅 분석 기법이다. 
+
++ R: Recency (최근 구매일) 
++ F: Frequency (총 구매횟수) 
++ M: Monetary (총 구매액) 
+
+일반적으로 사용되는 고객 분류와 는 아래와 같다. 
+
+|Segment| `R_score`| `mean(F_score, M_score)` |       |     
+|:-----:|:--------:|:-----------------------:|:-----:|    
+| Champions                   | 4-5 | 4-5 |     |   
+| Loyal                       | 2-5 | 3-5 |     |  
+| Potential Loyalist          | 3-5 | 1-3 | Offer loyalty program, recommend products             |  
+| **Recent Customers**	          | 4-5 | 1-2 | Provide support, build relationship                   |    
+| Promising	                  | 3-4 | 1-2 | Create brand awareness, offer free trials             |  
+| Customers Needing Attention	| 2-3 |	2-3 | Recommend based on previous purchase, reactivate      |   
+| About To Sleep              | 2-3 | 1-2 | Recomment popular products, reconnect with them       |  
+| At Risk	                    | 1-2 | 2-5 | Personalized email, offer renewals, provide resources |  
+| Can’t Lose Them            	| 1-2	| 4-5 | Don't lose them to competition, talk to them          |  
+| Hibernating	                | 1-2	| 1-2 | Offer other relevant products and special discounts   |  
+| Lost	                      | 1  	| 1   | Reach out compaign, ignore otherwise                  |  
+
+# 5. `Recent Customers`만 조회하기  
+
+```{r}
+cus_dataset %>% 
+  mutate(FM_avg = pmin(F_score, M_score)) %>%
+  filter(R_score >= 4) %>%
+  filter(FM_avg <= 2)
+```
+
+Reference: <https://www.putler.com/rfm-analysis/>
