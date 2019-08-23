@@ -24,3 +24,13 @@
 + Javascript를 이용해야 하나?
 + 안타깝게도 현재로선 R의 `leaflet` package에 대해서 모바일 환경에서의 작동에 관해서는 discussion이 활발하지 않음
 
+## `LeafLet` 사용예제
+
+```
+library(dplyr)
+library(leaflet)
+ls <- leaflet() %>% addTiles() %>%
+  setView(lng = 127, lat = 37.5, zoom = 11) %>%
+  addMarkers(lng = 127.028, lat = 37.499, popup="Learning Spoons")
+ls
+```
